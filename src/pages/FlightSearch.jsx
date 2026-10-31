@@ -69,6 +69,12 @@ function FlightSearch() {
     navigate(`/penerbangan?${params.toString()}`)
   }
 
+  function swapAirports() {
+    setFrom(to)
+    setTo(from)
+    setFormError('')
+  }
+
   function getLocalDate(value) {
     const year = value.getFullYear()
     const month = String(value.getMonth() + 1).padStart(2, '0')
@@ -121,6 +127,7 @@ function FlightSearch() {
 
       <form className="results-search-form" onSubmit={handleSearch} aria-label="Ubah rute dan tanggal penerbangan">
         <label className="results-search-field"><span>BERANGKAT DARI</span><select value={from} onChange={(event) => setFrom(event.target.value)} aria-label="Kota asal">{airports.map((airport) => <option key={airport.code} value={airport.code}>{airport.city} ({airport.code})</option>)}</select></label>
+        <button className="results-swap-button" type="button" onClick={swapAirports} aria-label="Tukar kota asal dan tujuan">⇄</button>
         <label className="results-search-field"><span>KE TUJUAN</span><select value={to} onChange={(event) => setTo(event.target.value)} aria-label="Kota tujuan">{airports.map((airport) => <option key={airport.code} value={airport.code}>{airport.city} ({airport.code})</option>)}</select></label>
         <label className="results-search-field results-date-field"><span>TANGGAL PERGI</span><input type="date" min={getLocalDate(new Date())} value={date} onChange={(event) => setDate(event.target.value)} required /></label>
         <PassengerPicker value={passengers} onChange={setPassengers} />
