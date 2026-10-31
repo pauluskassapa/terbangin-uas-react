@@ -1,6 +1,7 @@
 import { Link, Route, Routes } from 'react-router'
 import SiteFooter from './components/SiteFooter.jsx'
 import SiteHeader from './components/SiteHeader.jsx'
+import FlightDetails from './pages/FlightDetails.jsx'
 import FlightHome from './pages/FlightHome.jsx'
 import FlightSearch from './pages/FlightSearch.jsx'
 import './App.css'
@@ -23,7 +24,7 @@ function App() {
       <Routes>
         <Route path="/" element={<FlightHome />} />
         <Route path="/penerbangan" element={<FlightSearch />} />
-        <Route path="/penerbangan/:flightId" element={<RoutePlaceholder title="Detail penerbangan" />} />
+        <Route path="/penerbangan/:flightId" element={<FlightDetails />} />
         <Route path="*" element={<RoutePlaceholder title="Halaman tidak ditemukan" />} />
       </Routes>
       <SiteFooter />
