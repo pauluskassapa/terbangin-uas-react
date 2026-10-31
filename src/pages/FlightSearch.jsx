@@ -3,9 +3,16 @@ import { Link, useSearchParams } from 'react-router'
 import { airports, flights, formatRupiah } from '../data/flightData.js'
 import './FlightSearch.css'
 
+const departurePeriods = [
+  { id: 'morning', label: 'Pagi', hours: '05.00–11.00', start: 5, end: 11 },
+  { id: 'afternoon', label: 'Siang', hours: '11.00–17.00', start: 11, end: 17 },
+  { id: 'evening', label: 'Malam', hours: '17.00–23.00', start: 17, end: 23 },
+]
+
 function FlightSearch() {
   const [searchParams] = useSearchParams()
   const [airlineFilter, setAirlineFilter] = useState('Semua')
+  const [timeFilters, setTimeFilters] = useState([])
   const [sort, setSort] = useState('recommended')
   const from = searchParams.get('from') || 'CGK'
   const to = searchParams.get('to') || 'DPS'
@@ -13,15 +20,33 @@ function FlightSearch() {
   const origin = airports.find((airport) => airport.code === from) || airports[0]
   const destination = airports.find((airport) => airport.code === to) || airports[3]
   const airlines = ['Semua', ...new Set(flights.map((flight) => flight.airline))]
+  function toggleTimeFilter(periodId) {
+    setTimeFilters((currentFilters) => currentFilters.includes(periodId)
+      ? currentFilters.filter((filter) => filter !== periodId)
+      : [...currentFilters, periodId])
+  }
+
+  function resetFilters() {
+    setAirlineFilter('Semua')
+    setTimeFilters([])
+    setSort('recommended')
+  }
 
   const visibleFlights = useMemo(() => {
-    const filteredFlights = flights.filter((flight) => airlineFilter === 'Semua' || flight.airline === airlineFilter)
+    const filteredFlights = flights.filter((flight) => {
+      const matchesAirline = airlineFilter === 'Semua' || flight.airline === airlineFilter
+      const departureHour = Number(flight.departure.split('.')[0])
+      const matchesTime = timeFilters.length === 0 || departurePeriods.some((period) => (
+        timeFilters.includes(period.id) && departureHour >= period.start && departureHour < period.end
+      ))
+      return matchesAirline && matchesTime
+    })
     return [...filteredFlights].sort((first, second) => {
       if (sort === 'cheapest') return first.price - second.price
       if (sort === 'earliest') return first.departure.localeCompare(second.departure)
       return first.recommendation - second.recommendation
     })
-  }, [airlineFilter, sort])
+  }, [airlineFilter, departurePeriods, sort, timeFilters])
 
   const formattedDate = date
     ? new Intl.DateTimeFormat('id-ID', { dateStyle: 'long' }).format(new Date(`${date}T00:00:00`))
@@ -41,7 +66,7 @@ function FlightSearch() {
 
       <div className="results-layout">
         <aside className="filter-panel">
-          <div className="filter-heading"><h2>Filter</h2><button type="button" onClick={() => setAirlineFilter('Semua')}>Atur ulang</button></div>
+          <div className="filter-heading"><h2>Filter</h2><button type="button" onClick={resetFilters}>Atur ulang</button></div>
           <span className="filter-label">MASKAPAI</span>
           <div className="airline-options">
             {airlines.map((airline) => (
@@ -49,6 +74,17 @@ function FlightSearch() {
                 <span className="filter-radio" />{airline}
               </button>
             ))}
+          </div>
+          <div className="time-filter-group">
+            <span className="filter-label">WAKTU BERANGKAT</span>
+            <div className="time-filter-options">
+              {departurePeriods.map((period) => (
+                <label className="time-filter-option" key={period.id}>
+                  <input type="checkbox" checked={timeFilters.includes(period.id)} onChange={() => toggleTimeFilter(period.id)} />
+                  <span><strong>{period.label}</strong><small>{period.hours}</small></span>
+                </label>
+              ))}
+            </div>
           </div>
           <div className="filter-tip"><span>✦</span><p>Tip: tiket pagi cocok untuk memulai liburan lebih awal.</p></div>
         </aside>
