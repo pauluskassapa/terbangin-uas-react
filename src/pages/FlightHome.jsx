@@ -3,6 +3,13 @@ import { useNavigate } from 'react-router'
 import PassengerPicker from '../components/PassengerPicker.jsx'
 import { airports } from '../data/flightData.js'
 
+const popularDestinations = [
+  { code: 'DPS', name: 'Bali' },
+  { code: 'YIA', name: 'Yogyakarta' },
+  { code: 'LBJ', name: 'Labuan Bajo' },
+  { code: 'LOP', name: 'Lombok' },
+]
+
 function getLocalDate(date) {
   const year = date.getFullYear()
   const month = String(date.getMonth() + 1).padStart(2, '0')
@@ -35,6 +42,12 @@ function FlightHome() {
     setError('')
   }
 
+  function selectDestination(code) {
+    setTo(code)
+    setError('')
+    document.getElementById('flight-search')?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+  }
+
   return (
     <main className="home-page">
       <section className="home-hero">
@@ -53,7 +66,7 @@ function FlightHome() {
         </div>
       </section>
 
-      <section className="search-card page-wrap" aria-labelledby="search-heading">
+      <section id="flight-search" className="search-card page-wrap" aria-labelledby="search-heading">
         <div className="search-card-heading">
           <div><span className="eyebrow">MULAI PERJALANANMU</span><h2 id="search-heading">Cari penerbangan</h2></div>
           <span className="one-way"><i /> Sekali jalan</span>
@@ -72,7 +85,10 @@ function FlightHome() {
       <section className="home-intro page-wrap">
         <span className="eyebrow">LANGKAH PERTAMA MENUJU CERITA BARU</span>
         <div className="home-intro-row"><h2>Tujuanmu sudah<br />menunggu.</h2><p>Dari pantai tropis sampai kota penuh cerita, perjalanan impianmu dimulai dari satu tiket. Cari rute dan pilih jadwal yang cocok untukmu.</p></div>
-        <div className="home-destinations"><span>INDONESIA, SIAP DIJELAJAHI</span><div><span>✦ Bali</span><span>✦ Yogyakarta</span><span>✦ Labuan Bajo</span><span>✦ Lombok</span></div></div>
+        <div className="home-destinations">
+          <span>INDONESIA, SIAP DIJELAJAHI</span>
+          <div>{popularDestinations.map((destination) => <button key={destination.code} type="button" aria-pressed={to === destination.code} aria-label={`Pilih tujuan ${destination.name}`} onClick={() => selectDestination(destination.code)}>✦ {destination.name}</button>)}</div>
+        </div>
       </section>
     </main>
   )

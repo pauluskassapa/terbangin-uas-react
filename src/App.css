@@ -69,7 +69,8 @@
 .home-destinations { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--line); }
 .home-destinations > span { color: var(--teal); font-size: 8px; font-weight: 700; letter-spacing: 1px; }
 .home-destinations div { display: flex; flex-wrap: wrap; gap: 8px; }
-.home-destinations div span { padding: 8px 11px; border-radius: 99px; background: #f5f8fc; color: #52697a; font-size: 9px; }
+.home-destinations div button { padding: 8px 11px; border: 1px solid transparent; border-radius: 99px; background: #f5f8fc; color: #52697a; font-size: 9px; cursor: pointer; }
+.home-destinations div button:hover, .home-destinations div button[aria-pressed="true"] { border-color: #c3e1e3; background: #dff4f1; color: var(--teal); }
 .home-page :is(a, button, input, select):focus-visible { outline: 3px solid rgb(8 127 140 / 28%); outline-offset: 2px; }
 @media (max-width: 900px) {
   .home-search-form { grid-template-columns: minmax(0, 1fr) 32px minmax(0, 1fr) minmax(0, 1fr) 96px; }
