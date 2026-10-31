@@ -11,6 +11,12 @@
 .route-badge > span { grid-row: span 2; font-size: 20px; }
 .route-badge strong { color: var(--ink); font: 750 19px 'Manrope', sans-serif; }
 .route-badge small { color: var(--muted); font-size: 9px; }
+.results-search-form { display: grid; grid-template-columns: 1fr 1fr 1fr auto; align-items: end; gap: 10px; margin-top: 19px; padding: 14px; border: 1px solid var(--line); border-radius: 11px; background: white; }
+.results-search-field { min-width: 0; display: grid; gap: 6px; padding: 8px 10px; border: 1px solid var(--line); border-radius: 8px; }
+.results-search-field > span { color: var(--muted); font-size: 8px; font-weight: 700; letter-spacing: .7px; }
+.results-search-field select, .results-search-field input { width: 100%; min-width: 0; border: 0; outline: 0; background: transparent; color: var(--ink); font-size: 10px; font-weight: 600; }
+.results-search-button { min-height: 42px; gap: 9px; cursor: pointer; }
+.results-form-error { grid-column: 1 / -1; margin: 0; }
 .results-layout { display: grid; grid-template-columns: 215px minmax(0, 1fr); gap: 24px; padding-top: 25px; }
 .filter-panel { align-self: start; padding: 18px 16px; border: 1px solid var(--line); border-radius: 12px; background: white; box-shadow: 0 12px 32px rgb(24 50 75 / 5%); }
 .filter-heading { display: flex; align-items: center; justify-content: space-between; margin-bottom: 22px; }
@@ -77,6 +83,11 @@
   .route-arrow { margin: 0 8px; }
   .route-summary p { max-width: 230px; font-size: 9px; line-height: 1.6; }
   .route-badge { gap: 0 6px; padding: 8px; }
+  .results-search-form { grid-template-columns: 1fr 1fr; gap: 7px; padding: 10px; }
+  .results-search-field { padding: 8px; }
+  .results-search-field > span { font-size: 7px; }
+  .results-search-field select, .results-search-field input { font-size: 9px; }
+  .results-search-button { grid-column: 1 / -1; }
   .results-layout { display: block; }
   .filter-panel { margin-bottom: 17px; padding: 14px; }
   .filter-heading { margin-bottom: 12px; }

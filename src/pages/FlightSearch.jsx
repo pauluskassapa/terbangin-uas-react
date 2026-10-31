@@ -1,5 +1,5 @@
-import { useMemo, useState } from 'react'
-import { Link, useSearchParams } from 'react-router'
+import { useEffect, useMemo, useState } from 'react'
+import { Link, useNavigate, useSearchParams } from 'react-router'
 import { airports, flights, formatRupiah } from '../data/flightData.js'
 import './FlightSearch.css'
 
@@ -11,15 +11,48 @@ const departurePeriods = [
 
 function FlightSearch() {
   const [searchParams] = useSearchParams()
+  const navigate = useNavigate()
   const [airlineFilter, setAirlineFilter] = useState('Semua')
   const [timeFilters, setTimeFilters] = useState([])
   const [sort, setSort] = useState('recommended')
-  const from = searchParams.get('from') || 'CGK'
-  const to = searchParams.get('to') || 'DPS'
-  const date = searchParams.get('date') || ''
-  const origin = airports.find((airport) => airport.code === from) || airports[0]
-  const destination = airports.find((airport) => airport.code === to) || airports[3]
+  const queryString = searchParams.toString()
+  const query = new URLSearchParams(queryString)
+  const [from, setFrom] = useState(query.get('from') || 'CGK')
+  const [to, setTo] = useState(query.get('to') || 'DPS')
+  const [date, setDate] = useState(query.get('date') || '')
+  const [formError, setFormError] = useState('')
+  const origin = airports.find((airport) => airport.code === (query.get('from') || 'CGK')) || airports[0]
+  const destination = airports.find((airport) => airport.code === (query.get('to') || 'DPS')) || airports[3]
   const airlines = ['Semua', ...new Set(flights.map((flight) => flight.airline))]
+
+  useEffect(() => {
+    const params = new URLSearchParams(queryString)
+    setFrom(params.get('from') || 'CGK')
+    setTo(params.get('to') || 'DPS')
+    setDate(params.get('date') || '')
+    setFormError('')
+  }, [queryString])
+
+  function handleSearch(event) {
+    event.preventDefault()
+    if (from === to) {
+      setFormError('Kota asal dan tujuan harus berbeda.')
+      return
+    }
+    setFormError('')
+    setAirlineFilter('Semua')
+    setTimeFilters([])
+    setSort('recommended')
+    const params = new URLSearchParams({ from, to, date })
+    navigate(`/penerbangan?${params.toString()}`)
+  }
+
+  function getLocalDate(value) {
+    const year = value.getFullYear()
+    const month = String(value.getMonth() + 1).padStart(2, '0')
+    const day = String(value.getDate()).padStart(2, '0')
+    return `${year}-${month}-${day}`
+  }
   function toggleTimeFilter(periodId) {
     setTimeFilters((currentFilters) => currentFilters.includes(periodId)
       ? currentFilters.filter((filter) => filter !== periodId)
@@ -54,7 +87,7 @@ function FlightSearch() {
 
   return (
     <main className="results-page page-wrap">
-      <div className="results-topline"><span className="eyebrow">PENERBANGAN UNTUKMU</span><Link to="/">← Ubah pencarian</Link></div>
+      <div className="results-topline"><span className="eyebrow">PENERBANGAN UNTUKMU</span><Link to="/">← Beranda</Link></div>
       <section className="route-summary">
         <div>
           <span className="route-date">{formattedDate}</span>
@@ -63,6 +96,14 @@ function FlightSearch() {
         </div>
         <div className="route-badge"><span>✈</span><strong>{visibleFlights.length}</strong><small>pilihan tiket</small></div>
       </section>
+
+      <form className="results-search-form" onSubmit={handleSearch} aria-label="Ubah rute dan tanggal penerbangan">
+        <label className="results-search-field"><span>BERANGKAT DARI</span><select value={from} onChange={(event) => setFrom(event.target.value)} aria-label="Kota asal">{airports.map((airport) => <option key={airport.code} value={airport.code}>{airport.city} ({airport.code})</option>)}</select></label>
+        <label className="results-search-field"><span>KE TUJUAN</span><select value={to} onChange={(event) => setTo(event.target.value)} aria-label="Kota tujuan">{airports.map((airport) => <option key={airport.code} value={airport.code}>{airport.city} ({airport.code})</option>)}</select></label>
+        <label className="results-search-field results-date-field"><span>TANGGAL PERGI</span><input type="date" min={getLocalDate(new Date())} value={date} onChange={(event) => setDate(event.target.value)} required /></label>
+        <button className="button button-primary results-search-button" type="submit">Cari lagi <span>→</span></button>
+        {formError && <p className="form-error results-form-error" role="alert">{formError}</p>}
+      </form>
 
       <div className="results-layout">
         <aside className="filter-panel">
