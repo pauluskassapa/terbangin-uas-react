@@ -10,6 +10,21 @@ const departurePeriods = [
   { id: 'evening', label: 'Malam', hours: '17.00–23.00', start: 17, end: 23 },
 ]
 
+function getAirportCode(value, fallback) {
+  return airports.some((airport) => airport.code === value) ? value : fallback
+}
+
+function getValidDate(value) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(value || '')) return ''
+  const parsed = new Date(`${value}T00:00:00`)
+  if (Number.isNaN(parsed.getTime())) return ''
+  const today = new Date()
+  today.setHours(0, 0, 0, 0)
+  if (parsed < today) return ''
+  const normalized = `${parsed.getFullYear()}-${String(parsed.getMonth() + 1).padStart(2, '0')}-${String(parsed.getDate()).padStart(2, '0')}`
+  return normalized === value ? value : ''
+}
+
 function FlightSearch() {
   const [searchParams] = useSearchParams()
   const navigate = useNavigate()
@@ -18,21 +33,24 @@ function FlightSearch() {
   const [sort, setSort] = useState('recommended')
   const queryString = searchParams.toString()
   const query = new URLSearchParams(queryString)
-  const [from, setFrom] = useState(query.get('from') || 'CGK')
-  const [to, setTo] = useState(query.get('to') || 'DPS')
-  const [date, setDate] = useState(query.get('date') || '')
-  const [passengers, setPassengers] = useState(getPassengerCount(query.get('passengers')))
-  const [formError, setFormError] = useState('')
-  const origin = airports.find((airport) => airport.code === (query.get('from') || 'CGK')) || airports[0]
-  const destination = airports.find((airport) => airport.code === (query.get('to') || 'DPS')) || airports[3]
+  const searchedFrom = getAirportCode(query.get('from'), 'CGK')
+  const searchedTo = getAirportCode(query.get('to'), 'DPS')
+  const searchedDate = getValidDate(query.get('date'))
   const searchedPassengers = getPassengerCount(query.get('passengers'))
+  const [from, setFrom] = useState(searchedFrom)
+  const [to, setTo] = useState(searchedTo)
+  const [date, setDate] = useState(searchedDate)
+  const [passengers, setPassengers] = useState(searchedPassengers)
+  const [formError, setFormError] = useState('')
+  const origin = airports.find((airport) => airport.code === searchedFrom)
+  const destination = airports.find((airport) => airport.code === searchedTo)
   const airlines = ['Semua', ...new Set(flights.map((flight) => flight.airline))]
 
   useEffect(() => {
     const params = new URLSearchParams(queryString)
-    setFrom(params.get('from') || 'CGK')
-    setTo(params.get('to') || 'DPS')
-    setDate(params.get('date') || '')
+    setFrom(getAirportCode(params.get('from'), 'CGK'))
+    setTo(getAirportCode(params.get('to'), 'DPS'))
+    setDate(getValidDate(params.get('date')))
     setPassengers(getPassengerCount(params.get('passengers')))
     setFormError('')
   }, [queryString])
@@ -85,8 +103,8 @@ function FlightSearch() {
     })
   }, [airlineFilter, departurePeriods, sort, timeFilters])
 
-  const formattedDate = date
-    ? new Intl.DateTimeFormat('id-ID', { dateStyle: 'long' }).format(new Date(`${date}T00:00:00`))
+  const formattedDate = searchedDate
+    ? new Intl.DateTimeFormat('id-ID', { dateStyle: 'long' }).format(new Date(`${searchedDate}T00:00:00`))
     : 'Pilih tanggal perjalanan'
 
   return (
@@ -141,7 +159,7 @@ function FlightSearch() {
             <label className="sort-select">Urutkan<select value={sort} onChange={(event) => setSort(event.target.value)}><option value="recommended">Rekomendasi</option><option value="cheapest">Harga terendah</option><option value="earliest">Berangkat paling awal</option></select></label>
           </div>
           {visibleFlights.length ? visibleFlights.map((flight) => {
-            const detailParams = new URLSearchParams({ from, to, date, passengers: String(searchedPassengers) })
+            const detailParams = new URLSearchParams({ from: searchedFrom, to: searchedTo, date: searchedDate, passengers: String(searchedPassengers) })
             return (
               <article className="flight-card" key={flight.id}>
                 <div className="flight-airline"><span className={`airline-logo ${flight.color}`}>{flight.mark}</span><div><strong>{flight.airline}</strong><span>{flight.number} · Ekonomi</span></div></div>
