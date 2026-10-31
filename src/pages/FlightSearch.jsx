@@ -9,6 +9,8 @@ const departurePeriods = [
   { id: 'afternoon', label: 'Siang', hours: '11.00–17.00', start: 11, end: 17 },
   { id: 'evening', label: 'Malam', hours: '17.00–23.00', start: 17, end: 23 },
 ]
+const lowestFlightPrice = Math.min(...flights.map((flight) => flight.price))
+const highestFlightPrice = Math.max(...flights.map((flight) => flight.price))
 
 function getAirportCode(value, fallback) {
   return airports.some((airport) => airport.code === value) ? value : fallback
@@ -30,6 +32,7 @@ function FlightSearch() {
   const navigate = useNavigate()
   const [airlineFilter, setAirlineFilter] = useState('Semua')
   const [timeFilters, setTimeFilters] = useState([])
+  const [maxPrice, setMaxPrice] = useState(highestFlightPrice)
   const [sort, setSort] = useState('recommended')
   const queryString = searchParams.toString()
   const query = new URLSearchParams(queryString)
@@ -64,6 +67,7 @@ function FlightSearch() {
     setFormError('')
     setAirlineFilter('Semua')
     setTimeFilters([])
+    setMaxPrice(highestFlightPrice)
     setSort('recommended')
     const params = new URLSearchParams({ from, to, date, passengers: String(passengers) })
     navigate(`/penerbangan?${params.toString()}`)
@@ -90,6 +94,7 @@ function FlightSearch() {
   function resetFilters() {
     setAirlineFilter('Semua')
     setTimeFilters([])
+    setMaxPrice(highestFlightPrice)
     setSort('recommended')
   }
 
@@ -100,14 +105,15 @@ function FlightSearch() {
       const matchesTime = timeFilters.length === 0 || departurePeriods.some((period) => (
         timeFilters.includes(period.id) && departureHour >= period.start && departureHour < period.end
       ))
-      return matchesAirline && matchesTime
+      const matchesPrice = flight.price <= maxPrice
+      return matchesAirline && matchesTime && matchesPrice
     })
     return [...filteredFlights].sort((first, second) => {
       if (sort === 'cheapest') return first.price - second.price
       if (sort === 'earliest') return first.departure.localeCompare(second.departure)
       return first.recommendation - second.recommendation
     })
-  }, [airlineFilter, departurePeriods, sort, timeFilters])
+  }, [airlineFilter, maxPrice, sort, timeFilters])
 
   const formattedDate = searchedDate
     ? new Intl.DateTimeFormat('id-ID', { dateStyle: 'long' }).format(new Date(`${searchedDate}T00:00:00`))
@@ -156,6 +162,12 @@ function FlightSearch() {
                 </label>
               ))}
             </div>
+          </div>
+          <div className="price-filter-group">
+            <label htmlFor="max-flight-price">BATAS HARGA</label>
+            <output htmlFor="max-flight-price" aria-live="polite">{formatRupiah(maxPrice)}</output>
+            <input id="max-flight-price" type="range" min={lowestFlightPrice} max={highestFlightPrice} step="10000" value={maxPrice} onChange={(event) => setMaxPrice(Number(event.target.value))} />
+            <div><span>{formatRupiah(lowestFlightPrice)}</span><span>{formatRupiah(highestFlightPrice)}</span></div>
           </div>
           <div className="filter-tip"><span>✦</span><p>Tip: tiket pagi cocok untuk memulai liburan lebih awal.</p></div>
         </aside>

@@ -37,6 +37,11 @@
 .time-filter-option span { display: grid; gap: 3px; }
 .time-filter-option strong { font-size: 10px; font-weight: 600; }
 .time-filter-option small { color: var(--muted); font-size: 8px; }
+.price-filter-group { display: grid; grid-template-columns: 1fr auto; gap: 10px 6px; margin-top: 21px; padding-top: 17px; border-top: 1px solid var(--line); }
+.price-filter-group > label { align-self: center; color: var(--muted); font-size: 9px; font-weight: 700; letter-spacing: .7px; }
+.price-filter-group > output { color: var(--ink); font-size: 10px; font-weight: 700; }
+.price-filter-group > input { grid-column: 1 / -1; width: 100%; margin: 0; accent-color: var(--teal); cursor: pointer; }
+.price-filter-group > div { grid-column: 1 / -1; display: flex; justify-content: space-between; color: var(--muted); font-size: 8px; }
 .filter-tip { display: flex; gap: 8px; margin-top: 24px; padding: 11px; border-radius: 8px; background: #f5f8fc; color: var(--teal); }
 .filter-tip > span { font-size: 12px; }
 .filter-tip p { margin: 0; color: var(--muted); font-size: 9px; line-height: 1.55; }
