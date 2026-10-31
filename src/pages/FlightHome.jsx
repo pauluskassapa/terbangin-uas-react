@@ -1,12 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router'
-
-const airports = [
-  { code: 'CGK', city: 'Jakarta' }, { code: 'BDO', city: 'Bandung' },
-  { code: 'SUB', city: 'Surabaya' }, { code: 'DPS', city: 'Bali' },
-  { code: 'YIA', city: 'Yogyakarta' }, { code: 'LBJ', city: 'Labuan Bajo' },
-  { code: 'LOP', city: 'Lombok' }, { code: 'SOQ', city: 'Sorong · Raja Ampat' },
-]
+import { airports } from '../data/flightData.js'
 
 function getLocalDate(date) {
   const year = date.getFullYear()
