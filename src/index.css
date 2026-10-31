@@ -2,21 +2,21 @@
 
 :root {
   font-family: 'DM Sans', sans-serif;
-  color: #172b3c;
-  background: #fbfaf7;
+  color: #18324b;
+  background: #f5f8fc;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
-  --ink: #172b3c;
-  --muted: #7c8990;
-  --orange: #f26e3d;
-  --orange-dark: #d9542b;
-  --cream: #fbfaf7;
-  --line: #e8e8e3;
+  --ink: #18324b;
+  --muted: #6b7f8f;
+  --teal: #087f8c;
+  --teal-dark: #066b75;
+  --page: #f5f8fc;
+  --line: #e1e9ef;
 }
 
 * { box-sizing: border-box; }
 body { margin: 0; min-width: 320px; min-height: 100vh; }
 button, input, select { font: inherit; }
 a { color: inherit; }
-::selection { color: white; background: var(--orange); }
+::selection { color: white; background: var(--teal); }
