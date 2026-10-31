@@ -40,6 +40,7 @@
 .detail-not-found { min-height: 55vh; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 12px; }
 .detail-not-found h1 { margin: 0; color: var(--ink); font: 800 34px 'Manrope', sans-serif; }
 .detail-not-found p { margin: 0 0 7px; color: var(--muted); font-size: 12px; }
+.flight-detail-page :is(a, button):focus-visible { outline: 3px solid rgb(8 127 140 / 28%); outline-offset: 2px; }
 
 @media (max-width: 760px) {
   .detail-layout { grid-template-columns: 1fr; }

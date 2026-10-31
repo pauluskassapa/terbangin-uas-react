@@ -122,7 +122,7 @@ function FlightSearch() {
           <h1>{origin.city}<span className="route-arrow">→</span>{destination.city}</h1>
           <p>{origin.code} <i>·</i> Penerbangan langsung tersedia <i>·</i> {searchedPassengers} penumpang</p>
         </div>
-        <div className="route-badge"><span>✈</span><strong>{visibleFlights.length}</strong><small>pilihan tiket</small></div>
+        <div className="route-badge" role="status" aria-live="polite" aria-label={`${visibleFlights.length} penerbangan tersedia`}><span aria-hidden="true">✈</span><strong>{visibleFlights.length}</strong><small>pilihan tiket</small></div>
       </section>
 
       <form className="results-search-form" onSubmit={handleSearch} aria-label="Ubah rute dan tanggal penerbangan">
@@ -141,7 +141,7 @@ function FlightSearch() {
           <span className="filter-label">MASKAPAI</span>
           <div className="airline-options">
             {airlines.map((airline) => (
-              <button key={airline} type="button" className={airlineFilter === airline ? 'filter-option active' : 'filter-option'} onClick={() => setAirlineFilter(airline)}>
+              <button key={airline} type="button" aria-pressed={airlineFilter === airline} className={airlineFilter === airline ? 'filter-option active' : 'filter-option'} onClick={() => setAirlineFilter(airline)}>
                 <span className="filter-radio" />{airline}
               </button>
             ))}
@@ -171,11 +171,11 @@ function FlightSearch() {
               <article className="flight-card" key={flight.id}>
                 <div className="flight-airline"><span className={`airline-logo ${flight.color}`}>{flight.mark}</span><div><strong>{flight.airline}</strong><span>{flight.number} · Ekonomi</span></div></div>
                 <div className="flight-times"><div><strong>{flight.departure}</strong><span>{origin.code} · {origin.city}</span></div><div className="flight-duration"><span>Langsung</span><i /><small>{flight.duration}</small></div><div><strong>{flight.arrival}</strong><span>{destination.code} · {destination.city}</span></div></div>
-                <div className="flight-purchase"><strong>{formatRupiah(flight.price)}</strong><span>per penumpang</span><Link className="button button-primary" to={`/penerbangan/${flight.id}?${detailParams.toString()}`}>Lihat detail <b>→</b></Link></div>
+                <div className="flight-purchase"><strong>{formatRupiah(flight.price)}</strong><span>per penumpang</span><Link aria-label={`Lihat detail ${flight.airline} ${flight.number}`} className="button button-primary" to={`/penerbangan/${flight.id}?${detailParams.toString()}`}>Lihat detail <b aria-hidden="true">→</b></Link></div>
                 <div className="flight-perks"><span>✓ Bagasi {flight.baggage}</span><span>✓ {flight.perk}</span></div>
               </article>
             )
-          }) : <div className="empty-state"><span>✈</span><h3>Tidak ada penerbangan</h3><p>Coba atur ulang filter.</p></div>}
+          }) : <div className="empty-state" role="status" aria-live="polite"><span aria-hidden="true">✈</span><h3>Tidak ada penerbangan</h3><p>Coba atur ulang filter.</p></div>}
         </section>
       </div>
     </main>
