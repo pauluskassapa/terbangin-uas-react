@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router'
+import PassengerPicker from '../components/PassengerPicker.jsx'
 import { airports } from '../data/flightData.js'
 
 function getLocalDate(date) {
@@ -14,6 +15,7 @@ function FlightHome() {
   const [from, setFrom] = useState('CGK')
   const [to, setTo] = useState('DPS')
   const [date, setDate] = useState(() => getLocalDate(new Date()))
+  const [passengers, setPassengers] = useState(1)
   const [error, setError] = useState('')
 
   function handleSearch(event) {
@@ -23,7 +25,7 @@ function FlightHome() {
       return
     }
     setError('')
-    const params = new URLSearchParams({ from, to, date })
+    const params = new URLSearchParams({ from, to, date, passengers: String(passengers) })
     navigate(`/penerbangan?${params.toString()}`)
   }
 
@@ -61,6 +63,7 @@ function FlightHome() {
           <button className="swap-button" type="button" onClick={swapAirports} aria-label="Tukar kota asal dan tujuan">⇄</button>
           <label className="home-field"><span className="field-label">TUJUAN</span><span className="home-field-control"><b className="down-icon">↘</b><select value={to} onChange={(event) => setTo(event.target.value)} aria-label="Kota tujuan">{airports.map((airport) => <option key={airport.code} value={airport.code}>{airport.city} ({airport.code})</option>)}</select></span></label>
           <label className="home-field date-field"><span className="field-label">TANGGAL PERGI</span><span className="home-field-control"><b className="calendar-icon">▦</b><input type="date" min={getLocalDate(new Date())} value={date} onChange={(event) => setDate(event.target.value)} required /></span></label>
+          <PassengerPicker value={passengers} onChange={setPassengers} />
           <button className="button button-primary search-submit" type="submit">Cari tiket <span>→</span></button>
         </form>
         {error && <p className="form-error" role="alert">{error}</p>}

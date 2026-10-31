@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useNavigate, useSearchParams } from 'react-router'
-import { airports, flights, formatRupiah } from '../data/flightData.js'
+import PassengerPicker from '../components/PassengerPicker.jsx'
+import { airports, flights, formatRupiah, getPassengerCount } from '../data/flightData.js'
 import './FlightSearch.css'
 
 const departurePeriods = [
@@ -20,9 +21,11 @@ function FlightSearch() {
   const [from, setFrom] = useState(query.get('from') || 'CGK')
   const [to, setTo] = useState(query.get('to') || 'DPS')
   const [date, setDate] = useState(query.get('date') || '')
+  const [passengers, setPassengers] = useState(getPassengerCount(query.get('passengers')))
   const [formError, setFormError] = useState('')
   const origin = airports.find((airport) => airport.code === (query.get('from') || 'CGK')) || airports[0]
   const destination = airports.find((airport) => airport.code === (query.get('to') || 'DPS')) || airports[3]
+  const searchedPassengers = getPassengerCount(query.get('passengers'))
   const airlines = ['Semua', ...new Set(flights.map((flight) => flight.airline))]
 
   useEffect(() => {
@@ -30,6 +33,7 @@ function FlightSearch() {
     setFrom(params.get('from') || 'CGK')
     setTo(params.get('to') || 'DPS')
     setDate(params.get('date') || '')
+    setPassengers(getPassengerCount(params.get('passengers')))
     setFormError('')
   }, [queryString])
 
@@ -43,7 +47,7 @@ function FlightSearch() {
     setAirlineFilter('Semua')
     setTimeFilters([])
     setSort('recommended')
-    const params = new URLSearchParams({ from, to, date })
+    const params = new URLSearchParams({ from, to, date, passengers: String(passengers) })
     navigate(`/penerbangan?${params.toString()}`)
   }
 
@@ -92,7 +96,7 @@ function FlightSearch() {
         <div>
           <span className="route-date">{formattedDate}</span>
           <h1>{origin.city}<span className="route-arrow">→</span>{destination.city}</h1>
-          <p>{origin.code} <i>·</i> Penerbangan langsung tersedia <i>·</i> 1 penumpang</p>
+          <p>{origin.code} <i>·</i> Penerbangan langsung tersedia <i>·</i> {searchedPassengers} penumpang</p>
         </div>
         <div className="route-badge"><span>✈</span><strong>{visibleFlights.length}</strong><small>pilihan tiket</small></div>
       </section>
@@ -101,6 +105,7 @@ function FlightSearch() {
         <label className="results-search-field"><span>BERANGKAT DARI</span><select value={from} onChange={(event) => setFrom(event.target.value)} aria-label="Kota asal">{airports.map((airport) => <option key={airport.code} value={airport.code}>{airport.city} ({airport.code})</option>)}</select></label>
         <label className="results-search-field"><span>KE TUJUAN</span><select value={to} onChange={(event) => setTo(event.target.value)} aria-label="Kota tujuan">{airports.map((airport) => <option key={airport.code} value={airport.code}>{airport.city} ({airport.code})</option>)}</select></label>
         <label className="results-search-field results-date-field"><span>TANGGAL PERGI</span><input type="date" min={getLocalDate(new Date())} value={date} onChange={(event) => setDate(event.target.value)} required /></label>
+        <PassengerPicker value={passengers} onChange={setPassengers} />
         <button className="button button-primary results-search-button" type="submit">Cari lagi <span>→</span></button>
         {formError && <p className="form-error results-form-error" role="alert">{formError}</p>}
       </form>
@@ -136,7 +141,7 @@ function FlightSearch() {
             <label className="sort-select">Urutkan<select value={sort} onChange={(event) => setSort(event.target.value)}><option value="recommended">Rekomendasi</option><option value="cheapest">Harga terendah</option><option value="earliest">Berangkat paling awal</option></select></label>
           </div>
           {visibleFlights.length ? visibleFlights.map((flight) => {
-            const detailParams = new URLSearchParams({ from, to, date })
+            const detailParams = new URLSearchParams({ from, to, date, passengers: String(searchedPassengers) })
             return (
               <article className="flight-card" key={flight.id}>
                 <div className="flight-airline"><span className={`airline-logo ${flight.color}`}>{flight.mark}</span><div><strong>{flight.airline}</strong><span>{flight.number} · Ekonomi</span></div></div>

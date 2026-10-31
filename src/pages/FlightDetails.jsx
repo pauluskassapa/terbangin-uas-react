@@ -1,5 +1,5 @@
 import { Link, useParams, useSearchParams } from 'react-router'
-import { airports, flights, formatRupiah } from '../data/flightData.js'
+import { airports, flights, formatRupiah, getPassengerCount } from '../data/flightData.js'
 import './FlightDetails.css'
 
 function FlightDetails() {
@@ -11,7 +11,8 @@ function FlightDetails() {
   const from = airports.find((airport) => airport.code === fromCode) || airports[0]
   const to = airports.find((airport) => airport.code === toCode) || airports[3]
   const date = searchParams.get('date')
-  const routeParams = new URLSearchParams({ from: from.code, to: to.code, date: date || '' })
+  const passengers = getPassengerCount(searchParams.get('passengers'))
+  const routeParams = new URLSearchParams({ from: from.code, to: to.code, date: date || '', passengers: String(passengers) })
 
   if (!flight) {
     return (
@@ -27,13 +28,14 @@ function FlightDetails() {
   const formattedDate = date
     ? new Intl.DateTimeFormat('id-ID', { dateStyle: 'long' }).format(new Date(`${date}T00:00:00`))
     : 'Tanggal perjalanan'
-  const bookingParams = new URLSearchParams({ flightId: flight.id, from: from.code, to: to.code, date: date || '' })
+  const totalPrice = flight.price * passengers
+  const bookingParams = new URLSearchParams({ flightId: flight.id, from: from.code, to: to.code, date: date || '', passengers: String(passengers) })
 
   return (
     <main className="flight-detail-page page-wrap">
       <Link className="detail-back-link" to={`/penerbangan?${routeParams.toString()}`}>← Kembali ke hasil pencarian</Link>
       <div className="detail-page-heading">
-        <div><span className="eyebrow">RINCIAN PERJALANAN</span><h1>Detail penerbangan</h1><p>{formattedDate} <span>·</span> {from.city} menuju {to.city}</p></div>
+        <div><span className="eyebrow">RINCIAN PERJALANAN</span><h1>Detail penerbangan</h1><p>{formattedDate} <span>·</span> {from.city} menuju {to.city} <span>·</span> {passengers} penumpang</p></div>
         <span className="detail-selection">✦ PILIHANMU</span>
       </div>
 
@@ -57,10 +59,10 @@ function FlightDetails() {
         <aside className="detail-price-card">
           <span className="eyebrow">RINGKASAN HARGA</span>
           <h2>Harga tiket</h2>
-          <div className="detail-price-row"><span>1 penumpang</span><strong>{formatRupiah(flight.price)}</strong></div>
+          <div className="detail-price-row"><span>Tiket · {passengers} penumpang</span><strong>{formatRupiah(totalPrice)}</strong></div>
           <div className="detail-price-row"><span>Pajak dan biaya</span><strong>Termasuk</strong></div>
           <div className="detail-price-separator" />
-          <div className="detail-price-row detail-total"><span>Total</span><strong>{formatRupiah(flight.price)}</strong></div>
+          <div className="detail-price-row detail-total"><span>Total</span><strong>{formatRupiah(totalPrice)}</strong></div>
           <Link className="button button-primary detail-book-button" to={`/booking?${bookingParams.toString()}`}>Lanjutkan pemesanan <span>→</span></Link>
           <p>Harga contoh. Detail pemesanan dilanjutkan pada halaman booking.</p>
         </aside>

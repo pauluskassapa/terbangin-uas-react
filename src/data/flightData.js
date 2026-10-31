@@ -20,3 +20,8 @@ export const flights = [
 export function formatRupiah(value) {
   return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(value)
 }
+
+export function getPassengerCount(value) {
+  const count = Number(value)
+  return Number.isFinite(count) ? Math.min(6, Math.max(1, Math.floor(count))) : 1
+}
