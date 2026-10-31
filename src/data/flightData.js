@@ -15,6 +15,7 @@ export const flights = [
   { id: 'id6512', airline: 'Batik Air', number: 'ID 6512', mark: 'ID', color: 'batik', departure: '12.15', arrival: '15.10', duration: '1j 55m', price: 1050000, baggage: '20 kg', perk: 'Hiburan di pesawat', recommendation: 3 },
   { id: 'jt804', airline: 'Lion Air', number: 'JT 804', mark: 'JT', color: 'lion', departure: '14.20', arrival: '17.15', duration: '1j 55m', price: 760000, baggage: 'Kabin 7 kg', perk: 'Bagasi tambahan tersedia', recommendation: 4 },
   { id: 'iu750', airline: 'Super Air Jet', number: 'IU 750', mark: 'IU', color: 'super', departure: '16.00', arrival: '18.55', duration: '1j 55m', price: 820000, baggage: 'Kabin 7 kg', perk: 'Hiburan di aplikasi', recommendation: 5 },
+  { id: 'ip120', airline: 'Pelita Air', number: 'IP 120', mark: 'IP', color: 'pelita', departure: '19.20', arrival: '22.15', duration: '1j 55m', price: 930000, baggage: '20 kg', perk: 'Makanan tersedia', recommendation: 6 },
 ]
 
 export function formatRupiah(value) {

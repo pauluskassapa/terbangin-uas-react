@@ -137,7 +137,7 @@ function FlightSearch() {
 
         <section className="flight-list" aria-label="Daftar penerbangan tersedia">
           <div className="list-heading">
-            <div><h2>Penerbangan tersedia</h2><p>Harga contoh untuk keperluan tampilan.</p></div>
+            <div><h2>Penerbangan tersedia</h2><p>Jadwal dan harga contoh untuk keperluan tampilan.</p></div>
             <label className="sort-select">Urutkan<select value={sort} onChange={(event) => setSort(event.target.value)}><option value="recommended">Rekomendasi</option><option value="cheapest">Harga terendah</option><option value="earliest">Berangkat paling awal</option></select></label>
           </div>
           {visibleFlights.length ? visibleFlights.map((flight) => {
