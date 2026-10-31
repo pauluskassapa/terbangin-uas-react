@@ -1,0 +1,63 @@
+.flight-detail-page { flex: 1; padding-top: 38px; padding-bottom: 76px; }
+.detail-back-link { display: inline-block; margin-bottom: 26px; color: var(--teal); text-decoration: none; font-size: 11px; font-weight: 700; }
+.detail-page-heading { display: flex; align-items: end; justify-content: space-between; gap: 12px; margin-bottom: 22px; }
+.detail-page-heading h1 { margin: 8px 0 6px; color: var(--ink); font: 750 clamp(29px, 4vw, 40px) 'Manrope', sans-serif; letter-spacing: -1.6px; }
+.detail-page-heading p { margin: 0; color: var(--muted); font-size: 11px; }
+.detail-page-heading p span { margin: 0 5px; }
+.detail-selection { padding: 8px 11px; border: 1px solid #c9e7e6; border-radius: 99px; color: var(--teal); font-size: 9px; font-weight: 700; letter-spacing: .6px; }
+.detail-layout { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(250px, .8fr); align-items: start; gap: 17px; }
+.flight-detail-card, .detail-price-card { padding: 23px; border: 1px solid var(--line); border-radius: 13px; background: white; box-shadow: 0 12px 32px rgb(24 50 75 / 5%); }
+.detail-airline { display: flex; align-items: center; gap: 10px; }
+.detail-airline-mark { width: 45px; height: 45px; display: grid; place-items: center; border-radius: 12px; background: #dff4f1; color: var(--teal); font: 800 13px 'Manrope', sans-serif; }
+.detail-airline > div { display: grid; gap: 4px; }
+.detail-airline strong { color: var(--ink); font-size: 11px; }
+.detail-airline div span { color: var(--muted); font-size: 9px; }
+.detail-itinerary { display: grid; grid-template-columns: auto minmax(75px, 1fr) auto; align-items: center; gap: 17px; padding: 31px 4px 25px; }
+.detail-endpoint { display: grid; gap: 4px; }
+.detail-time { color: var(--ink); font: 800 25px 'Manrope', sans-serif; }
+.detail-endpoint strong { color: var(--ink); font: 750 13px 'Manrope', sans-serif; }
+.detail-endpoint > span:last-child { color: var(--muted); font-size: 9px; }
+.detail-arrival { text-align: right; }
+.detail-route-line { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 7px; color: var(--teal); }
+.detail-route-line i { height: 1px; background: #cbd8e0; }
+.detail-route-line small { grid-column: 1 / -1; color: var(--muted); font-size: 8px; text-align: center; }
+.detail-separator, .detail-price-separator { height: 1px; margin-bottom: 18px; background: var(--line); }
+.flight-detail-card h2, .detail-price-card h2 { margin: 0 0 14px; color: var(--ink); font: 700 14px 'Manrope', sans-serif; }
+.detail-amenities { display: flex; flex-wrap: wrap; gap: 8px; }
+.detail-amenities span { padding: 8px 10px; border-radius: 7px; background: #f5f8fc; color: #52697a; font-size: 9px; }
+.airport-reminder { display: flex; align-items: center; gap: 8px; margin: 19px 0 0; color: var(--muted); font-size: 9px; }
+.airport-reminder span { width: 16px; height: 16px; display: grid; place-items: center; border: 1px solid #b8c9d4; border-radius: 50%; }
+.detail-price-card { position: sticky; top: 18px; }
+.detail-price-card > .eyebrow { display: block; margin-bottom: 7px; }
+.detail-price-row { display: flex; justify-content: space-between; gap: 9px; margin: 13px 0; color: var(--muted); font-size: 10px; }
+.detail-price-row strong { color: var(--ink); font-size: 10px; }
+.detail-price-separator { margin: 17px 0; }
+.detail-total { align-items: center; color: var(--ink); font-weight: 700; }
+.detail-total strong { color: var(--teal); font: 800 18px 'Manrope', sans-serif; }
+.detail-book-button { width: 100%; margin-top: 12px; }
+.detail-book-button span { margin-left: 7px; font-size: 15px; }
+.detail-price-card > p { margin: 11px 0 0; color: var(--muted); font-size: 8px; line-height: 1.6; text-align: center; }
+.detail-not-found { min-height: 55vh; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 12px; }
+.detail-not-found h1 { margin: 0; color: var(--ink); font: 800 34px 'Manrope', sans-serif; }
+.detail-not-found p { margin: 0 0 7px; color: var(--muted); font-size: 12px; }
+.flight-detail-page :is(a, button):focus-visible { outline: 3px solid rgb(8 127 140 / 28%); outline-offset: 2px; }
+
+@media (max-width: 760px) {
+  .detail-layout { grid-template-columns: 1fr; }
+  .detail-price-card { position: static; }
+}
+@media (max-width: 500px) {
+  .flight-detail-page { padding-top: 27px; padding-bottom: 50px; }
+  .detail-page-heading { align-items: flex-start; }
+  .detail-page-heading h1 { font-size: 28px; }
+  .detail-selection { display: none; }
+  .flight-detail-card, .detail-price-card { padding: 17px 14px; }
+  .detail-itinerary { gap: 8px; padding: 26px 0 21px; }
+  .detail-time { font-size: 20px; }
+  .detail-endpoint strong { font-size: 11px; }
+  .detail-endpoint > span:last-child { font-size: 8px; }
+  .detail-route-line { gap: 4px; }
+  .detail-route-line small { font-size: 7px; white-space: nowrap; }
+  .detail-amenities { gap: 6px; }
+  .detail-amenities span { padding: 7px; font-size: 8px; }
+}
