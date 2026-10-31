@@ -171,7 +171,7 @@ function FlightSearch() {
               <article className="flight-card" key={flight.id}>
                 <div className="flight-airline"><span className={`airline-logo ${flight.color}`}>{flight.mark}</span><div><strong>{flight.airline}</strong><span>{flight.number} · Ekonomi</span></div></div>
                 <div className="flight-times"><div><strong>{flight.departure}</strong><span>{origin.code} · {origin.city}</span></div><div className="flight-duration"><span>Langsung</span><i /><small>{flight.duration}</small></div><div><strong>{flight.arrival}</strong><span>{destination.code} · {destination.city}</span></div></div>
-                <div className="flight-purchase"><strong>{formatRupiah(flight.price)}</strong><span>per penumpang</span><Link aria-label={`Lihat detail ${flight.airline} ${flight.number}`} className="button button-primary" to={`/penerbangan/${flight.id}?${detailParams.toString()}`}>Lihat detail <b aria-hidden="true">→</b></Link></div>
+                <div className="flight-purchase"><strong>{formatRupiah(flight.price)}</strong><span>per penumpang</span>{searchedPassengers > 1 && <small className="flight-total-price">Total {formatRupiah(flight.price * searchedPassengers)}</small>}<Link aria-label={`Lihat detail ${flight.airline} ${flight.number}`} className="button button-primary" to={`/penerbangan/${flight.id}?${detailParams.toString()}`}>Lihat detail <b aria-hidden="true">→</b></Link></div>
                 <div className="flight-perks"><span>✓ Bagasi {flight.baggage}</span><span>✓ {flight.perk}</span></div>
               </article>
             )

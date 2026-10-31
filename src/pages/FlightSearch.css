@@ -63,6 +63,7 @@
 .flight-purchase { display: grid; justify-items: end; gap: 3px; }
 .flight-purchase > strong { color: var(--teal); font: 750 15px 'Manrope', sans-serif; white-space: nowrap; }
 .flight-purchase > span { margin-bottom: 5px; color: var(--muted); font-size: 8px; }
+.flight-total-price { color: var(--ink); font-size: 8px; font-weight: 700; white-space: nowrap; }
 .flight-purchase .button { padding: 8px 10px; gap: 8px; font-size: 9px; }
 .flight-purchase .button b { font-size: 13px; }
 .flight-perks { grid-column: 1 / -1; display: flex; gap: 16px; padding-top: 9px; border-top: 1px solid #edf1f4; color: #52697a; font-size: 9px; }
