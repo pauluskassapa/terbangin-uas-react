@@ -1,6 +1,7 @@
 import { Link, Route, Routes } from 'react-router'
 import SiteFooter from './components/SiteFooter.jsx'
 import SiteHeader from './components/SiteHeader.jsx'
+import FlightHome from './pages/FlightHome.jsx'
 import './App.css'
 
 function RoutePlaceholder({ title }) {
@@ -19,7 +20,7 @@ function App() {
     <>
       <SiteHeader />
       <Routes>
-        <Route path="/" element={<RoutePlaceholder title="Beranda penerbangan" />} />
+        <Route path="/" element={<FlightHome />} />
         <Route path="/penerbangan" element={<RoutePlaceholder title="Hasil pencarian penerbangan" />} />
         <Route path="/penerbangan/:flightId" element={<RoutePlaceholder title="Detail penerbangan" />} />
         <Route path="*" element={<RoutePlaceholder title="Halaman tidak ditemukan" />} />
