@@ -1,0 +1,47 @@
+.register-page { display: grid; place-items: center; flex: 1; padding-block: 54px; }
+.register-card { width: min(940px, 100%); display: grid; grid-template-columns: .82fr 1.18fr; overflow: hidden; border: 1px solid var(--line); border-radius: 20px; background: white; box-shadow: 0 18px 50px rgba(24, 50, 75, .08); }
+.register-aside { min-height: 650px; position: relative; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; overflow: hidden; padding: 48px 40px; color: white; background: linear-gradient(155deg, #087f8c, #066b75 70%, #18324b); }
+.register-aside .eyebrow { color: #b9e9e6; font-size: 9px; }
+.register-aside-icon { margin-bottom: 38px; font-size: 38px; transform: rotate(-12deg); }
+.register-aside h2 { z-index: 1; margin: 16px 0 12px; font: 800 37px/1.15 'Manrope', sans-serif; letter-spacing: -1.8px; }
+.register-aside p { z-index: 1; max-width: 240px; margin: 0; color: #d5efed; font-size: 12px; line-height: 1.8; }
+.register-aside-decoration { position: absolute; right: -92px; bottom: 56px; width: 340px; height: 120px; border: 1px solid rgba(255,255,255,.25); border-radius: 50%; transform: rotate(-28deg); }
+.register-aside-decoration i { position: absolute; inset: 12px; border: 1px solid rgba(255,255,255,.16); border-radius: 50%; }
+.register-aside-decoration i:nth-child(2) { inset: 25px; }
+.register-aside-decoration i:nth-child(3) { inset: 38px; }
+.register-form-panel { padding: 46px 55px 38px; }
+.register-form-panel h1 { margin: 9px 0 5px; color: var(--ink); font: 800 29px/1.2 'Manrope', sans-serif; letter-spacing: -1px; }
+.register-intro { margin: 0 0 24px; color: var(--muted); font-size: 12px; }
+.register-form { display: grid; gap: 14px; }
+.register-field { display: grid; gap: 7px; color: #354c5e; font-size: 11px; font-weight: 700; }
+.register-field small { margin-left: 5px; color: #96a3aa; font-size: 9px; font-weight: 500; }
+.register-field > input, .register-password-wrap input { width: 100%; min-width: 0; height: 42px; padding: 0 12px; border: 1px solid #dfe7eb; border-radius: 8px; outline: none; color: var(--ink); background: #fff; font-size: 11px; font-weight: 400; }
+.register-field > input:focus, .register-password-wrap input:focus { border-color: var(--teal); box-shadow: 0 0 0 3px rgb(8 127 140 / 10%); }
+.register-field input::placeholder { color: #a5b0b5; }
+.register-password-wrap { position: relative; display: flex; align-items: center; }
+.register-password-wrap input { padding-right: 84px; }
+.password-toggle { position: absolute; right: 10px; border: 0; padding: 5px 0; color: var(--teal); background: transparent; font-size: 9px; font-weight: 700; cursor: pointer; }
+.register-terms { display: flex; align-items: flex-start; gap: 8px; color: #71818b; font-size: 9px; line-height: 1.6; }
+.register-terms input { margin: 1px 0 0; accent-color: var(--teal); }
+.register-terms a { color: var(--teal); font-weight: 700; }
+.register-error { margin: -5px 0 0; color: #b94035; font-size: 10px; }
+.register-submit { width: 100%; min-height: 43px; gap: 10px; cursor: pointer; }
+.register-login-note { margin: 18px 0 0; text-align: center; color: #87959c; font-size: 10px; }
+.register-login-note span { color: #647985; font-weight: 700; }
+.register-success { min-height: 550px; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; }
+.register-success-icon { width: 48px; height: 48px; display: grid; place-items: center; margin-bottom: 25px; border-radius: 50%; color: var(--teal); background: #e5f5f2; font-size: 22px; }
+.register-success h1 { max-width: 360px; margin: 10px 0; }
+.register-success p { max-width: 380px; margin: 0 0 22px; color: var(--muted); font-size: 12px; line-height: 1.7; }
+.register-page :is(a, button, input):focus-visible { outline: 3px solid rgb(8 127 140 / 28%); outline-offset: 2px; }
+@media (max-width: 720px) {
+  .register-page { width: min(520px, calc(100% - 34px)); padding-block: 30px; }
+  .register-card { grid-template-columns: 1fr; }
+  .register-aside { min-height: auto; padding: 25px 28px; }
+  .register-aside-icon { margin-bottom: 15px; font-size: 28px; }
+  .register-aside h2 { margin: 9px 0 6px; font-size: 27px; }
+  .register-aside p { max-width: 320px; font-size: 11px; }
+  .register-aside-decoration { right: -170px; bottom: -70px; }
+  .register-form-panel { padding: 30px 25px; }
+  .register-form-panel h1 { font-size: 26px; }
+  .register-success { min-height: 360px; }
+}

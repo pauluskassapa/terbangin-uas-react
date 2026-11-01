@@ -12,7 +12,7 @@ function SiteHeader() {
           <NavLink to="/" end>Beranda</NavLink>
           <NavLink to="/penerbangan">Cari Penerbangan</NavLink>
         </nav>
-        <Link className="header-cta" to="/penerbangan">Jelajahi tiket <span aria-hidden="true">↗</span></Link>
+        <Link className="header-cta" to="/register">Daftar akun <span aria-hidden="true">↗</span></Link>
       </div>
     </header>
   )
