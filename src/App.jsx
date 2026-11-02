@@ -4,6 +4,7 @@ import SiteHeader from './components/SiteHeader.jsx'
 import FlightDetails from './pages/FlightDetails.jsx'
 import FlightHome from './pages/FlightHome.jsx'
 import FlightSearch from './pages/FlightSearch.jsx'
+import Booking from './pages/Booking.jsx'
 import './App.css'
 
 function RoutePlaceholder({ title }) {
@@ -25,6 +26,7 @@ function App() {
         <Route path="/" element={<FlightHome />} />
         <Route path="/penerbangan" element={<FlightSearch />} />
         <Route path="/penerbangan/:flightId" element={<FlightDetails />} />
+        <Route path="/booking" element={<Booking />} />
         <Route path="*" element={<RoutePlaceholder title="Halaman tidak ditemukan" />} />
       </Routes>
       <SiteFooter />
