@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link, useNavigate, useSearchParams } from 'react-router'
 import { airports, flights, formatRupiah, getPassengerCount } from '../data/flightData.js'
+import './Booking.css'
 
 function Booking() {
     const [searchParams] = useSearchParams()
