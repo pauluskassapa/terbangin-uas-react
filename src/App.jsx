@@ -6,6 +6,7 @@ import FlightHome from './pages/FlightHome.jsx'
 import FlightSearch from './pages/FlightSearch.jsx'
 import Booking from './pages/Booking.jsx'
 import Payment from './pages/Payment.jsx'
+import PaymentSuccess from './pages/PaymentSuccess.jsx'
 import './App.css'
 
 function RoutePlaceholder({ title }) {
@@ -29,7 +30,7 @@ function App() {
         <Route path="/penerbangan/:flightId" element={<FlightDetails />} />
         <Route path="/booking" element={<Booking />} />
         <Route path="/payment" element={<Payment />} />
-        <Route path="/payment-success" element={<RoutePlaceholder title="Konfirmasi Pembayaran" />} />
+        <Route path="/payment-success" element={<PaymentSuccess />} />
         <Route path="*" element={<RoutePlaceholder title="Halaman tidak ditemukan" />} />
       </Routes>
       <SiteFooter />
