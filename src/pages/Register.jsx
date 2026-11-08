@@ -1,13 +1,15 @@
 import { useState } from 'react'
 import { Link } from 'react-router'
+import { useAuth } from '../auth/AuthContext.jsx'
 import './Register.css'
 
 function Register() {
   const [showPassword, setShowPassword] = useState(false)
   const [error, setError] = useState('')
   const [registered, setRegistered] = useState(false)
+  const { register } = useAuth()
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault()
     const form = new FormData(event.currentTarget)
     const password = form.get('password')
@@ -19,7 +21,12 @@ function Register() {
     }
 
     setError('')
-    setRegistered(true)
+    try {
+      await register({ name: form.get('name'), email: form.get('email'), phone: form.get('phone'), password })
+      setRegistered(true)
+    } catch (registrationError) {
+      setError(registrationError.message || 'Pendaftaran belum berhasil. Coba lagi.')
+    }
   }
 
   return (
@@ -37,10 +44,10 @@ function Register() {
           {registered ? (
             <div className="register-success" role="status">
               <span className="register-success-icon" aria-hidden="true">✓</span>
-              <span className="eyebrow">FORMULIR TERKIRIM</span>
-              <h1 id="register-title">Terima kasih sudah mendaftar!</h1>
-              <p>Data pendaftaran siap diproses. Fitur pembuatan akun akan aktif setelah terhubung ke layanan akun.</p>
-              <Link className="button button-primary" to="/">Kembali ke beranda</Link>
+              <span className="eyebrow">AKUN SIAP DIGUNAKAN</span>
+              <h1 id="register-title">Selamat datang di Terbangin!</h1>
+              <p>Akunmu berhasil dibuat. Kamu sudah masuk dan bisa melihat atau mengubah informasi profil.</p>
+              <Link className="button button-primary" to="/profile">Lihat profil</Link>
             </div>
           ) : (
             <>
@@ -76,7 +83,7 @@ function Register() {
                 <label className="register-terms"><input type="checkbox" required /><span>Saya menyetujui <a href="#syarat">syarat dan ketentuan</a> serta <a href="#privasi">kebijakan privasi</a>.</span></label>
                 <button className="button button-primary register-submit" type="submit">Buat akun <span aria-hidden="true">→</span></button>
               </form>
-              <p className="register-login-note">Sudah punya akun? <span>Fitur masuk segera hadir</span></p>
+              <p className="register-login-note">Sudah punya akun? <Link to="/login">Masuk di sini</Link></p>
             </>
           )}
         </div>
