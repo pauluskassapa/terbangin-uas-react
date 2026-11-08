@@ -28,6 +28,8 @@
 .register-submit { width: 100%; min-height: 43px; gap: 10px; cursor: pointer; }
 .register-login-note { margin: 18px 0 0; text-align: center; color: #87959c; font-size: 10px; }
 .register-login-note span { color: #647985; font-weight: 700; }
+.register-login-note a { color: var(--teal); font-weight: 700; text-decoration: none; }
+.register-login-note a:hover { text-decoration: underline; }
 .register-success { min-height: 550px; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; }
 .register-success-icon { width: 48px; height: 48px; display: grid; place-items: center; margin-bottom: 25px; border-radius: 50%; color: var(--teal); background: #e5f5f2; font-size: 22px; }
 .register-success h1 { max-width: 360px; margin: 10px 0; }
