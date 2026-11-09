@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router'
-import { useAuth } from '../auth/AuthContext.jsx'
+import { useAuth } from '../context/AuthContext.jsx'
 import './Register.css'
 
 function Register() {

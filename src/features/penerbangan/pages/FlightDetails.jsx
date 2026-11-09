@@ -1,5 +1,5 @@
 import { Link, useParams, useSearchParams } from 'react-router'
-import { airports, flights, formatRupiah, getPassengerCount } from '../data/flightData.js'
+import { airports, flights, formatRupiah, getPassengerCount } from '../../../data/penerbangan.js'
 import './FlightDetails.css'
 
 function FlightDetails() {

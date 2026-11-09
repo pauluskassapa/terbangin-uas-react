@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router'
-import { formatRupiah } from '../data/flightData.js'
+import { formatRupiah } from '../../../data/penerbangan.js'
 import './Payment.css'
 
 const BAGGAGE_PRICE = 200000

@@ -1,5 +1,6 @@
 import { Link, useLocation } from 'react-router'
-import { formatRupiah } from '../data/flightData.js'
+import { formatRupiah } from '../../../data/penerbangan.js'
+import './PaymentSuccess.css'
 
 function PaymentSuccess() {
     const location = useLocation()
