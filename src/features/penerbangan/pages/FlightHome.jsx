@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router'
 import PassengerPicker from '../components/PassengerPicker.jsx'
-import { airports } from '../data/flightData.js'
+import { airports } from '../../../data/penerbangan.js'
 
 const popularDestinations = [
   { code: 'DPS', name: 'Bali' },
