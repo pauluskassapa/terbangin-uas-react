@@ -10,6 +10,10 @@
 .main-nav a:hover, .main-nav a.active { color: var(--teal); }
 .header-cta { padding: 10px 15px; border: 1px solid #d8e3e9; border-radius: 99px; text-decoration: none; font-size: 11px; font-weight: 700; }
 .header-cta span { margin-left: 8px; color: var(--teal); }
+.header-account { display: flex; align-items: center; gap: 12px; }
+.header-account-name, .header-login { color: var(--ink); text-decoration: none; font-size: 11px; font-weight: 700; }
+.header-account-name:hover, .header-login:hover { color: var(--teal); }
+.header-logout { background: white; color: var(--ink); cursor: pointer; }
 .site-footer { margin-top: auto; background: #e8f1ff; }
 .footer-inner { min-height: 78px; display: flex; align-items: center; justify-content: space-between; }
 .footer-brand { font-size: 17px; }
@@ -82,7 +86,9 @@
   .brand { font-size: 18px; }
   .main-nav { gap: 12px; }
   .main-nav a { font-size: 10px; }
-  .header-cta { display: none; }
+  .header-account { gap: 8px; }
+  .header-account-name, .header-login { font-size: 9px; }
+  .header-cta { padding: 8px 10px; font-size: 9px; }
   .footer-inner { min-height: 88px; flex-wrap: wrap; gap: 5px 10px; padding-block: 15px; }
   .footer-inner p { order: 3; width: 100%; margin: 0; }
   .home-hero-inner { min-height: 560px; display: flex; flex-direction: column; align-items: stretch; padding-top: 42px; }
