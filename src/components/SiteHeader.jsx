@@ -13,6 +13,8 @@ function SiteHeader() {
         <nav className="main-nav" aria-label="Navigasi utama">
           <NavLink to="/" end>Beranda</NavLink>
           <NavLink to="/penerbangan">Cari Penerbangan</NavLink>
+          <NavLink to="/my-booking">Perjalanan</NavLink>
+          <NavLink to="/booking-history">Booking History</NavLink>
         </nav>
         {user ? (
           <div className="header-account">
