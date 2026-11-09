@@ -1,5 +1,5 @@
 import { Link, NavLink } from 'react-router'
-import { useAuth } from '../auth/AuthContext.jsx'
+import { useAuth } from '../features/akun/context/AuthContext.jsx'
 
 function SiteHeader() {
   const { user, logout } = useAuth()

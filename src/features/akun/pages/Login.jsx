@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link, Navigate, useNavigate } from 'react-router'
-import { useAuth } from '../auth/AuthContext.jsx'
+import { useAuth } from '../context/AuthContext.jsx'
 import './AccountPages.css'
 
 function Login() {

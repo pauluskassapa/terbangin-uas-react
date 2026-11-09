@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useNavigate, useSearchParams } from 'react-router'
 import PassengerPicker from '../components/PassengerPicker.jsx'
-import { airports, flights, formatRupiah, getPassengerCount } from '../data/flightData.js'
+import { airports, flights, formatRupiah, getPassengerCount } from '../../../data/penerbangan.js'
 import './FlightSearch.css'
 
 const departurePeriods = [
