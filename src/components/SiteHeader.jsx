@@ -15,6 +15,7 @@ function SiteHeader() {
           <NavLink to="/penerbangan">Cari Penerbangan</NavLink>
           <NavLink to="/my-booking">Perjalanan</NavLink>
           <NavLink to="/booking-history">Booking History</NavLink>
+          <NavLink to="/faq">FAQ</NavLink>
         </nav>
         {user ? (
           <div className="header-account">
