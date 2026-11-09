@@ -10,6 +10,7 @@ import Login from './pages/Login.jsx'
 import Profile from './pages/Profile.jsx'
 import MyBooking from './pages/MyBooking.jsx'
 import BookingHistory from './pages/BookingHistory.jsx'
+import Faq from './pages/Faq.jsx'
 import './App.css'
 
 function RoutePlaceholder({ title }) {
@@ -37,6 +38,7 @@ function App() {
         <Route path="/profile" element={user ? <Profile /> : <Navigate to="/login" replace />} />
         <Route path="/my-booking" element={<MyBooking />} />
         <Route path="/booking-history" element={<BookingHistory />} />
+        <Route path="/faq" element={<Faq />} />
         <Route path="*" element={<RoutePlaceholder title="Halaman tidak ditemukan" />} />
       </Routes>
       <SiteFooter />
