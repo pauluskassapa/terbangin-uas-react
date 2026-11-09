@@ -8,6 +8,8 @@ import FlightSearch from './pages/FlightSearch.jsx'
 import Register from './pages/Register.jsx'
 import Login from './pages/Login.jsx'
 import Profile from './pages/Profile.jsx'
+import MyBooking from './pages/MyBooking.jsx'
+import BookingHistory from './pages/BookingHistory.jsx'
 import './App.css'
 
 function RoutePlaceholder({ title }) {
@@ -33,6 +35,8 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/profile" element={user ? <Profile /> : <Navigate to="/login" replace />} />
+        <Route path="/my-booking" element={<MyBooking />} />
+        <Route path="/booking-history" element={<BookingHistory />} />
         <Route path="*" element={<RoutePlaceholder title="Halaman tidak ditemukan" />} />
       </Routes>
       <SiteFooter />
