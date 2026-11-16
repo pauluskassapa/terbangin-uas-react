@@ -14,6 +14,7 @@ import Booking from './features/pemesanan/pages/Booking.jsx'
 import Payment from './features/pemesanan/pages/Payment.jsx'
 import PaymentSuccess from './features/pemesanan/pages/PaymentSuccess.jsx'
 import Faq from './features/bantuan/pages/Faq.jsx'
+import Destination from './features/destinasi/pages/Destination.jsx'
 import './App.css'
 
 function RoutePlaceholder({ title }) {
@@ -44,6 +45,8 @@ function App() {
         <Route path="/profile" element={user ? <Profile /> : <Navigate to="/login" replace />} />
         <Route path="/my-booking" element={<MyBooking />} />
         <Route path="/booking-history" element={<BookingHistory />} />
+        <Route path="/destinasi" element={<Destination />} />
+        <Route path="/destinasi/:code" element={<Destination />} />
         <Route path="/faq" element={<Faq />} />
         <Route path="*" element={<RoutePlaceholder title="Halaman tidak ditemukan" />} />
       </Routes>
