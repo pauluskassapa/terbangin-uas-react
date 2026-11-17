@@ -55,7 +55,14 @@ function Destination() {
 
   return (
     <main className="destination-page">
-      <section className="destination-hero">
+      <section
+        className="destination-hero"
+        style={
+          destination.heroImage
+            ? { '--destination-hero-image': `url(${destination.heroImage})` }
+            : undefined
+        }
+      >
         <div className="page-wrap destination-hero-inner">
           <div className="destination-hero-copy">
             <span className="eyebrow">

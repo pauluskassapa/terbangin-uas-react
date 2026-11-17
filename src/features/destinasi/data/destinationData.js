@@ -1,3 +1,6 @@
+import baliPhoto from '../../penerbangan/assets/destination-bali.jpg'
+import jogjaPhoto from '../../penerbangan/assets/destination-yogyakarta.jpg'
+
 export const destinations = {
   DPS: {
     code: 'DPS',
@@ -7,6 +10,7 @@ export const destinations = {
     tagline: 'Pulau Dewata dengan harmoni pantai tropis, sawah terasering, dan budaya yang hidup.',
     heroTitle: 'Jelajahi Pesona',
     heroAccent: 'Bali.',
+    heroImage: baliPhoto,
     startingPrice: 760000,
     flightDuration: '1j 50m dari Jakarta (CGK)',
     bestSeason: 'April – Oktober (Musim Kemarau)',
@@ -105,6 +109,7 @@ export const destinations = {
     tagline: 'Kota budaya dengan warisan keraton, kemegahan candi bersejarah, hingga petualangan alam Gunung Merapi dan pantai selatan.',
     heroTitle: 'Telusuri Cerita',
     heroAccent: 'Yogyakarta.',
+    heroImage: jogjaPhoto,
     startingPrice: 760000,
     flightDuration: '1j 15m dari Jakarta (CGK)',
     bestSeason: 'Mei – September (Musim Kemarau)',
