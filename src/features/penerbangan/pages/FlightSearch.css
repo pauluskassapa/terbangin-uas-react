@@ -54,28 +54,36 @@
 .results-page .list-heading p { margin: 7px 0 0; color: #52697a; font-size: 12px; line-height: 1.5; }
 .results-page .sort-select { display: grid; gap: 6px; color: #52697a; font-size: 12px; }
 .results-page .sort-select select { max-width: 100%; padding: 10px; border: 1px solid var(--line); border-radius: 10px; background: white; color: var(--ink); font-size: 13px; cursor: pointer; }
-.results-page .flight-card { display: grid; grid-template-columns: minmax(0, 1fr) 210px; gap: 20px 24px; margin-bottom: 16px; padding: 24px; border: 1px solid var(--line); border-radius: 20px; background: white; box-shadow: 0 4px 16px rgb(24 50 75 / 3%); }
+.results-page .flight-card { display: grid; grid-template-columns: minmax(0, 1fr) 210px; gap: 24px; margin-bottom: 20px; padding: 24px; border: 1px solid var(--line); border-radius: 20px; background: white; box-shadow: 0 6px 22px rgb(24 50 75 / 5%); }
+.results-page .flight-card:focus-within { border-color: var(--teal); }
+.results-page .flight-card-heading { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; padding-bottom: 18px; border-bottom: 1px solid #edf1f4; }
+.results-page .flight-price-badge { padding: 7px 10px; border-radius: 20px; background: #dff4f1; color: var(--teal-dark); font-size: 11px; font-weight: 600; }
 .results-page .flight-airline { display: flex; align-items: center; gap: 12px; }
-.results-page .airline-logo { display: grid; place-items: center; flex: 0 0 42px; height: 42px; border-radius: 12px; background: #dff4f1; color: var(--teal-dark); font: 800 13px 'Manrope', sans-serif; }
+.results-page .airline-logo { display: grid; place-items: center; flex: 0 0 46px; height: 46px; border: 1px solid #cce5e5; border-radius: 14px; background: #dff4f1; color: var(--teal-dark); font: 800 13px 'Manrope', sans-serif; }
 .results-page .flight-airline > div { display: grid; gap: 5px; }
 .results-page .flight-airline strong { font-size: 15px; }
 .results-page .flight-airline div span { color: #52697a; font-size: 12px; }
 .results-page .flight-times { grid-column: 1; display: flex; align-items: center; justify-content: space-between; gap: 14px; }
-.results-page .flight-times > div:not(.flight-duration) { display: grid; gap: 7px; }
-.results-page .flight-times strong { font: 750 24px 'Manrope', sans-serif; }
+.results-page .flight-times > div:not(.flight-duration) { display: grid; gap: 5px; flex: 1; min-width: 0; }
+.results-page .flight-times > div:last-child { text-align: right; }
+.results-page .flight-times .flight-airport-code { color: var(--ink); font-size: 13px; font-weight: 700; }
+.results-page .flight-times > div > small { color: #52697a; font-size: 11px; line-height: 1.5; overflow-wrap: anywhere; }
+.results-page .flight-times strong { font: 750 28px 'Manrope', sans-serif; }
 .results-page .flight-times span { color: #52697a; font-size: 12px; }
-.results-page .flight-duration { display: grid; flex: 1; min-width: 54px; justify-items: center; gap: 8px; }
+.results-page .flight-duration { display: grid; flex: 1; min-width: 54px; justify-items: center; gap: 12px; }
 .results-page .flight-duration > i { width: 100%; height: 1px; background: #cbd8e0; position: relative; }
 .results-page .flight-duration > i::before, .results-page .flight-duration > i::after { content: ''; position: absolute; top: -3px; width: 6px; height: 6px; border: 1px solid #87a8b4; border-radius: 50%; background: white; }
 .results-page .flight-duration > i::before { left: 0; }
 .results-page .flight-duration > i::after { right: 0; }
+.results-page .flight-duration svg { position: absolute; width: 19px; height: 19px; left: 50%; top: 50%; padding: 2px; background: white; color: var(--teal); transform: translate(-50%, -50%) rotate(90deg); }
 .results-page .flight-duration small { color: #52697a; font-size: 12px; }
-.results-page .flight-purchase { grid-column: 2; grid-row: 1 / 3; display: flex; flex-direction: column; align-items: flex-end; justify-content: center; gap: 6px; padding-left: 24px; border-left: 1px dashed #d4e1e8; }
+.results-page .flight-purchase { grid-column: 2; grid-row: 2 / 4; display: flex; flex-direction: column; align-items: flex-end; justify-content: center; gap: 6px; padding: 20px; border: 1px solid #d4e4e8; border-radius: 16px; background: #f5f8fc; }
 .results-page .flight-purchase > strong { color: var(--teal-dark); font: 800 23px 'Manrope', sans-serif; white-space: nowrap; }
 .results-page .flight-purchase > span { color: #52697a; font-size: 12px; }
 .results-page .flight-total-price { font-size: 12px; line-height: 1.6; text-align: right; }
 .results-page .flight-purchase .button { width: 100%; min-height: 42px; margin-top: 8px; padding: 10px 14px; border-radius: 10px; gap: 10px; font-size: 13px; }
-.results-page .flight-perks { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 10px 22px; padding-top: 16px; border-top: 1px solid #edf1f4; color: #52697a; font-size: 12px; line-height: 1.5; }
+.results-page .flight-perks { grid-column: 1; grid-row: 3; display: flex; flex-wrap: wrap; gap: 10px 22px; padding-top: 0; color: #52697a; font-size: 12px; line-height: 1.5; }
+.results-page .flight-perks > span { padding: 6px 9px; border-radius: 8px; background: #f5f8fc; }
 .results-page .empty-state { padding: 44px 24px; border: 1px solid var(--line); border-radius: 20px; background: white; text-align: center; }
 .results-page .empty-state > span { color: var(--teal); font-size: 28px; }
 .results-page .empty-state h3 { margin: 14px 0 8px; font-size: 19px; }
@@ -88,7 +96,9 @@
   .results-page .results-search-button { grid-column: 1 / -1; }
   .results-page .results-layout { grid-template-columns: 210px minmax(0, 1fr); gap: 18px; }
   .results-page .flight-card { grid-template-columns: minmax(0, 1fr); padding: 20px; }
-  .results-page .flight-purchase { grid-column: 1; grid-row: auto; display: grid; grid-template-columns: minmax(0, 1fr) auto; justify-items: start; padding: 16px 0 0; border-left: 0; border-top: 1px dashed #d4e1e8; }
+  .results-page .flight-purchase { grid-column: 1; grid-row: auto; display: grid; grid-template-columns: minmax(0, 1fr) auto; justify-items: start; padding: 16px; }
+  .results-page .flight-perks { grid-row: auto; }
+  .results-page .flight-purchase { grid-row: 4; }
   .results-page .flight-purchase > span, .results-page .flight-total-price { grid-column: 1; text-align: left; }
   .results-page .flight-purchase .button { grid-column: 2; grid-row: 1 / 4; margin: 0; }
 }
