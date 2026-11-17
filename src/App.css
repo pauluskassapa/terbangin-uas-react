@@ -39,3 +39,26 @@
   .footer-inner { min-height: 88px; flex-wrap: wrap; gap: 5px 10px; padding-block: 15px; }
   .footer-inner p { order: 3; width: 100%; margin: 0; }
 }
+
+/* Menu berpindah ke panel sebelum tautan mulai berdesakan. */
+.site-header .header-inner { height: auto; min-height: 78px; gap: 24px; }
+.site-header .brand { flex-shrink: 0; }
+.header-navigation { display: flex; align-items: center; justify-content: space-between; gap: 28px; flex: 1; }
+.site-header .main-nav { margin-inline: auto; gap: 24px; }
+.site-header .main-nav a, .site-header .header-cta, .site-header .header-login { white-space: nowrap; }
+.site-header .header-account { flex-shrink: 0; }
+.header-menu-toggle { display: none; }
+.site-header :is(a, button):focus-visible { outline: 3px solid var(--teal); outline-offset: 4px; }
+@media (max-width: 1100px) {
+  .site-header .header-inner { min-height: 70px; flex-wrap: wrap; gap: 0; padding-block: 12px; }
+  .header-menu-toggle { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; margin-left: auto; padding: 8px 14px; border: 1px solid #cbd8e0; border-radius: 12px; background: white; color: var(--teal-dark); font: inherit; font-size: 14px; cursor: pointer; }
+  .header-menu-toggle > span { font-size: 22px; line-height: 1; }
+  .header-navigation { display: none; flex: 0 0 100%; min-width: 0; margin-top: 14px; padding: 12px; border: 1px solid #d8e3e9; border-radius: 16px; background: white; }
+  .header-navigation.is-open { display: flex; flex-direction: column; align-items: stretch; gap: 12px; }
+  .site-header .main-nav { display: grid; gap: 4px; margin: 0; }
+  .site-header .main-nav a { display: flex; align-items: center; min-height: 44px; padding: 10px 12px; border-radius: 10px; font-size: 14px; }
+  .site-header .main-nav a.active { background: #dff4f1; }
+  .site-header .header-account { flex-wrap: wrap; gap: 12px; border-top: 1px solid #e1e9ef; padding: 12px 8px 0; }
+  .site-header .header-account-name, .site-header .header-login, .site-header .header-cta { display: inline-flex; align-items: center; min-height: 44px; font-size: 13px; overflow-wrap: anywhere; }
+  .site-header .header-cta { padding: 10px 16px; }
+}
