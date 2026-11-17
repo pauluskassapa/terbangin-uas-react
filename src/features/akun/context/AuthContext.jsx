@@ -37,7 +37,7 @@ async function hashPassword(password, salt = crypto.getRandomValues(new Uint8Arr
     keyMaterial,
     256,
   )
-  return `pbkdf2$${PASSWORD_ITERATIONS}$${toHex(salt)}$${toHex(derivedBits)}`
+  return `pbkdf2$${iterations}$${toHex(salt)}$${toHex(derivedBits)}`
 }
 
 async function verifyPassword(password, storedHash) {
