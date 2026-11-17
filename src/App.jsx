@@ -3,6 +3,7 @@ import { useAuth } from './features/akun/context/AuthContext.jsx'
 import SiteFooter from './components/SiteFooter.jsx'
 import SiteHeader from './components/SiteHeader.jsx'
 import FlightDetails from './features/penerbangan/pages/FlightDetails.jsx'
+import FlightSeats from './features/penerbangan/pages/FlightSeats.jsx'
 import FlightHome from './features/penerbangan/pages/FlightHome.jsx'
 import FlightSearch from './features/penerbangan/pages/FlightSearch.jsx'
 import Register from './features/akun/pages/Register.jsx'
@@ -36,6 +37,7 @@ function App() {
         <Route path="/" element={<FlightHome />} />
         <Route path="/penerbangan" element={<FlightSearch />} />
         <Route path="/penerbangan/:flightId" element={<FlightDetails />} />
+        <Route path="/penerbangan/:flightId/kursi" element={<FlightSeats />} />
         <Route path="/booking" element={<Booking />} />
         <Route path="/payment" element={<Payment />} />
         <Route path="/payment-success" element={<PaymentSuccess />} />
