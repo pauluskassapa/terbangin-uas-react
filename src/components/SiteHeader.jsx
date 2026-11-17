@@ -31,7 +31,7 @@ function SiteHeader() {
         ) : (
           <div className="header-account">
             <Link className="header-login" to="/login">Masuk</Link>
-            <Link className="header-cta" to="/register">Daftar akun <span aria-hidden="true">↗</span></Link>
+            <Link className="header-cta" to="/register">Daftar akun</Link>
           </div>
         )}
         </div>
