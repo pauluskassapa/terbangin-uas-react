@@ -117,6 +117,8 @@ function FlightSearch() {
     })
   }, [airlineFilter, maxPrice, sort, timeFilters])
 
+  const lowestVisiblePrice = Math.min(...visibleFlights.map((flight) => flight.price))
+
   const formattedDate = searchedDate
     ? new Intl.DateTimeFormat('id-ID', { dateStyle: 'long' }).format(new Date(`${searchedDate}T00:00:00`))
     : 'Pilih tanggal perjalanan'
@@ -191,8 +193,8 @@ function FlightSearch() {
             const detailParams = new URLSearchParams({ from: searchedFrom, to: searchedTo, date: searchedDate, passengers: String(searchedPassengers) })
             return (
               <article className="flight-card" key={flight.id}>
-                <div className="flight-airline"><span className={`airline-logo ${flight.color}`}>{flight.mark}</span><div><strong>{flight.airline}</strong><span>{flight.number} · Ekonomi</span></div></div>
-                <div className="flight-times"><div><strong>{flight.departure}</strong><span>{origin.code} · {origin.city}</span></div><div className="flight-duration"><span>Langsung</span><i /><small>{flight.duration}</small></div><div><strong>{flight.arrival}</strong><span>{destination.code} · {destination.city}</span></div></div>
+                <div className="flight-card-heading"><div className="flight-airline"><span className={`airline-logo ${flight.color}`}>{flight.mark}</span><div><strong>{flight.airline}</strong><span>{flight.number} · Ekonomi</span></div></div>{flight.price === lowestVisiblePrice && <span className="flight-price-badge">Harga terendah di hasil ini</span>}</div>
+                <div className="flight-times"><div><strong>{flight.departure}</strong><span className="flight-airport-code">{origin.code}</span><small>{origin.city}</small></div><div className="flight-duration"><span>{flight.duration}</span><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="m21 12-8-4V3a1 1 0 0 0-2 0v5l-8 4v2l8-2v6l-2 2v1l3-1 3 1v-1l-2-2v-6l8 2z" /></svg></i><small>Langsung</small></div><div><strong>{flight.arrival}</strong><span className="flight-airport-code">{destination.code}</span><small>{destination.city}</small></div></div>
                 <div className="flight-purchase"><strong>{formatRupiah(flight.price)}</strong><span>per penumpang</span>{searchedPassengers > 1 && <small className="flight-total-price">Total {searchedPassengers} orang: {formatRupiah(flight.price * searchedPassengers)}</small>}<Link aria-label={`Lihat detail ${flight.airline} ${flight.number}`} className="button button-primary" to={`/penerbangan/${flight.id}?${detailParams.toString()}`}>Lihat detail <b aria-hidden="true">→</b></Link></div>
                 <div className="flight-perks"><span>✓ Bagasi {flight.baggage}</span><span>✓ {flight.perk}</span></div>
               </article>
