@@ -5,16 +5,16 @@ Dokumen ini menjelaskan alur register, login, profil, logout, dan lupa kata sand
 ## Peta file
 
 - `src/main.jsx` memasang `BrowserRouter` dan `AuthProvider` di atas seluruh aplikasi.
-- `src/auth/authContext.js` membuat objek konteks React bernama `AuthContext`.
-- `src/auth/AuthContext.jsx` menyediakan data akun dan fungsi register/login/profil/reset/logout.
-- `src/auth/useAuth.js` membuat hook kecil agar komponen dapat membaca konteks dengan `useAuth()`.
+- `src/features/akun/context/authContext.js` membuat objek konteks React bernama `AuthContext`.
+- `src/features/akun/context/AuthContext.jsx` menyediakan data akun dan fungsi register/login/profil/reset/logout.
+- `src/features/akun/context/useAuth.js` membuat hook kecil agar komponen dapat membaca konteks dengan `useAuth()`.
 - `src/App.jsx` mendefinisikan URL halaman dan melindungi route profil.
 - `src/components/SiteHeader.jsx` menampilkan tombol masuk/daftar atau nama pengguna/keluar.
-- `src/pages/Register.jsx` dan `Register.css` membentuk form pendaftaran.
-- `src/pages/Login.jsx` adalah form masuk.
-- `src/pages/Profile.jsx` menampilkan dan menyimpan nama serta nomor telepon.
-- `src/pages/ForgotPassword.jsx` membuat kode demo dan mengganti kata sandi.
-- `src/pages/AccountPages.css` memuat gaya yang dipakai halaman login, profil, dan pemulihan.
+- `src/features/akun/pages/Register.jsx` dan `Register.css` membentuk form pendaftaran.
+- `src/features/akun/pages/Login.jsx` adalah form masuk.
+- `src/features/akun/pages/Profile.jsx` menampilkan dan menyimpan nama serta nomor telepon.
+- `src/features/akun/pages/ForgotPassword.jsx` membuat kode demo dan mengganti kata sandi.
+- `src/features/akun/pages/AccountPages.css` memuat gaya yang dipakai halaman login, profil, dan pemulihan.
 
 ## Konsep React yang dipakai
 

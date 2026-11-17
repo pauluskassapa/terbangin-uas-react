@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link, Navigate, useNavigate } from 'react-router'
-import { useAuth } from '../auth/useAuth.js'
+import { useAuth } from '../context/useAuth.js'
 import './AccountPages.css'
 
 function Login() {

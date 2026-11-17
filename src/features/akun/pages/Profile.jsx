@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useAuth } from '../auth/useAuth.js'
+import { useAuth } from '../context/useAuth.js'
 import './AccountPages.css'
 
 function Profile() {
