@@ -108,6 +108,27 @@ function Destination() {
         </div>
       </section>
 
+      {destination.videoUrl && (
+        <section className="page-wrap destination-video-section" aria-labelledby="video-preview-heading">
+          <div className="destination-video-card">
+            <div className="destination-video-info">
+              <span className="eyebrow">▶ TRAILER DESTINASI · {destination.city.toUpperCase()}</span>
+              <h2 id="video-preview-heading">{destination.videoTitle}</h2>
+              <p>{destination.videoDescription}</p>
+            </div>
+            <div className="destination-video-frame">
+              <iframe
+                src={destination.videoUrl}
+                title={destination.videoTitle}
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
+          </div>
+        </section>
+      )}
+
       <section className="page-wrap destination-content">
         <div className="destination-toolbar">
           <div className="destination-categories" role="tablist" aria-label="Kategori wisata">

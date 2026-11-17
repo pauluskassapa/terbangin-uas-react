@@ -10,6 +10,10 @@ export const destinations = {
     startingPrice: 760000,
     flightDuration: '1j 50m dari Jakarta (CGK)',
     bestSeason: 'April – Oktober (Musim Kemarau)',
+    videoTitle: 'Cinematic Preview · Pesona Pulau Dewata',
+    videoDescription:
+      'Saksikan cuplikan keindahan tebing Uluwatu, hamparan sawah Ubud, hingga suasana matahari terbenam di pesisir Bali sebelum memulai perjalananmu.',
+    videoUrl: 'https://www.youtube.com/embed/BFS9n4B_2xA?rel=0',
     highlights: [
       { label: 'KODE BANDARA', value: 'DPS · Denpasar' },
       { label: 'DURASI RATA-RATA', value: '1 Jam 50 Menit' },
