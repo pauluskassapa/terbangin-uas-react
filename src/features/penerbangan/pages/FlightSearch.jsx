@@ -34,6 +34,8 @@ function FlightSearch() {
   const [timeFilters, setTimeFilters] = useState([])
   const [maxPrice, setMaxPrice] = useState(highestFlightPrice)
   const [sort, setSort] = useState('recommended')
+  const [filtersOpen, setFiltersOpen] = useState(false)
+  const activeFilterCount = Number(airlineFilter !== 'Semua') + timeFilters.length + Number(maxPrice < highestFlightPrice)
   const queryString = searchParams.toString()
   const query = new URLSearchParams(queryString)
   const searchedFrom = getAirportCode(query.get('from'), 'CGK')
@@ -121,28 +123,35 @@ function FlightSearch() {
 
   return (
     <main className="results-page page-wrap">
-      <div className="results-topline"><span className="eyebrow">PENERBANGAN UNTUKMU</span><Link to="/">← Beranda</Link></div>
+      <Link className="results-back" to="/">← Kembali ke beranda</Link>
       <section className="route-summary">
         <div>
-          <span className="route-date">{formattedDate}</span>
+          <span className="route-label">Penerbangan sekali jalan</span>
           <h1>{origin.city}<span className="route-arrow">→</span>{destination.city}</h1>
-          <p>{origin.code} <i>·</i> Penerbangan langsung tersedia <i>·</i> {searchedPassengers} penumpang</p>
+          <p>{formattedDate} <span>·</span> {searchedPassengers} penumpang <span>·</span> Ekonomi</p>
         </div>
-        <div className="route-badge" role="status" aria-live="polite" aria-label={`${visibleFlights.length} penerbangan tersedia`}><span aria-hidden="true">✈</span><strong>{visibleFlights.length}</strong><small>pilihan tiket</small></div>
       </section>
 
+      <details className="results-search-editor" key={queryString} open={!searchedDate}>
+        <summary>Ubah pencarian <span>Rute, tanggal, dan penumpang</span></summary>
       <form className="results-search-form" onSubmit={handleSearch} aria-label="Ubah rute dan tanggal penerbangan">
-        <label className="results-search-field"><span>BERANGKAT DARI</span><select value={from} onChange={(event) => setFrom(event.target.value)} aria-label="Kota asal">{airports.map((airport) => <option key={airport.code} value={airport.code}>{airport.city} ({airport.code})</option>)}</select></label>
+        <label className="results-search-field"><span>Berangkat dari</span><select value={from} onChange={(event) => setFrom(event.target.value)} aria-label="Kota asal">{airports.map((airport) => <option key={airport.code} value={airport.code}>{airport.city} ({airport.code})</option>)}</select></label>
         <button className="results-swap-button" type="button" onClick={swapAirports} aria-label="Tukar kota asal dan tujuan">⇄</button>
-        <label className="results-search-field"><span>KE TUJUAN</span><select value={to} onChange={(event) => setTo(event.target.value)} aria-label="Kota tujuan">{airports.map((airport) => <option key={airport.code} value={airport.code}>{airport.city} ({airport.code})</option>)}</select></label>
-        <label className="results-search-field results-date-field"><span>TANGGAL PERGI</span><input type="date" min={getLocalDate(new Date())} value={date} onChange={(event) => setDate(event.target.value)} required /></label>
+        <label className="results-search-field"><span>Tujuan</span><select value={to} onChange={(event) => setTo(event.target.value)} aria-label="Kota tujuan">{airports.map((airport) => <option key={airport.code} value={airport.code}>{airport.city} ({airport.code})</option>)}</select></label>
+        <label className="results-search-field results-date-field"><span>Tanggal pergi</span><input type="date" min={getLocalDate(new Date())} value={date} onChange={(event) => setDate(event.target.value)} required /></label>
         <PassengerPicker value={passengers} onChange={setPassengers} />
         <button className="button button-primary results-search-button" type="submit">Cari lagi <span>→</span></button>
         {formError && <p className="form-error results-form-error" role="alert">{formError}</p>}
       </form>
+      </details>
 
       <div className="results-layout">
-        <aside className="filter-panel">
+        <aside className={`filter-panel${filtersOpen ? ' is-open' : ''}`} aria-label="Filter penerbangan">
+          <button className="mobile-filter-toggle" type="button" aria-expanded={filtersOpen} aria-controls="flight-filter-controls" onClick={() => setFiltersOpen((open) => !open)}>
+            <span>Filter{activeFilterCount > 0 ? ` (${activeFilterCount} aktif)` : ''}</span>
+            <span>{filtersOpen ? 'Tutup −' : 'Buka +'}</span>
+          </button>
+          <div className="filter-controls" id="flight-filter-controls">
           <div className="filter-heading"><h2>Filter</h2><button type="button" onClick={resetFilters}>Atur ulang</button></div>
           <span className="filter-label">MASKAPAI</span>
           <div className="airline-options">
@@ -169,12 +178,13 @@ function FlightSearch() {
             <input id="max-flight-price" type="range" min={lowestFlightPrice} max={highestFlightPrice} step="10000" value={maxPrice} onChange={(event) => setMaxPrice(Number(event.target.value))} />
             <div><span>{formatRupiah(lowestFlightPrice)}</span><span>{formatRupiah(highestFlightPrice)}</span></div>
           </div>
-          <div className="filter-tip"><span>✦</span><p>Tip: tiket pagi cocok untuk memulai liburan lebih awal.</p></div>
+          <p className="filter-price-note">Batas harga berlaku per penumpang.</p>
+          </div>
         </aside>
 
         <section className="flight-list" aria-label="Daftar penerbangan tersedia">
           <div className="list-heading">
-            <div><h2>Penerbangan tersedia</h2><p>Jadwal dan harga contoh untuk keperluan tampilan.</p></div>
+            <div><h2 role="status" aria-live="polite">{visibleFlights.length} penerbangan ditemukan</h2><p>Jadwal dan harga menggunakan data contoh.</p></div>
             <label className="sort-select">Urutkan<select value={sort} onChange={(event) => setSort(event.target.value)}><option value="recommended">Rekomendasi</option><option value="cheapest">Harga terendah</option><option value="earliest">Berangkat paling awal</option></select></label>
           </div>
           {visibleFlights.length ? visibleFlights.map((flight) => {
@@ -183,11 +193,11 @@ function FlightSearch() {
               <article className="flight-card" key={flight.id}>
                 <div className="flight-airline"><span className={`airline-logo ${flight.color}`}>{flight.mark}</span><div><strong>{flight.airline}</strong><span>{flight.number} · Ekonomi</span></div></div>
                 <div className="flight-times"><div><strong>{flight.departure}</strong><span>{origin.code} · {origin.city}</span></div><div className="flight-duration"><span>Langsung</span><i /><small>{flight.duration}</small></div><div><strong>{flight.arrival}</strong><span>{destination.code} · {destination.city}</span></div></div>
-                <div className="flight-purchase"><strong>{formatRupiah(flight.price)}</strong><span>per penumpang</span>{searchedPassengers > 1 && <small className="flight-total-price">Total {formatRupiah(flight.price * searchedPassengers)}</small>}<Link aria-label={`Lihat detail ${flight.airline} ${flight.number}`} className="button button-primary" to={`/penerbangan/${flight.id}?${detailParams.toString()}`}>Lihat detail <b aria-hidden="true">→</b></Link></div>
+                <div className="flight-purchase"><strong>{formatRupiah(flight.price)}</strong><span>per penumpang</span>{searchedPassengers > 1 && <small className="flight-total-price">Total {searchedPassengers} orang: {formatRupiah(flight.price * searchedPassengers)}</small>}<Link aria-label={`Lihat detail ${flight.airline} ${flight.number}`} className="button button-primary" to={`/penerbangan/${flight.id}?${detailParams.toString()}`}>Lihat detail <b aria-hidden="true">→</b></Link></div>
                 <div className="flight-perks"><span>✓ Bagasi {flight.baggage}</span><span>✓ {flight.perk}</span></div>
               </article>
             )
-          }) : <div className="empty-state" role="status" aria-live="polite"><span aria-hidden="true">✈</span><h3>Tidak ada penerbangan</h3><p>Coba atur ulang filter.</p></div>}
+          }) : <div className="empty-state" role="status" aria-live="polite"><span aria-hidden="true">✈</span><h3>Tidak ada penerbangan</h3><p>Coba ubah pilihan maskapai, waktu, atau batas harga.</p><button className="button button-primary" type="button" onClick={resetFilters}>Atur ulang filter</button></div>}
         </section>
       </div>
     </main>
