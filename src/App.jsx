@@ -1,5 +1,5 @@
 import { Link, Navigate, Route, Routes } from 'react-router'
-import { useAuth } from './auth/AuthContext.jsx'
+import { useAuth } from './auth/useAuth.js'
 import SiteFooter from './components/SiteFooter.jsx'
 import SiteHeader from './components/SiteHeader.jsx'
 import FlightDetails from './pages/FlightDetails.jsx'
@@ -8,6 +8,7 @@ import FlightSearch from './pages/FlightSearch.jsx'
 import Register from './pages/Register.jsx'
 import Login from './pages/Login.jsx'
 import Profile from './pages/Profile.jsx'
+import ForgotPassword from './pages/ForgotPassword.jsx'
 import './App.css'
 
 function RoutePlaceholder({ title }) {
@@ -32,6 +33,7 @@ function App() {
         <Route path="/penerbangan/:flightId" element={<FlightDetails />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/profile" element={user ? <Profile /> : <Navigate to="/login" replace />} />
         <Route path="*" element={<RoutePlaceholder title="Halaman tidak ditemukan" />} />
       </Routes>
