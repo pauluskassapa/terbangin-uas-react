@@ -32,6 +32,8 @@ function FlightDetails() {
   const totalPrice = flight.price * passengers
   const bookingParams = new URLSearchParams({ flightId: flight.id, from: from.code, to: to.code, date: date || '', passengers: String(passengers) })
 
+  const seatUrl = `/penerbangan/${flight.id}/kursi?${bookingParams.toString()}`
+
   return (
     <main className="flight-detail-page page-wrap">
       <Link className="detail-back-link" to={`/penerbangan?${routeParams.toString()}`}>← Kembali ke hasil pencarian</Link>
@@ -48,17 +50,25 @@ function FlightDetails() {
             <div><h2>{flight.airline}</h2><span>{flight.number} · Ekonomi</span></div>
             <span className="detail-direct">Langsung</span>
           </div>
-          <div className="detail-itinerary">
-            <div className="detail-endpoint"><span className="detail-endpoint-label">Berangkat</span><span className="detail-time">{flight.departure}</span><strong>{from.code}</strong><span>{from.city}</span></div>
-            <div className="detail-route-line"><span>{flight.duration}</span><i aria-hidden="true" /><small>Tanpa transit</small></div>
-            <div className="detail-endpoint detail-arrival"><span className="detail-endpoint-label">Tiba</span><span className="detail-time">{flight.arrival}</span><strong>{to.code}</strong><span>{to.city}</span></div>
-          </div>
+          <ol className="detail-itinerary" aria-label="Alur perjalanan">
+            <li className="detail-stop">
+              <div className="detail-stop-time"><strong>{flight.departure}</strong><span>Berangkat</span></div>
+              <span className="detail-stop-dot" aria-hidden="true" />
+              <div className="detail-stop-place"><strong>{from.city}</strong><span>Bandara {from.code}</span></div>
+            </li>
+            <li className="detail-flight-leg"><span aria-hidden="true">✈</span><div><strong>{flight.duration} di udara</strong><span>Penerbangan langsung · Tanpa transit</span></div></li>
+            <li className="detail-stop detail-stop-arrival">
+              <div className="detail-stop-time"><strong>{flight.arrival}</strong><span>Tiba</span></div>
+              <span className="detail-stop-dot" aria-hidden="true" />
+              <div className="detail-stop-place"><strong>{to.city}</strong><span>Bandara {to.code}</span></div>
+            </li>
+          </ol>
           <div className="detail-facilities">
             <h2>Informasi tiket</h2>
             <dl className="detail-amenities">
-              <div><dt>Bagasi sesuai tiket</dt><dd>{flight.baggage}</dd></div>
-              <div><dt>Kelas penerbangan</dt><dd>Ekonomi</dd></div>
-              <div><dt>Layanan maskapai</dt><dd>{flight.perk}</dd></div>
+              <div><dt><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="5" y="7" width="14" height="13" rx="2" /><path d="M9 7V4h6v3M9 11v5m6-5v5" /></svg>Bagasi sesuai tiket</dt><dd>{flight.baggage}</dd></div>
+              <div><dt><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M6 3v12a3 3 0 0 0 3 3h10M10 4v9h8v3M8 18v3m10-3v3" /></svg>Kelas penerbangan</dt><dd>Ekonomi</dd></div>
+              <div><dt><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 17h16M6 15a6 6 0 0 1 12 0M12 7V4m-2 0h4M3 20h18" /></svg>Layanan maskapai</dt><dd>{flight.perk}</dd></div>
             </dl>
           </div>
           <p className="airport-reminder"><span aria-hidden="true">i</span> Siapkan waktu untuk check-in. Disarankan tiba di bandara 2 jam sebelum keberangkatan.</p>
@@ -75,11 +85,16 @@ function FlightDetails() {
               <div><dt>Jumlah penumpang</dt><dd>{passengers} orang</dd></div>
               <div><dt>Pajak dan biaya</dt><dd>Termasuk</dd></div>
             </dl>
+            <p className="detail-price-calculation">{formatRupiah(flight.price)} × {passengers} penumpang</p>
             <div className="detail-total"><span>Total untuk {passengers} penumpang</span><strong>{formatRupiah(totalPrice)}</strong></div>
-            <Link className="button button-primary detail-book-button" to={`/penerbangan/${flight.id}/kursi?${bookingParams.toString()}`}>Pilih kursi <span aria-hidden="true">→</span></Link>
+            <Link className="button button-primary detail-book-button" to={seatUrl}>Pilih kursi <span aria-hidden="true">→</span></Link>
             <p className="detail-next-step">Pilih tempat duduk sebelum mengisi data pemesanan.</p>
           </div>
         </aside>
+      </div>
+      <div className="detail-mobile-action">
+        <div><span>Total · {passengers} penumpang</span><strong>{formatRupiah(totalPrice)}</strong></div>
+        <Link className="button button-primary" to={seatUrl}>Pilih kursi <span aria-hidden="true">→</span></Link>
       </div>
       <p className="detail-demo-note">Jadwal dan harga menggunakan data contoh.</p>
     </main>
