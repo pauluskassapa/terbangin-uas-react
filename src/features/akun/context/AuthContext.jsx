@@ -68,6 +68,18 @@ function saveAccounts(accounts) {
   localStorage.setItem(ACCOUNTS_KEY, JSON.stringify(accounts))
 }
 
+function validatePassword(password) {
+  if (password.length < 8) {
+    throw new Error('Kata sandi harus minimal 8 karakter.')
+  }
+  if (!/[A-Z]/.test(password)) {
+    throw new Error('Kata sandi harus memiliki minimal 1 huruf kapital.')
+  }
+  if (!/[^A-Za-z0-9]/.test(password)) {
+    throw new Error('Kata sandi harus memiliki minimal 1 simbol, seperti ! atau #.')
+  }
+}
+
 function AuthProvider({ children }) {
   const [user, setUser] = useState(() => readJson(SESSION_KEY, null))
 
@@ -76,7 +88,7 @@ function AuthProvider({ children }) {
     const normalizedName = name.trim()
     if (normalizedName.length < 2) throw new Error('Nama minimal terdiri dari 2 karakter.')
     if (!normalizedEmail) throw new Error('Email wajib diisi.')
-    if (password.length < 8) throw new Error('Kata sandi minimal 8 karakter.')
+    validatePassword(password)
 
     const accounts = readAccounts()
     if (accounts.some((account) => account.email === normalizedEmail)) {
@@ -161,7 +173,7 @@ function AuthProvider({ children }) {
       localStorage.setItem(RESET_KEY, JSON.stringify({ ...reset, attempts: reset.attempts + 1 }))
       throw new Error(`Kode tidak cocok. Sisa percobaan: ${RESET_MAX_ATTEMPTS - reset.attempts - 1}.`)
     }
-    if (password.length < 8) throw new Error('Kata sandi minimal 8 karakter.')
+    validatePassword(password)
 
     const accounts = readAccounts()
     const accountIndex = accounts.findIndex((account) => account.email === normalizedEmail)

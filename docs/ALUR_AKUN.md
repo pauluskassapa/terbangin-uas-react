@@ -38,6 +38,8 @@ Dokumen ini menjelaskan alur register, login, profil, logout, dan lupa kata sand
 
 HTML `required`, `type="email"`, dan `minLength` memberi validasi dasar di browser. Pemeriksaan di `register()` tetap diperlukan karena validasi tampilan saja dapat dilewati.
 
+Aturan kata sandi berlaku saat daftar dan reset: minimal 8 karakter, satu huruf kapital, dan satu simbol. Atribut `pattern` memberi umpan balik dari browser, sedangkan `validatePassword()` memeriksa aturan itu lagi di logika akun.
+
 ## Cara kerja login dan sesi
 
 `login()` mencari email yang sudah dinormalkan. Ia memverifikasi kata sandi terhadap hash tersimpan. Jika cocok, data publik pengguna (nama, email, telepon) disimpan sebagai sesi di `localStorage` dan dimasukkan ke state React. `passwordHash` tidak pernah dimasukkan ke sesi.
