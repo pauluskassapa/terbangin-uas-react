@@ -62,3 +62,31 @@
   .site-header .header-account-name, .site-header .header-login, .site-header .header-cta { display: inline-flex; align-items: center; min-height: 44px; font-size: 13px; overflow-wrap: anywhere; }
   .site-header .header-cta { padding: 10px 16px; }
 }
+
+.travel-footer-grid { display: grid; grid-template-columns: 1.2fr .9fr 1fr 1fr; gap: 36px; padding-block: 44px 36px; }
+.travel-footer-grid > * { min-width: 0; }
+.travel-footer-intro p { margin: 18px 0 8px; font-size: 14px; font-weight: 600; }
+.travel-footer-intro > span { display: block; max-width: 270px; color: #52697a; font-size: 13px; line-height: 1.8; }
+.travel-footer-grid h2 { margin: 0 0 18px; color: var(--ink); font: 700 14px 'Manrope', sans-serif; }
+.travel-footer-links { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; }
+.travel-footer-links h2 { margin-bottom: 10px; }
+.travel-footer-links > a { display: inline-flex; align-items: center; min-height: 36px; color: #52697a; text-decoration: none; font-size: 13px; }
+.travel-footer-links > a:hover { color: var(--teal-dark); text-decoration: underline; text-underline-offset: 4px; }
+.travel-footer-contact dl { display: grid; gap: 16px; margin: 0; }
+.travel-footer-contact dt { margin-bottom: 5px; color: #52697a; font-size: 12px; }
+.travel-footer-contact dd { margin: 0; color: var(--ink); font-size: 13px; line-height: 1.6; overflow-wrap: anywhere; }
+.travel-footer-contact small { color: #52697a; font-size: 11px; }
+.travel-footer-office address { display: grid; gap: 10px; font-size: 13px; font-style: normal; line-height: 1.8; }
+.travel-footer-office address > span { color: #52697a; }
+.travel-footer-demo { display: inline-block; margin-top: 14px; padding: 5px 9px; border: 1px solid #c5d7e3; border-radius: 8px; color: #52697a; font-size: 11px; }
+.travel-footer-bottom { display: flex; align-items: center; justify-content: space-between; gap: 12px 24px; padding-block: 20px; border-top: 1px solid #cbdbe8; color: #52697a; font-size: 12px; line-height: 1.7; }
+.travel-footer-bottom p { margin: 0; }
+.site-footer a:focus-visible { outline: 3px solid var(--teal); outline-offset: 4px; }
+@media (max-width: 1000px) {
+  .travel-footer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px; }
+}
+@media (max-width: 560px) {
+  .travel-footer-grid { grid-template-columns: minmax(0, 1fr); gap: 28px; padding-block: 32px; }
+  .travel-footer-links > a { min-height: 44px; }
+  .travel-footer-bottom { flex-direction: column; align-items: flex-start; gap: 6px; }
+}
