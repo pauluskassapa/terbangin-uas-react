@@ -19,6 +19,7 @@ function getLocalDate(date) {
 
 function FlightHome() {
   const navigate = useNavigate()
+  const [today] = useState(() => getLocalDate(new Date()))
   const [from, setFrom] = useState('CGK')
   const [to, setTo] = useState('DPS')
   const [date, setDate] = useState(() => getLocalDate(new Date()))
@@ -75,7 +76,7 @@ function FlightHome() {
           <label className="home-field"><span className="field-label">BERANGKAT DARI</span><span className="home-field-control"><b>↗</b><select value={from} onChange={(event) => setFrom(event.target.value)} aria-label="Kota asal">{airports.map((airport) => <option key={airport.code} value={airport.code}>{airport.city} ({airport.code})</option>)}</select></span></label>
           <button className="swap-button" type="button" onClick={swapAirports} aria-label="Tukar kota asal dan tujuan">⇄</button>
           <label className="home-field"><span className="field-label">TUJUAN</span><span className="home-field-control"><b className="down-icon">↘</b><select value={to} onChange={(event) => setTo(event.target.value)} aria-label="Kota tujuan">{airports.map((airport) => <option key={airport.code} value={airport.code}>{airport.city} ({airport.code})</option>)}</select></span></label>
-          <label className="home-field date-field"><span className="field-label">TANGGAL PERGI</span><span className="home-field-control"><b className="calendar-icon">▦</b><input type="date" min={getLocalDate(new Date())} value={date} onChange={(event) => setDate(event.target.value)} required /></span></label>
+          <label className="home-field date-field"><span className="field-label">TANGGAL PERGI</span><span className="home-field-control"><b className="calendar-icon">▦</b><input type="date" min={today} value={date} onChange={(event) => setDate(event.target.value)} required /></span></label>
           <PassengerPicker value={passengers} onChange={setPassengers} />
           <button className="button button-primary search-submit" type="submit">Cari tiket <span>→</span></button>
         </form>
