@@ -8,19 +8,26 @@ const rows = Array.from({ length: 18 }, (_, index) => index + 1)
 // Contoh okupansi untuk denah demo, bukan data penjualan maskapai.
 const occupied = new Set(['1A', '1B', '2F', '3C', '4D', '4E', '5A', '6F', '7B', '7C', '9D', '10A', '10B', '12E', '14F', '15C', '16D', '17A'])
 
+function seatPosition(seat) {
+  if (!seat) return 'Belum dipilih'
+  const letter = seat.slice(-1)
+  return letter === 'A' || letter === 'F' ? 'Jendela' : letter === 'C' || letter === 'D' ? 'Dekat lorong' : 'Tengah'
+}
+
 function SeatPicker({ flight, from, to, date, count, query }) {
   const navigate = useNavigate()
-  const [selected, setSelected] = useState([])
+  const [selected, setSelected] = useState(() => Array(count).fill(null))
   const [message, setMessage] = useState('')
+  const selectedCount = selected.filter(Boolean).length
   const detailUrl = `/penerbangan/${flight.id}?${query}`
 
   function toggleSeat(seat) {
     if (occupied.has(seat)) return
     if (selected.includes(seat)) {
-      setSelected((current) => current.filter((item) => item !== seat))
+      setSelected((current) => current.map((item) => item === seat ? null : item))
       setMessage('')
-    } else if (selected.length < count) {
-      setSelected((current) => [...current, seat])
+    } else if (selectedCount < count) {
+      setSelected((current) => current.map((item, index) => index === current.indexOf(null) ? seat : item))
       setMessage('')
     } else {
       setMessage(`Sudah memilih ${count} kursi. Klik kursi pilihanmu untuk melepasnya sebelum memilih kursi lain.`)
@@ -28,7 +35,7 @@ function SeatPicker({ flight, from, to, date, count, query }) {
   }
 
   function continueBooking() {
-    if (selected.length !== count) return
+    if (selectedCount !== count) return
     const params = new URLSearchParams({ flightId: flight.id, from: from.code, to: to.code, date, passengers: String(count), seats: selected.join(',') })
     navigate(`/booking?${params}`)
   }
@@ -44,7 +51,10 @@ function SeatPicker({ flight, from, to, date, count, query }) {
       <div className="seat-layout">
         <section className="seat-map-panel" aria-label="Denah kursi pesawat">
           <div className="seat-legend"><span><i />Tersedia</span><span><i className="chosen" />Pilihanmu</span><span><i className="taken" />Terpesan (demo)</span></div>
-          <p className="seat-map-hint">Klik kursi untuk memilih atau membatalkan pilihan. A dan F berada di sisi jendela.</p>
+          <p className="seat-map-hint">Klik kursi untuk memilih atau membatalkan pilihan. A/F: jendela · B/E: tengah · C/D: dekat lorong.</p>
+          <div className="seat-selection-strip" aria-label="Pilihan kursi per penumpang">
+            {selected.map((seat, index) => <span key={index} className={seat ? 'filled' : ''}>P{index + 1}<strong>{seat || '—'}</strong>{seat && <small>{seatPosition(seat)}</small>}</span>)}
+          </div>
           <div className="seat-aircraft-area">
             <div className="seat-wing seat-wing-left" aria-hidden="true" />
             <div className="seat-wing seat-wing-right" aria-hidden="true" />
@@ -58,7 +68,8 @@ function SeatPicker({ flight, from, to, date, count, query }) {
                     const seat = `${row}${letter}`
                     const taken = occupied.has(seat)
                     const chosen = selected.includes(seat)
-                    return <button key={seat} type="button" className={`seat-chair${chosen ? ' chosen' : ''}`} disabled={taken} aria-pressed={chosen} aria-label={`Kursi ${seat}${taken ? ', terpesan dalam demo' : ''}${letter === 'A' || letter === 'F' ? ', jendela' : letter === 'C' || letter === 'D' ? ', dekat lorong' : ', tengah'}`} onClick={() => toggleSeat(seat)}>{seat}</button>
+                    const passengerIndex = selected.indexOf(seat)
+                    return <button key={seat} type="button" className={`seat-chair${chosen ? ' chosen' : ''}`} disabled={taken} aria-pressed={chosen} title={`${seat} · ${seatPosition(seat)}${chosen ? ` · Penumpang ${passengerIndex + 1}` : ''}`} aria-label={`Kursi ${seat}${chosen ? `, penumpang ${passengerIndex + 1}` : ''}${taken ? ', terpesan dalam demo' : ''}${letter === 'A' || letter === 'F' ? ', jendela' : letter === 'C' || letter === 'D' ? ', dekat lorong' : ', tengah'}`} onClick={() => toggleSeat(seat)}>{seat}{chosen && <span className="seat-passenger-badge" aria-hidden="true">{passengerIndex + 1}</span>}</button>
                   })}
                   <span className="seat-row-number" aria-hidden="true">{row}</span>
                 </div>)}
@@ -67,17 +78,22 @@ function SeatPicker({ flight, from, to, date, count, query }) {
             </div>
           </div>
         </section>
-        <aside className="seat-summary" aria-labelledby="seat-summary-title">
-          <div className="seat-summary-heading"><h2 id="seat-summary-title">Kursi pilihanmu</h2><p role="status" aria-live="polite">{selected.length} dari {count} kursi dipilih</p></div>
+        <aside id="seat-summary" className="seat-summary" aria-labelledby="seat-summary-title">
+          <div className="seat-summary-heading"><h2 id="seat-summary-title">Kursi pilihanmu</h2><p role="status" aria-live="polite">{selectedCount} dari {count} kursi dipilih</p></div>
           <div className="seat-summary-body">
-            <ol className="seat-passengers">{Array.from({ length: count }, (_, index) => <li key={index}><span>Penumpang {index + 1}</span><strong>{selected[index] || 'Belum dipilih'}</strong></li>)}</ol>
-            {selected.length > 0 && <button className="seat-clear" type="button" onClick={() => { setSelected([]); setMessage('') }}>Hapus pilihan kursi</button>}
-            <p className="seat-feedback" role="status" aria-live="polite">{message || (selected.length < count ? `Pilih ${count - selected.length} kursi lagi untuk melanjutkan.` : 'Pilihan lengkap. Kamu bisa melanjutkan pemesanan.')}</p>
+            <ol className="seat-passengers">{Array.from({ length: count }, (_, index) => <li key={index}><span>Penumpang {index + 1}</span><span className="seat-passenger-choice"><strong>{selected[index] || 'Belum dipilih'}</strong>{selected[index] && <small>{seatPosition(selected[index])}</small>}</span></li>)}</ol>
+            {selectedCount > 0 && <button className="seat-clear" type="button" onClick={() => { setSelected(Array(count).fill(null)); setMessage('') }}>Hapus pilihan kursi</button>}
+            <p className="seat-feedback" role="status" aria-live="polite">{message || (selectedCount < count ? `Pilih ${count - selectedCount} kursi lagi untuk melanjutkan.` : 'Pilihan lengkap. Kamu bisa melanjutkan pemesanan.')}</p>
             <div className="seat-total"><span>Total tiket · {count} penumpang</span><strong>{formatRupiah(flight.price * count)}</strong><small>Tidak ada biaya pilih kursi pada demo ini.</small></div>
-            <button className="button button-primary seat-continue" type="button" disabled={selected.length !== count} onClick={continueBooking}>Lanjutkan pemesanan →</button>
+            <button className="button button-primary seat-continue" type="button" disabled={selectedCount !== count} onClick={continueBooking}>Lanjutkan pemesanan →</button>
             <p className="seat-demo-note">Denah dan kursi terpesan merupakan contoh. Pilihan ini belum mengunci kursi dan belum terhubung ke pembayaran.</p>
           </div>
         </aside>
+      </div>
+      <div className="seat-mobile-actions" aria-label="Ringkasan pilihan dan lanjut pemesanan">
+        <div><a href="#seat-summary">{selectedCount}/{count} kursi dipilih · Lihat rincian</a><span>{selected.filter(Boolean).join(', ') || 'Pilih kursi pada denah'}</span></div>
+        <button className="button button-primary" type="button" disabled={selectedCount !== count} onClick={continueBooking}>Lanjut →</button>
+        {message && <p>{message}</p>}
       </div>
     </main>
   )
