@@ -97,6 +97,104 @@ export const destinations = {
       },
     ],
   },
+    YIA: {
+    code: 'YIA',
+    city: 'Yogyakarta',
+    province: 'DI Yogyakarta, Indonesia',
+    airport: 'Bandara Internasional Yogyakarta (YIA)',
+    tagline: 'Kota budaya dengan warisan keraton, kemegahan candi bersejarah, hingga petualangan alam Gunung Merapi dan pantai selatan.',
+    heroTitle: 'Telusuri Cerita',
+    heroAccent: 'Yogyakarta.',
+    startingPrice: 760000,
+    flightDuration: '1j 15m dari Jakarta (CGK)',
+    bestSeason: 'Mei – September (Musim Kemarau)',
+    videoTitle: 'Cinematic Preview · Istimewanya Yogyakarta',
+    videoDescription:
+      'Nikmati suasana hangat Malioboro, kemegahan Candi Prambanan saat senja, hingga pesona alam perbukitan dan pantai selatan Yogyakarta.',
+    videoUrl: 'https://www.youtube.com/embed/1V_4E2G1tJc?rel=0',
+    highlights: [
+      { label: 'KODE BANDARA', value: 'YIA · Kulon Progo' },
+      { label: 'DURASI RATA-RATA', value: '1 Jam 15 Menit' },
+      { label: 'HARGA MULAI', value: 'Rp760.000 / org' },
+    ],
+    categories: ['Semua', 'Budaya & Sejarah', 'Alam & Pantai', 'Kuliner & Kota'],
+    spots: [
+      {
+        id: 'prambanan',
+        name: 'Candi Prambanan & Ratu Boko',
+        area: 'Sleman · Perbatasan Klaten',
+        category: 'Budaya & Sejarah',
+        rating: '4.9',
+        bestTime: '15.30 – 18.00 WIB',
+        description:
+          'Kompleks candi Hindu terbesar di Indonesia dari abad ke-9 dengan relief Ramayana yang megah dan panorama matahari terbenam dari Bukit Ratu Boko.',
+      },
+      {
+        id: 'malioboro',
+        name: 'Kawasan Jalan Malioboro & Titik Nol',
+        area: 'Pusat Kota Yogyakarta',
+        category: 'Kuliner & Kota',
+        rating: '4.8',
+        bestTime: '18.00 – 22.00 WIB',
+        description:
+          'Jantung keramaian Jogja dengan pedestrian estetik, gedung heritage kolonial, belanja batik di Pasar Beringharjo, dan kuliner lesehan malam.',
+      },
+      {
+        id: 'keraton',
+        name: 'Keraton Yogyakarta & Taman Sari',
+        area: 'Kraton · Kota Yogyakarta',
+        category: 'Budaya & Sejarah',
+        rating: '4.8',
+        bestTime: '08.30 – 13.00 WIB',
+        description:
+          'Istana resmi Kesultanan Ngayogyakarta Hadiningrat yang masih hidup dengan tradisi Jawa serta kompleks pemandian bersejarah Taman Sari.',
+      },
+      {
+        id: 'merapi',
+        name: 'Lava Tour Gunung Merapi & Kaliurang',
+        area: 'Pakem · Sleman Utara',
+        category: 'Alam & Pantai',
+        rating: '4.8',
+        bestTime: '05.30 – 09.30 WIB',
+        description:
+          'Petualangan seru menyusuri lereng Merapi dengan mobil Jeep terbuka, mengunjungi Bunker Kaliadem, dan menikmati udara dingin pegunungan.',
+      },
+      {
+        id: 'gunungkidul',
+        name: 'Pantai Indrayanti & HeHa Ocean View',
+        area: 'Gunungkidul',
+        category: 'Alam & Pantai',
+        rating: '4.7',
+        bestTime: '15.00 – 18.30 WIB',
+        description:
+          'Deretan pantai pasir putih berbatu karang di pesisir selatan lengkap dengan spot santai di atas tebing menghadap langsung ke Samudra Hindia.',
+      },
+      {
+        id: 'kotagede',
+        name: 'Kampung Heritage Kotagede & Gudeg Wijilan',
+        area: 'Kotagede & Wijilan',
+        category: 'Kuliner & Kota',
+        rating: '4.8',
+        bestTime: '09.00 – 20.00 WIB',
+        description:
+          'Sentra kerajinan perak tradisional dengan gang-gang arsitektur klasik Mataram Kuno serta pusat kuliner Gudeg autentik khas Yogyakarta.',
+      },
+    ],
+    tips: [
+      {
+        title: 'Gunakan Kereta Bandara YIA Xpress',
+        detail: 'Dari Bandara YIA Kulon Progo, naik KA Bandara menuju Stasiun Tugu Yogyakarta (tepat di dekat Malioboro) hanya sekitar 35 menit.',
+      },
+      {
+        title: 'Datang Pagi ke Keraton & Taman Sari',
+        detail: 'Kawasan wisata budaya Keraton umumnya tutup pukul 14.00 WIB, sehingga paling ideal dikunjungi pada pagi hari.',
+      },
+      {
+        title: 'Siapkan Waktu Khusus ke Gunungkidul',
+        detail: 'Perjalanan ke pantai selatan Gunungkidul memakan waktu sekitar 1,5–2 jam dari pusat kota; berangkatlah siang hari agar tiba saat sunset.',
+      },
+    ],
+  },
 }
 
 export const defaultDestinationCode = 'DPS'
