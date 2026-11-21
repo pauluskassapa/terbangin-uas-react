@@ -1,5 +1,6 @@
 import baliPhoto from '../../penerbangan/assets/destination-bali.jpg'
 import jogjaPhoto from '../../penerbangan/assets/destination-yogyakarta.jpg'
+import bajoPhoto from '../../penerbangan/assets/destination-labuan-bajo.jpg'
 
 export const destinations = {
   DPS: {
@@ -13,7 +14,7 @@ export const destinations = {
     heroImage: baliPhoto,
     startingPrice: 760000,
     flightDuration: '1j 50m dari Jakarta (CGK)',
-    bestSeason: 'April – Oktober (Musim Kemarau)',
+    bestSeason: 'April - Oktober (Musim Kemarau)',
     videoTitle: 'Cinematic Preview · Pesona Pulau Dewata',
     videoDescription:
       'Saksikan cuplikan keindahan tebing Uluwatu, hamparan sawah Ubud, hingga suasana matahari terbenam di pesisir Bali sebelum memulai perjalananmu.',
@@ -31,7 +32,7 @@ export const destinations = {
         area: 'Badung Selatan',
         category: 'Pantai & Laut',
         rating: '4.9',
-        bestTime: '16.00 – 18.30 WITA',
+        bestTime: '16.00 - 18.30 WITA',
         description:
           'Tebing karang menjulang di atas Samudra Hindia dengan pertunjukan Tari Kecak saat matahari terbenam serta deretan pantai berpasir putih.',
       },
@@ -41,7 +42,7 @@ export const destinations = {
         area: 'Gianyar · Ubud',
         category: 'Budaya & Alam',
         rating: '4.8',
-        bestTime: '07.00 – 10.30 WITA',
+        bestTime: '07.00 - 10.30 WITA',
         description:
           'Lanskap sawah bertingkat dengan sistem irigasi tradisional Subak, udara sejuk pedesaan, serta galeri seni dan kerajinan khas Bali.',
       },
@@ -51,7 +52,7 @@ export const destinations = {
         area: 'Nusa Penida',
         category: 'Pantai & Laut',
         rating: '4.9',
-        bestTime: '08.00 – 15.00 WITA',
+        bestTime: '08.00 - 15.00 WITA',
         description:
           'Formasi tebing ikonik menyerupai punggung T-Rex dengan gradasi air laut biru turkis yang spektakuler untuk fotografi dan snorkeling.',
       },
@@ -61,7 +62,7 @@ export const destinations = {
         area: 'Kintamani · Bangli',
         category: 'Budaya & Alam',
         rating: '4.8',
-        bestTime: '05.30 – 09.00 WITA',
+        bestTime: '05.30 - 09.00 WITA',
         description:
           'Deretan kafe di tepi kaldera dengan panorama matahari terbit di balik Gunung Batur dan hamparan kabut tipis di atas danau.',
       },
@@ -71,7 +72,7 @@ export const destinations = {
         area: 'Jimbaran · Kuta Selatan',
         category: 'Kuliner & Sunset',
         rating: '4.7',
-        bestTime: '17.00 – 21.00 WITA',
+        bestTime: '17.00 - 21.00 WITA',
         description:
           'Santap malam hidangan laut bakar khas bumbu Bali langsung di atas pasir pantai sambil menikmati langit senja dan debur ombak tenang.',
       },
@@ -81,7 +82,7 @@ export const destinations = {
         area: 'Tabanan',
         category: 'Kuliner & Sunset',
         rating: '4.8',
-        bestTime: '16.30 – 18.30 WITA',
+        bestTime: '16.30 - 18.30 WITA',
         description:
           'Pura laut bersejarah di atas bongkahan batu besar yang tampak terapung saat air pasang dengan siluet senja paling populer di Bali.',
       },
@@ -89,7 +90,7 @@ export const destinations = {
     tips: [
       {
         title: 'Pesan Tiket Lebih Awal',
-        detail: 'Pilih jadwal keberangkatan pagi (08.00 – 10.30) agar waktu check-in hotel dan eksplorasi hari pertama lebih maksimal.',
+        detail: 'Pilih jadwal keberangkatan pagi (08.00 - 10.30) agar waktu check-in hotel dan eksplorasi hari pertama lebih maksimal.',
       },
       {
         title: 'Siapkan Pakaian Sopan untuk Pura',
@@ -112,7 +113,7 @@ export const destinations = {
     heroImage: jogjaPhoto,
     startingPrice: 760000,
     flightDuration: '1j 15m dari Jakarta (CGK)',
-    bestSeason: 'Mei – September (Musim Kemarau)',
+    bestSeason: 'Mei - September (Musim Kemarau)',
     videoTitle: 'Cinematic Preview · Istimewanya Yogyakarta',
     videoDescription:
       'Nikmati suasana hangat Malioboro, kemegahan Candi Prambanan saat senja, hingga pesona alam perbukitan dan pantai selatan Yogyakarta.',
@@ -130,7 +131,7 @@ export const destinations = {
         area: 'Sleman · Perbatasan Klaten',
         category: 'Budaya & Sejarah',
         rating: '4.9',
-        bestTime: '15.30 – 18.00 WIB',
+        bestTime: '15.30 - 18.00 WIB',
         description:
           'Kompleks candi Hindu terbesar di Indonesia dari abad ke-9 dengan relief Ramayana yang megah dan panorama matahari terbenam dari Bukit Ratu Boko.',
       },
@@ -140,7 +141,7 @@ export const destinations = {
         area: 'Pusat Kota Yogyakarta',
         category: 'Kuliner & Kota',
         rating: '4.8',
-        bestTime: '18.00 – 22.00 WIB',
+        bestTime: '18.00 - 22.00 WIB',
         description:
           'Jantung keramaian Jogja dengan pedestrian estetik, gedung heritage kolonial, belanja batik di Pasar Beringharjo, dan kuliner lesehan malam.',
       },
@@ -150,7 +151,7 @@ export const destinations = {
         area: 'Kraton · Kota Yogyakarta',
         category: 'Budaya & Sejarah',
         rating: '4.8',
-        bestTime: '08.30 – 13.00 WIB',
+        bestTime: '08.30 - 13.00 WIB',
         description:
           'Istana resmi Kesultanan Ngayogyakarta Hadiningrat yang masih hidup dengan tradisi Jawa serta kompleks pemandian bersejarah Taman Sari.',
       },
@@ -160,7 +161,7 @@ export const destinations = {
         area: 'Pakem · Sleman Utara',
         category: 'Alam & Pantai',
         rating: '4.8',
-        bestTime: '05.30 – 09.30 WIB',
+        bestTime: '05.30 - 09.30 WIB',
         description:
           'Petualangan seru menyusuri lereng Merapi dengan mobil Jeep terbuka, mengunjungi Bunker Kaliadem, dan menikmati udara dingin pegunungan.',
       },
@@ -170,7 +171,7 @@ export const destinations = {
         area: 'Gunungkidul',
         category: 'Alam & Pantai',
         rating: '4.7',
-        bestTime: '15.00 – 18.30 WIB',
+        bestTime: '15.00 - 18.30 WIB',
         description:
           'Deretan pantai pasir putih berbatu karang di pesisir selatan lengkap dengan spot santai di atas tebing menghadap langsung ke Samudra Hindia.',
       },
@@ -180,7 +181,7 @@ export const destinations = {
         area: 'Kotagede & Wijilan',
         category: 'Kuliner & Kota',
         rating: '4.8',
-        bestTime: '09.00 – 20.00 WIB',
+        bestTime: '09.00 - 20.00 WIB',
         description:
           'Sentra kerajinan perak tradisional dengan gang-gang arsitektur klasik Mataram Kuno serta pusat kuliner Gudeg autentik khas Yogyakarta.',
       },
@@ -196,7 +197,106 @@ export const destinations = {
       },
       {
         title: 'Siapkan Waktu Khusus ke Gunungkidul',
-        detail: 'Perjalanan ke pantai selatan Gunungkidul memakan waktu sekitar 1,5–2 jam dari pusat kota; berangkatlah siang hari agar tiba saat sunset.',
+        detail: 'Perjalanan ke pantai selatan Gunungkidul memakan waktu sekitar 1,5 - 2 jam dari pusat kota; berangkatlah siang hari agar tiba saat sunset.',
+      },
+    ],
+  },
+    LBJ: {
+    code: 'LBJ',
+    city: 'Labuan Bajo',
+    province: 'Nusa Tenggara Timur, Indonesia',
+    airport: 'Bandara Internasional Komodo (LBJ)',
+    tagline: 'Gerbang menuju Taman Nasional Komodo dengan gugusan pulau eksotis, perairan sebening kristal, dan lanskap perbukitan savana.',
+    heroTitle: 'Berlayar Menuju',
+    heroAccent: 'Labuan Bajo.',
+    heroImage: bajoPhoto,
+    startingPrice: 760000,
+    flightDuration: '2j 25m dari Jakarta (CGK)',
+    bestSeason: 'April - November (Musim Kemarau)',
+    videoTitle: 'Cinematic Preview · Keajaiban Labuan Bajo',
+    videoDescription:
+      'Intip panorama ikonik Pulau Padar dari puncak bukit, hamparan pasir merah muda di Pink Beach, hingga petualangan berlayar melintasi perairan Taman Nasional Komodo.',
+    videoUrl: 'https://www.youtube.com/embed/5_4d7613i7A?rel=0',
+    highlights: [
+      { label: 'KODE BANDARA', value: 'LBJ · Manggarai Barat' },
+      { label: 'DURASI RATA-RATA', value: '2 Jam 25 Menit' },
+      { label: 'HARGA MULAI', value: 'Rp760.000 / org' },
+    ],
+    categories: ['Semua', 'Pulau & Laut', 'Taman Nasional', 'Bukit & Sunset'],
+    spots: [
+      {
+        id: 'pulau-padar',
+        name: 'Puncak Bukit Pulau Padar',
+        area: 'Taman Nasional Komodo',
+        category: 'Bukit & Sunset',
+        rating: '4.9',
+        bestTime: '05.30 - 08.30 WITA',
+        description:
+          'Ikon utama Labuan Bajo dengan jalur trekking menuju puncak bukit yang menyuguhkan panorama tiga teluk berpasir putih, hitam, dan merah muda.',
+      },
+      {
+        id: 'pulau-komodo',
+        name: 'Pulau Komodo & Pulau Rinca',
+        area: 'Taman Nasional Komodo',
+        category: 'Taman Nasional',
+        rating: '4.9',
+        bestTime: '08.00 - 12.00 WITA',
+        description:
+          'Habitat asli kadal purba Komodo yang dilindungi UNESCO, ditemani pemandu resmi (ranger) menyusuri jalur hutan dan savana alami.',
+      },
+      {
+        id: 'pink-beach',
+        name: 'Pink Beach (Pantai Long Beach)',
+        area: 'Pulau Komodo & Padar',
+        category: 'Pulau & Laut',
+        rating: '4.9',
+        bestTime: '09.00 - 14.00 WITA',
+        description:
+          'Pantai berpasir merah muda alami yang terbentuk dari serpihan karang merah dengan air laut jernih untuk berenang dan snorkeling.',
+      },
+      {
+        id: 'manta-point',
+        name: 'Manta Point & Taka Makassar',
+        area: 'Perairan Selat Komodo',
+        category: 'Pulau & Laut',
+        rating: '4.8',
+        bestTime: '10.00 - 14.30 WITA',
+        description:
+          'Spot snorkeling terbaik untuk berenang bersama ikan pari manta yang ramah, berdekatan dengan gosong pasir putih berbentuk bulan sabit di tengah laut.',
+      },
+      {
+        id: 'pulau-kanawa',
+        name: 'Pulau Kanawa & Pulau Kelor',
+        area: 'Perairan Labuan Bajo',
+        category: 'Pulau & Laut',
+        rating: '4.8',
+        bestTime: '11.00 - 16.00 WITA',
+        description:
+          'Pulau kecil dengan dermaga kayu fotogenik, terumbu karang dangkal penuh bintang laut, serta bukit pendek dengan pemandangan teluk biru.',
+      },
+      {
+        id: 'bukit-sylvia',
+        name: 'Bukit Sylvia & Marina Waterfront',
+        area: 'Kota Labuan Bajo',
+        category: 'Bukit & Sunset',
+        rating: '4.7',
+        bestTime: '16.30 - 18.30 WITA',
+        description:
+          'Perbukitan hijau di pinggir kota dan kawasan tepi laut modern untuk menikmati siluet kapal phinisi saat matahari terbenam.',
+      },
+    ],
+    tips: [
+      {
+        title: 'Pilih Paket Sailing atau One-Day Speedboat',
+        detail: 'Jika waktu terbatas, pilih tur speedboat 1 hari (Padar, Pink Beach, Komodo, Taka Makassar). Jika punya 3 hari 2 malam, coba pengalaman menginap di kapal Phinisi.',
+      },
+      {
+        title: 'Gunakan Alas Kaki Nyaman & Tabir Surya',
+        detail: 'Trekking ke Pulau Padar dan Pulau Kelor cukup terjal dan terik; siapkan sepatu trekking ringan, topi, serta sunblock ramah terumbu karang.',
+      },
+      {
+        title: 'Ikuti Arahan Ranger di Pulau Komodo',
+        detail: 'Selalu berjalan bersama rombongan, jaga jarak aman dari satwa liar, dan hindari membuat gerakan mendadak selama di kawasan konservasi.',
       },
     ],
   },
