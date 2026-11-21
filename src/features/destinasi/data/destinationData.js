@@ -1,6 +1,7 @@
 import baliPhoto from '../../penerbangan/assets/destination-bali.jpg'
 import jogjaPhoto from '../../penerbangan/assets/destination-yogyakarta.jpg'
 import bajoPhoto from '../../penerbangan/assets/destination-labuan-bajo.jpg'
+import lombokPhoto from '../../penerbangan/assets/destination-lombok.jpg'
 
 export const destinations = {
   DPS: {
@@ -297,6 +298,105 @@ export const destinations = {
       {
         title: 'Ikuti Arahan Ranger di Pulau Komodo',
         detail: 'Selalu berjalan bersama rombongan, jaga jarak aman dari satwa liar, dan hindari membuat gerakan mendadak selama di kawasan konservasi.',
+      },
+    ],
+  },
+  LOP: {
+    code: 'LOP',
+    city: 'Lombok',
+    province: 'Nusa Tenggara Barat, Indonesia',
+    airport: 'Bandara Internasional Zainuddin Abdul Madjid (LOP)',
+    tagline: 'Pulau Seribu Masjid dengan pesona gugusan Gili, perbukitan Mandalika yang menawan, megahnya Gunung Rinjani, dan tradisi Sasak yang autentik.',
+    heroTitle: 'Temukan Ketenangan',
+    heroAccent: 'Lombok.',
+    heroImage: lombokPhoto,
+    startingPrice: 760000,
+    flightDuration: '2j 05m dari Jakarta (CGK)',
+    bestSeason: 'Mei - Oktober (Musim Kemarau)',
+    videoTitle: 'Cinematic Preview · Pesona Pulau Lombok',
+    videoDescription:
+      'Nikmati birunya perairan Gili Trawangan, lekukan pantai pasir merica di Mandalika, hingga gagahnya lanskap pegunungan Sembalun di kaki Gunung Rinjani.',
+    videoUrl: 'https://www.youtube.com/embed/h0b1nS-lN8k?rel=0',
+    highlights: [
+      { label: 'KODE BANDARA', value: 'LOP · Lombok Tengah' },
+      { label: 'DURASI RATA-RATA', value: '2 Jam 5 Menit' },
+      { label: 'HARGA MULAI', value: 'Rp760.000 / org' },
+    ],
+    categories: ['Semua', 'Pantai & Gili', 'Alam & Gunung', 'Budaya & Kuliner'],
+    spots: [
+      {
+        id: 'gili-trawangan',
+        name: 'Gili Trawangan, Gili Air & Gili Meno',
+        area: 'Lombok Utara',
+        category: 'Pantai & Gili',
+        rating: '4.9',
+        bestTime: '08.00 - 18.00 WITA',
+        description:
+          'Tiga pulau tropis bebas kendaraan bermotor dengan sepeda santai, terumbu karang dangkal tempat penyu berenang, serta ayunan sunset ikonik.',
+      },
+      {
+        id: 'bukit-merese',
+        name: 'Bukit Merese & Pantai Tanjung Aan',
+        area: 'Kuta · Mandalika',
+        category: 'Pantai & Gili',
+        rating: '4.9',
+        bestTime: '15.30 - 18.30 WITA',
+        description:
+          'Perbukitan hijau luas di atas garis pantai berpasir unik menyerupai butiran merica dengan pemandangan teluk biru dan sunset terbaik di Lombok Selatan.',
+      },
+      {
+        id: 'sembalun-rinjani',
+        name: 'Lembah Sembalun & Bukit Pergasingan',
+        area: 'Lombok Timur · Kaki Rinjani',
+        category: 'Alam & Gunung',
+        rating: '4.9',
+        bestTime: '06.00 - 10.30 WITA',
+        description:
+          'Dataran tinggi sejuk di lereng Gunung Rinjani dengan petak kebun warna-warni, jalur pendakian ramah pemula, dan udara pegunungan yang segar.',
+      },
+      {
+        id: 'air-terjun-senaru',
+        name: 'Air Terjun Sendang Gile & Tiu Kelep',
+        area: 'Senaru · Lombok Utara',
+        category: 'Alam & Gunung',
+        rating: '4.8',
+        bestTime: '08.30 - 13.00 WITA',
+        description:
+          'Dua air terjun bertingkat yang tersembunyi di tengah hutan tropis rimbun dengan aliran air dingin langsung dari mata air Gunung Rinjani.',
+      },
+      {
+        id: 'desa-sade',
+        name: 'Desa Adat Sade & Sentra Tenun Sukarara',
+        area: 'Lombok Tengah',
+        category: 'Budaya & Kuliner',
+        rating: '4.8',
+        bestTime: '09.00 - 16.00 WITA',
+        description:
+          'Perkampungan tradisional Suku Sasak dengan rumah lumbung beratap alang-alang, proses menenun kain songket tradisional, dan tari peresean.',
+      },
+      {
+        id: 'senggigi-taliwang',
+        name: 'Pantai Senggigi & Kuliner Ayam Taliwang',
+        area: 'Lombok Barat & Mataram',
+        category: 'Budaya & Kuliner',
+        rating: '4.7',
+        bestTime: '17.00 - 21.00 WITA',
+        description:
+          'Garis pantai klasik menghadap Gunung Agung Bali saat senja, dilengkapi wisata kuliner khas Lombok seperti Ayam Taliwang, Plecing Kangkung, dan Sate Rembiga.',
+      },
+    ],
+    tips: [
+      {
+        title: 'Mulai Eksplorasi dari Lombok Selatan',
+        detail: 'Bandara LOP hanya berjarak sekitar 25 menit dari kawasan Kuta Mandalika dan Desa Sade, cocok dijadikan destinasi hari pertama setibanya di Lombok.',
+      },
+      {
+        title: 'Atur Jadwal Penyeberangan ke Tiga Gili',
+        detail: 'Gunakan fast boat atau perahu dari Pelabuhan Bangsal pada pagi hari (sebelum pukul 10.00 WITA) saat ombak relatif lebih tenang.',
+      },
+      {
+        title: 'Siapkan Jaket Jika ke Sembalun atau Senaru',
+        detail: 'Meski area pantai cukup terik, suhu di kawasan lereng Rinjani dan Sembalun bisa turun cukup dingin terutama di pagi dan malam hari.',
       },
     ],
   },
