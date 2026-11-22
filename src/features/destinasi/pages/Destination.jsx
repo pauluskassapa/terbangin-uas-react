@@ -1,9 +1,11 @@
 import { useMemo, useState } from 'react'
-import { useNavigate, useParams } from 'react-router'
+import { Link, useNavigate, useParams } from 'react-router'
 import { airports, formatRupiah } from '../../../data/penerbangan.js'
 import DestinationSpotCard from '../components/DestinationSpotCard.jsx'
 import { defaultDestinationCode, destinations } from '../data/destinationData.js'
 import './Destination.css'
+
+const destinationList = Object.values(destinations)
 
 function getTodayDate() {
   const today = new Date()
@@ -15,20 +17,28 @@ function getTodayDate() {
 
 function Destination() {
   const { code } = useParams()
-  const navigate = useNavigate()
-
   const activeCode = code && destinations[code.toUpperCase()] ? code.toUpperCase() : defaultDestinationCode
   const destination = destinations[activeCode]
 
-  const [selectedCategory, setSelectedCategory] = useState('Semua')
-  const [originCode, setOriginCode] = useState('CGK')
-  const [searchQuery, setSearchQuery] = useState('')
-  const [activePhoto, setActivePhoto] = useState(null)
+  return <DestinationContent key={activeCode} destination={destination} />
+}
+
+function DestinationContent({ destination }) {
+  const navigate = useNavigate()
 
   const availableOrigins = useMemo(
     () => airports.filter((airport) => airport.code !== destination.code),
     [destination.code]
   )
+
+  const [selectedCategory, setSelectedCategory] = useState('Semua')
+  const [originCode, setOriginCode] = useState(() =>
+    availableOrigins.some((airport) => airport.code === 'CGK')
+      ? 'CGK'
+      : availableOrigins[0]?.code || 'CGK'
+  )
+  const [searchQuery, setSearchQuery] = useState('')
+  const [activePhoto, setActivePhoto] = useState(null)
 
   const filteredSpots = useMemo(() => {
     const query = searchQuery.trim().toLowerCase()
@@ -44,6 +54,8 @@ function Destination() {
     })
   }, [destination.spots, selectedCategory, searchQuery])
 
+  const searchHint = destination.spots[0]?.area?.split('·')[0]?.trim() || destination.city
+
   function handleSearchFlights() {
     const params = new URLSearchParams({
       from: originCode,
@@ -56,6 +68,31 @@ function Destination() {
 
   return (
     <main className="destination-page">
+      <nav className="destination-switcher-bar" aria-label="Pilih destinasi wisata">
+        <div className="page-wrap destination-switcher-inner">
+          <span className="destination-switcher-label">JELAJAHI KOTA</span>
+          <div className="destination-switcher-list">
+            {destinationList.map((item) => {
+              const isActive = item.code === destination.code
+              return (
+                <Link
+                  key={item.code}
+                  to={`/destinasi/${item.code}`}
+                  className={`destination-switcher-item${isActive ? ' is-active' : ''}`}
+                  aria-current={isActive ? 'page' : undefined}
+                >
+                  <img src={item.heroImage} alt="" aria-hidden="true" />
+                  <span className="destination-switcher-text">
+                    <strong>{item.city}</strong>
+                    <small>{item.code}</small>
+                  </span>
+                </Link>
+              )
+            })}
+          </div>
+        </div>
+      </nav>
+
       <section
         className="destination-hero"
         style={
@@ -241,7 +278,7 @@ function Destination() {
               type="search"
               value={searchQuery}
               onChange={(event) => setSearchQuery(event.target.value)}
-              placeholder={`Cari spot di ${destination.city} (misal: Ubud, pantai)...`}
+              placeholder={`Cari spot di ${destination.city} (misal: ${searchHint})...`}
               aria-label={`Cari tempat wisata di ${destination.city}`}
             />
           </div>

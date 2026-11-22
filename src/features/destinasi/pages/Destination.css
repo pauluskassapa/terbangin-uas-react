@@ -3,6 +3,114 @@
   padding-bottom: 80px;
 }
 
+.destination-switcher-bar {
+  background: #ffffff;
+  border-bottom: 1px solid var(--line);
+  padding: 14px 0;
+}
+
+.destination-switcher-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.destination-switcher-label {
+  flex-shrink: 0;
+  color: var(--teal);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+}
+
+.destination-switcher-list {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 2px;
+  scrollbar-width: none;
+}
+
+.destination-switcher-list::-webkit-scrollbar {
+  display: none;
+}
+
+.destination-switcher-item {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 14px 6px 6px;
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  background: var(--page);
+  color: var(--ink);
+  text-decoration: none;
+  transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.destination-switcher-item:hover {
+  border-color: #9ed4d8;
+  background: #eff9f9;
+  transform: translateY(-1px);
+}
+
+.destination-switcher-item.is-active {
+  border-color: var(--teal);
+  background: var(--teal);
+  color: #ffffff;
+  box-shadow: 0 6px 18px rgba(8, 127, 140, 0.22);
+}
+
+.destination-switcher-item img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  border: 1.5px solid rgba(255, 255, 255, 0.85);
+}
+
+.destination-switcher-text {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.destination-switcher-text strong {
+  font: 700 13px 'Manrope', sans-serif;
+}
+
+.destination-switcher-text small {
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.destination-switcher-item.is-active .destination-switcher-text small {
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.destination-switcher-item:focus-visible {
+  outline: 3px solid var(--teal);
+  outline-offset: 2px;
+}
+
+@media (max-width: 760px) {
+  .destination-switcher-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .destination-switcher-list {
+    width: 100%;
+  }
+}
+
 .destination-hero {
   position: relative;
   background-color: #0d2b45;
