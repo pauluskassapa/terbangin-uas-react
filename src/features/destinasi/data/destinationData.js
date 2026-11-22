@@ -26,6 +26,36 @@ export const destinations = {
       { label: 'HARGA MULAI', value: 'Rp760.000 / org' },
     ],
     categories: ['Semua', 'Pantai & Laut', 'Budaya & Alam', 'Kuliner & Sunset'],
+    gallery: [
+      {
+        id: 'bali-ubud',
+        title: 'Sawah Terasering Tegalalang',
+        location: 'Ubud · Gianyar',
+        layout: 'large',
+        image: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1000&q=80',
+      },
+      {
+        id: 'bali-penida',
+        title: 'Tebing Kelingking Beach',
+        location: 'Nusa Penida',
+        layout: 'normal',
+        image: 'https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?auto=format&fit=crop&w=800&q=80',
+      },
+      {
+        id: 'bali-tanahlot',
+        title: 'Siluet Pura Tanah Lot',
+        location: 'Tabanan',
+        layout: 'normal',
+        image: 'https://images.unsplash.com/photo-1555400038-63f5ba517a47?auto=format&fit=crop&w=800&q=80',
+      },
+      {
+        id: 'bali-jimbaran',
+        title: 'Senja & Kuliner Tepi Pantai',
+        location: 'Teluk Jimbaran',
+        layout: 'tall',
+        image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80',
+      },
+    ],
     spots: [
       {
         id: 'uluwatu',
@@ -125,6 +155,36 @@ export const destinations = {
       { label: 'HARGA MULAI', value: 'Rp760.000 / org' },
     ],
     categories: ['Semua', 'Budaya & Sejarah', 'Alam & Pantai', 'Kuliner & Kota'],
+    gallery: [
+      {
+        id: 'jogja-prambanan',
+        title: 'Kemegahan Candi Prambanan',
+        location: 'Sleman · Yogyakarta',
+        layout: 'large',
+        image: 'https://images.unsplash.com/photo-1584810359583-96fc3448beaa?auto=format&fit=crop&w=1000&q=80',
+      },
+      {
+        id: 'jogja-tamansari',
+        title: 'Arsitektur Klasik Taman Sari',
+        location: 'Kraton Yogyakarta',
+        layout: 'normal',
+        image: 'https://images.unsplash.com/photo-1596402184320-417e7178b2cd?auto=format&fit=crop&w=800&q=80',
+      },
+      {
+        id: 'jogja-merapi',
+        title: 'Pagi Cerah di Lereng Merapi',
+        location: 'Kaliurang · Sleman',
+        layout: 'normal',
+        image: 'https://images.unsplash.com/photo-1542640244-7e672d6cef4e?auto=format&fit=crop&w=800&q=80',
+      },
+      {
+        id: 'jogja-malioboro',
+        title: 'Suasana Malam & Budaya Jogja',
+        location: 'Malioboro · Pusat Kota',
+        layout: 'tall',
+        image: 'https://images.unsplash.com/photo-1565967511849-76a60a516170?auto=format&fit=crop&w=800&q=80',
+      },
+    ],
     spots: [
       {
         id: 'prambanan',
@@ -224,6 +284,36 @@ export const destinations = {
       { label: 'HARGA MULAI', value: 'Rp760.000 / org' },
     ],
     categories: ['Semua', 'Pulau & Laut', 'Taman Nasional', 'Bukit & Sunset'],
+    gallery: [
+      {
+        id: 'bajo-padar',
+        title: 'Panorama Tiga Teluk Pulau Padar',
+        location: 'Taman Nasional Komodo',
+        layout: 'large',
+        image: 'https://images.unsplash.com/photo-1516690561799-46d8f74f9abf?auto=format&fit=crop&w=1000&q=80',
+      },
+      {
+        id: 'bajo-pink',
+        title: 'Pasir Merah Muda Pink Beach',
+        location: 'Pulau Komodo',
+        layout: 'normal',
+        image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80',
+      },
+      {
+        id: 'bajo-kanawa',
+        title: 'Perairan Jernih Pulau Kanawa',
+        location: 'Selat Komodo',
+        layout: 'normal',
+        image: 'https://images.unsplash.com/photo-1559128010-7c1ad6e1b6a5?auto=format&fit=crop&w=800&q=80',
+      },
+      {
+        id: 'bajo-phinisi',
+        title: 'Berlayar dengan Kapal Phinisi',
+        location: 'Marina Labuan Bajo',
+        layout: 'tall',
+        image: 'https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=800&q=80',
+      },
+    ],
     spots: [
       {
         id: 'pulau-padar',
@@ -323,6 +413,36 @@ export const destinations = {
       { label: 'HARGA MULAI', value: 'Rp760.000 / org' },
     ],
     categories: ['Semua', 'Pantai & Gili', 'Alam & Gunung', 'Budaya & Kuliner'],
+    gallery: [
+      {
+        id: 'lombok-merese',
+        title: 'Perbukitan Hijau Bukit Merese',
+        location: 'Kuta · Mandalika',
+        layout: 'large',
+        image: 'https://images.unsplash.com/photo-1570789210967-2cac24afeb00?auto=format&fit=crop&w=1000&q=80',
+      },
+      {
+        id: 'lombok-gili',
+        title: 'Pantai Tropis Gili Trawangan',
+        location: 'Lombok Utara',
+        layout: 'normal',
+        image: 'https://images.unsplash.com/photo-1537953773345-d172ccf13cf1?auto=format&fit=crop&w=800&q=80',
+      },
+      {
+        id: 'lombok-sembalun',
+        title: 'Lanskap Lembah Sembalun',
+        location: 'Kaki Gunung Rinjani',
+        layout: 'normal',
+        image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80',
+      },
+      {
+        id: 'lombok-senaru',
+        title: 'Kesegaran Air Terjun Tiu Kelep',
+        location: 'Senaru · Lombok Utara',
+        layout: 'tall',
+        image: 'https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=800&q=80',
+      },
+    ],
     spots: [
       {
         id: 'gili-trawangan',

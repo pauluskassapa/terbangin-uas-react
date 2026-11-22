@@ -465,3 +465,197 @@
     width: 100%;
   }
 }
+
+/* === GALERI SUASANA (BENTO GRID & LIGHTBOX) === */
+.destination-gallery-section {
+  padding-top: 36px;
+}
+
+.destination-gallery-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.destination-gallery-header h2 {
+  margin: 6px 0 0;
+  color: var(--ink);
+  font: 800 clamp(22px, 3vw, 28px) / 1.2 'Manrope', sans-serif;
+  letter-spacing: -0.8px;
+}
+
+.destination-gallery-header p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.destination-bento-grid {
+  display: grid;
+  grid-template-columns: 1.45fr 1fr 0.95fr;
+  grid-template-rows: repeat(2, 195px);
+  gap: 16px;
+}
+
+.destination-bento-item {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  overflow: hidden;
+  background: #0d2b45;
+  cursor: pointer;
+  text-align: left;
+}
+
+.destination-bento-item.is-large {
+  grid-column: 1 / 2;
+  grid-row: 1 / 3;
+}
+
+.destination-bento-item.is-tall {
+  grid-column: 3 / 4;
+  grid-row: 1 / 3;
+}
+
+.destination-bento-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.destination-bento-item:hover img {
+  transform: scale(1.05);
+}
+
+.destination-bento-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 18px;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 28, 48, 0) 38%,
+    rgba(10, 28, 48, 0.82) 100%
+  );
+  color: #ffffff;
+}
+
+.destination-bento-location {
+  display: inline-block;
+  margin-bottom: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #7ef0ec;
+}
+
+.destination-bento-overlay strong {
+  font: 700 15px / 1.3 'Manrope', sans-serif;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+}
+
+.destination-bento-item.is-large .destination-bento-overlay strong {
+  font-size: 18px;
+}
+
+.destination-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(10, 26, 44, 0.82);
+  backdrop-filter: blur(8px);
+}
+
+.destination-lightbox-content {
+  position: relative;
+  max-width: 860px;
+  width: 100%;
+  background: #ffffff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+}
+
+.destination-lightbox-content img {
+  display: block;
+  width: 100%;
+  max-height: 70vh;
+  object-fit: cover;
+}
+
+.destination-lightbox-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  padding: 8px 14px;
+  border: 0;
+  border-radius: 99px;
+  background: rgba(15, 34, 48, 0.78);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.destination-lightbox-caption {
+  padding: 16px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.destination-lightbox-caption span {
+  color: var(--teal);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.destination-lightbox-caption strong {
+  color: var(--ink);
+  font: 750 17px 'Manrope', sans-serif;
+}
+
+@media (max-width: 900px) {
+  .destination-bento-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: 220px 180px 180px;
+  }
+
+  .destination-bento-item.is-large {
+    grid-column: 1 / -1;
+    grid-row: 1 / 2;
+  }
+
+  .destination-bento-item.is-tall {
+    grid-column: auto;
+    grid-row: auto;
+  }
+}
+
+@media (max-width: 560px) {
+  .destination-bento-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+
+  .destination-bento-item,
+  .destination-bento-item.is-large,
+  .destination-bento-item.is-tall {
+    grid-column: auto;
+    grid-row: auto;
+    aspect-ratio: 16 / 10;
+  }
+}

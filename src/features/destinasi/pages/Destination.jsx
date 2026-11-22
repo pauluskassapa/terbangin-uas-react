@@ -23,6 +23,7 @@ function Destination() {
   const [selectedCategory, setSelectedCategory] = useState('Semua')
   const [originCode, setOriginCode] = useState('CGK')
   const [searchQuery, setSearchQuery] = useState('')
+  const [activePhoto, setActivePhoto] = useState(null)
 
   const availableOrigins = useMemo(
     () => airports.filter((airport) => airport.code !== destination.code),
@@ -114,6 +115,83 @@ function Destination() {
           </div>
         </div>
       </section>
+
+      {destination.gallery?.length > 0 && (
+        <section
+          className="page-wrap destination-gallery-section"
+          aria-labelledby="gallery-heading"
+        >
+          <div className="destination-gallery-header">
+            <div>
+              <span className="eyebrow">✦ GALERI VISUAL · {destination.city.toUpperCase()}</span>
+              <h2 id="gallery-heading">Galeri Suasana {destination.city}</h2>
+            </div>
+            <p>Klik foto untuk melihat tampilan penuh sudut-sudut terbaik di {destination.city}.</p>
+          </div>
+
+          <div className="destination-bento-grid">
+            {destination.gallery.map((item) => (
+              <button
+                key={item.id}
+                type="button"
+                className={`destination-bento-item is-${item.layout || 'normal'}`}
+                onClick={() => setActivePhoto(item)}
+                aria-label={`Perbesar foto ${item.title}`}
+              >
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  loading="lazy"
+                  onError={(event) => {
+                    event.currentTarget.onerror = null
+                    event.currentTarget.src = destination.heroImage
+                  }}
+                />
+                <div className="destination-bento-overlay">
+                  <span className="destination-bento-location">📍 {item.location}</span>
+                  <strong>{item.title}</strong>
+                </div>
+              </button>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {activePhoto && (
+        <div
+          className="destination-lightbox"
+          role="dialog"
+          aria-modal="true"
+          aria-label={activePhoto.title}
+          onClick={() => setActivePhoto(null)}
+        >
+          <div
+            className="destination-lightbox-content"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <button
+              type="button"
+              className="destination-lightbox-close"
+              onClick={() => setActivePhoto(null)}
+              aria-label="Tutup pratinjau foto"
+            >
+              ✕ Tutup
+            </button>
+            <img
+              src={activePhoto.image}
+              alt={activePhoto.title}
+              onError={(event) => {
+                event.currentTarget.onerror = null
+                event.currentTarget.src = destination.heroImage
+              }}
+            />
+            <div className="destination-lightbox-caption">
+              <span>📍 {activePhoto.location}</span>
+              <strong>{activePhoto.title}</strong>
+            </div>
+          </div>
+        </div>
+      )}
 
       {destination.videoUrl && (
         <section className="page-wrap destination-video-section" aria-labelledby="video-preview-heading">
