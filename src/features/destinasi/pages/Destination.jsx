@@ -252,7 +252,12 @@ function Destination() {
             {filteredSpots.length > 0 ? (
               <div className="destination-spots-grid">
                 {filteredSpots.map((spot, index) => (
-                  <DestinationSpotCard key={spot.id} spot={spot} index={index} />
+                  <DestinationSpotCard
+                    key={spot.id}
+                    spot={spot}
+                    index={index}
+                    fallbackImage={destination.heroImage}
+                  />
                 ))}
               </div>
             ) : (

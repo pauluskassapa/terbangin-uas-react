@@ -32,28 +32,28 @@ export const destinations = {
         title: 'Sawah Terasering Tegalalang',
         location: 'Ubud · Gianyar',
         layout: 'large',
-        image: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1000&q=80',
+        image: '/images/destinasi/baliUbud.jpg',
       },
       {
         id: 'bali-penida',
         title: 'Tebing Kelingking Beach',
         location: 'Nusa Penida',
         layout: 'normal',
-        image: 'https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?auto=format&fit=crop&w=800&q=80',
+        image: '/images/destinasi/baliUluwatu.jpg',
       },
       {
         id: 'bali-tanahlot',
         title: 'Siluet Pura Tanah Lot',
         location: 'Tabanan',
         layout: 'normal',
-        image: 'https://images.unsplash.com/photo-1555400038-63f5ba517a47?auto=format&fit=crop&w=800&q=80',
+        image: '/images/destinasi/baliTanahLot.jpg',
       },
       {
         id: 'bali-jimbaran',
         title: 'Senja & Kuliner Tepi Pantai',
         location: 'Teluk Jimbaran',
         layout: 'tall',
-        image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80',
+        image: '/images/destinasi/baliJimbaran.jpg',
       },
     ],
     spots: [
@@ -64,6 +64,7 @@ export const destinations = {
         category: 'Pantai & Laut',
         rating: '4.9',
         bestTime: '16.00 - 18.30 WITA',
+        image: '/images/destinasi/baliUluwatu.jpg',
         description:
           'Tebing karang menjulang di atas Samudra Hindia dengan pertunjukan Tari Kecak saat matahari terbenam serta deretan pantai berpasir putih.',
       },
@@ -74,6 +75,7 @@ export const destinations = {
         category: 'Budaya & Alam',
         rating: '4.8',
         bestTime: '07.00 - 10.30 WITA',
+        image: '/images/destinasi/baliUbud.jpg',
         description:
           'Lanskap sawah bertingkat dengan sistem irigasi tradisional Subak, udara sejuk pedesaan, serta galeri seni dan kerajinan khas Bali.',
       },
@@ -84,6 +86,7 @@ export const destinations = {
         category: 'Pantai & Laut',
         rating: '4.9',
         bestTime: '08.00 - 15.00 WITA',
+        image: '/images/destinasi/baliNusaPenida.jpg',
         description:
           'Formasi tebing ikonik menyerupai punggung T-Rex dengan gradasi air laut biru turkis yang spektakuler untuk fotografi dan snorkeling.',
       },
@@ -94,6 +97,7 @@ export const destinations = {
         category: 'Budaya & Alam',
         rating: '4.8',
         bestTime: '05.30 - 09.00 WITA',
+        image: '/images/destinasi/baliKintamani.jpg',
         description:
           'Deretan kafe di tepi kaldera dengan panorama matahari terbit di balik Gunung Batur dan hamparan kabut tipis di atas danau.',
       },
@@ -104,6 +108,7 @@ export const destinations = {
         category: 'Kuliner & Sunset',
         rating: '4.7',
         bestTime: '17.00 - 21.00 WITA',
+        image: '/images/destinasi/baliJimbaran.jpg',
         description:
           'Santap malam hidangan laut bakar khas bumbu Bali langsung di atas pasir pantai sambil menikmati langit senja dan debur ombak tenang.',
       },
@@ -114,6 +119,7 @@ export const destinations = {
         category: 'Kuliner & Sunset',
         rating: '4.8',
         bestTime: '16.30 - 18.30 WITA',
+        image: '/images/destinasi/baliTanahLot.jpg',
         description:
           'Pura laut bersejarah di atas bongkahan batu besar yang tampak terapung saat air pasang dengan siluet senja paling populer di Bali.',
       },
@@ -161,28 +167,28 @@ export const destinations = {
         title: 'Kemegahan Candi Prambanan',
         location: 'Sleman · Yogyakarta',
         layout: 'large',
-        image: 'https://images.unsplash.com/photo-1584810359583-96fc3448beaa?auto=format&fit=crop&w=1000&q=80',
+        image: '/images/destinasi/jogjaPrambanan.jpg',
       },
       {
         id: 'jogja-tamansari',
         title: 'Arsitektur Klasik Taman Sari',
         location: 'Kraton Yogyakarta',
         layout: 'normal',
-        image: 'https://images.unsplash.com/photo-1596402184320-417e7178b2cd?auto=format&fit=crop&w=800&q=80',
+        image: '/images/destinasi/jogjaTamanSari.jpg',
       },
       {
         id: 'jogja-merapi',
         title: 'Pagi Cerah di Lereng Merapi',
         location: 'Kaliurang · Sleman',
         layout: 'normal',
-        image: 'https://images.unsplash.com/photo-1542640244-7e672d6cef4e?auto=format&fit=crop&w=800&q=80',
+        image: '/images/destinasi/jogjaMerapi.jpg',
       },
       {
         id: 'jogja-malioboro',
         title: 'Suasana Malam & Budaya Jogja',
         location: 'Malioboro · Pusat Kota',
         layout: 'tall',
-        image: 'https://images.unsplash.com/photo-1565967511849-76a60a516170?auto=format&fit=crop&w=800&q=80',
+        image: '/images/destinasi/jogjaMalioboro.jpg',
       },
     ],
     spots: [
@@ -193,6 +199,7 @@ export const destinations = {
         category: 'Budaya & Sejarah',
         rating: '4.9',
         bestTime: '15.30 - 18.00 WIB',
+        image: '/images/destinasi/jogjaPrambanan.jpg',
         description:
           'Kompleks candi Hindu terbesar di Indonesia dari abad ke-9 dengan relief Ramayana yang megah dan panorama matahari terbenam dari Bukit Ratu Boko.',
       },
@@ -203,6 +210,7 @@ export const destinations = {
         category: 'Kuliner & Kota',
         rating: '4.8',
         bestTime: '18.00 - 22.00 WIB',
+        image: '/images/destinasi/jogjaMalioboro.jpg',
         description:
           'Jantung keramaian Jogja dengan pedestrian estetik, gedung heritage kolonial, belanja batik di Pasar Beringharjo, dan kuliner lesehan malam.',
       },
@@ -213,6 +221,7 @@ export const destinations = {
         category: 'Budaya & Sejarah',
         rating: '4.8',
         bestTime: '08.30 - 13.00 WIB',
+        image: '/images/destinasi/jogjaTamanSari.jpg',
         description:
           'Istana resmi Kesultanan Ngayogyakarta Hadiningrat yang masih hidup dengan tradisi Jawa serta kompleks pemandian bersejarah Taman Sari.',
       },
@@ -223,6 +232,7 @@ export const destinations = {
         category: 'Alam & Pantai',
         rating: '4.8',
         bestTime: '05.30 - 09.30 WIB',
+        image: '/images/destinasi/jogjaMerapi.jpg',
         description:
           'Petualangan seru menyusuri lereng Merapi dengan mobil Jeep terbuka, mengunjungi Bunker Kaliadem, dan menikmati udara dingin pegunungan.',
       },
@@ -233,6 +243,7 @@ export const destinations = {
         category: 'Alam & Pantai',
         rating: '4.7',
         bestTime: '15.00 - 18.30 WIB',
+        image: '/images/destinasi/jogjaGunungkidul.jpg',
         description:
           'Deretan pantai pasir putih berbatu karang di pesisir selatan lengkap dengan spot santai di atas tebing menghadap langsung ke Samudra Hindia.',
       },
@@ -243,6 +254,7 @@ export const destinations = {
         category: 'Kuliner & Kota',
         rating: '4.8',
         bestTime: '09.00 - 20.00 WIB',
+        image: '/images/destinasi/jogjaKotagede.jpg',
         description:
           'Sentra kerajinan perak tradisional dengan gang-gang arsitektur klasik Mataram Kuno serta pusat kuliner Gudeg autentik khas Yogyakarta.',
       },
@@ -290,28 +302,28 @@ export const destinations = {
         title: 'Panorama Tiga Teluk Pulau Padar',
         location: 'Taman Nasional Komodo',
         layout: 'large',
-        image: 'https://images.unsplash.com/photo-1516690561799-46d8f74f9abf?auto=format&fit=crop&w=1000&q=80',
+        image: '/images/destinasi/bajoPadar.jpg',
       },
       {
         id: 'bajo-pink',
         title: 'Pasir Merah Muda Pink Beach',
         location: 'Pulau Komodo',
         layout: 'normal',
-        image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80',
+        image: '/images/destinasi/bajoPinkBeach.jpg',
       },
       {
         id: 'bajo-kanawa',
         title: 'Perairan Jernih Pulau Kanawa',
         location: 'Selat Komodo',
         layout: 'normal',
-        image: 'https://images.unsplash.com/photo-1559128010-7c1ad6e1b6a5?auto=format&fit=crop&w=800&q=80',
+        image: '/images/destinasi/bajoMantaPoint.jpg',
       },
       {
         id: 'bajo-phinisi',
         title: 'Berlayar dengan Kapal Phinisi',
         location: 'Marina Labuan Bajo',
         layout: 'tall',
-        image: 'https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=800&q=80',
+        image: '/images/destinasi/bajoPhinisi.jpg',
       },
     ],
     spots: [
@@ -322,6 +334,7 @@ export const destinations = {
         category: 'Bukit & Sunset',
         rating: '4.9',
         bestTime: '05.30 - 08.30 WITA',
+        image: '/images/destinasi/bajoPadar.jpg',
         description:
           'Ikon utama Labuan Bajo dengan jalur trekking menuju puncak bukit yang menyuguhkan panorama tiga teluk berpasir putih, hitam, dan merah muda.',
       },
@@ -332,6 +345,7 @@ export const destinations = {
         category: 'Taman Nasional',
         rating: '4.9',
         bestTime: '08.00 - 12.00 WITA',
+        image: '/images/destinasi/bajoKomodo.jpg',
         description:
           'Habitat asli kadal purba Komodo yang dilindungi UNESCO, ditemani pemandu resmi (ranger) menyusuri jalur hutan dan savana alami.',
       },
@@ -342,6 +356,7 @@ export const destinations = {
         category: 'Pulau & Laut',
         rating: '4.9',
         bestTime: '09.00 - 14.00 WITA',
+        image: '/images/destinasi/bajoPinkBeach.jpg',
         description:
           'Pantai berpasir merah muda alami yang terbentuk dari serpihan karang merah dengan air laut jernih untuk berenang dan snorkeling.',
       },
@@ -352,6 +367,7 @@ export const destinations = {
         category: 'Pulau & Laut',
         rating: '4.8',
         bestTime: '10.00 - 14.30 WITA',
+        image: '/images/destinasi/bajoMantaPoint.jpg',
         description:
           'Spot snorkeling terbaik untuk berenang bersama ikan pari manta yang ramah, berdekatan dengan gosong pasir putih berbentuk bulan sabit di tengah laut.',
       },
@@ -362,6 +378,7 @@ export const destinations = {
         category: 'Pulau & Laut',
         rating: '4.8',
         bestTime: '11.00 - 16.00 WITA',
+        image: '/images/destinasi/bajoKanawa.jpg',
         description:
           'Pulau kecil dengan dermaga kayu fotogenik, terumbu karang dangkal penuh bintang laut, serta bukit pendek dengan pemandangan teluk biru.',
       },
@@ -372,6 +389,7 @@ export const destinations = {
         category: 'Bukit & Sunset',
         rating: '4.7',
         bestTime: '16.30 - 18.30 WITA',
+        image: '/images/destinasi/bajoPhinisi.jpg',
         description:
           'Perbukitan hijau di pinggir kota dan kawasan tepi laut modern untuk menikmati siluet kapal phinisi saat matahari terbenam.',
       },
@@ -419,28 +437,28 @@ export const destinations = {
         title: 'Perbukitan Hijau Bukit Merese',
         location: 'Kuta · Mandalika',
         layout: 'large',
-        image: 'https://images.unsplash.com/photo-1570789210967-2cac24afeb00?auto=format&fit=crop&w=1000&q=80',
+        image: '/images/destinasi/lombokMerese.jpg',
       },
       {
         id: 'lombok-gili',
         title: 'Pantai Tropis Gili Trawangan',
         location: 'Lombok Utara',
         layout: 'normal',
-        image: 'https://images.unsplash.com/photo-1537953773345-d172ccf13cf1?auto=format&fit=crop&w=800&q=80',
+        image: '/images/destinasi/lombokGili.jpg',
       },
       {
         id: 'lombok-sembalun',
         title: 'Lanskap Lembah Sembalun',
         location: 'Kaki Gunung Rinjani',
         layout: 'normal',
-        image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80',
+        image: '/images/destinasi/lombokSembalun.jpg',
       },
       {
         id: 'lombok-senaru',
         title: 'Kesegaran Air Terjun Tiu Kelep',
         location: 'Senaru · Lombok Utara',
         layout: 'tall',
-        image: 'https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=800&q=80',
+        image: '/images/destinasi/lombokSenaru.jpg',
       },
     ],
     spots: [
@@ -451,6 +469,7 @@ export const destinations = {
         category: 'Pantai & Gili',
         rating: '4.9',
         bestTime: '08.00 - 18.00 WITA',
+        image: '/images/destinasi/lombokGili.jpg',
         description:
           'Tiga pulau tropis bebas kendaraan bermotor dengan sepeda santai, terumbu karang dangkal tempat penyu berenang, serta ayunan sunset ikonik.',
       },
@@ -461,6 +480,7 @@ export const destinations = {
         category: 'Pantai & Gili',
         rating: '4.9',
         bestTime: '15.30 - 18.30 WITA',
+        image: '/images/destinasi/lombokMerese.jpg',
         description:
           'Perbukitan hijau luas di atas garis pantai berpasir unik menyerupai butiran merica dengan pemandangan teluk biru dan sunset terbaik di Lombok Selatan.',
       },
@@ -471,6 +491,7 @@ export const destinations = {
         category: 'Alam & Gunung',
         rating: '4.9',
         bestTime: '06.00 - 10.30 WITA',
+        image: '/images/destinasi/lombokSembalun.jpg',
         description:
           'Dataran tinggi sejuk di lereng Gunung Rinjani dengan petak kebun warna-warni, jalur pendakian ramah pemula, dan udara pegunungan yang segar.',
       },
@@ -481,6 +502,7 @@ export const destinations = {
         category: 'Alam & Gunung',
         rating: '4.8',
         bestTime: '08.30 - 13.00 WITA',
+        image: '/images/destinasi/lombokSenaru.jpg',
         description:
           'Dua air terjun bertingkat yang tersembunyi di tengah hutan tropis rimbun dengan aliran air dingin langsung dari mata air Gunung Rinjani.',
       },
@@ -491,6 +513,7 @@ export const destinations = {
         category: 'Budaya & Kuliner',
         rating: '4.8',
         bestTime: '09.00 - 16.00 WITA',
+        image: '/images/destinasi/lombokSade.jpg',
         description:
           'Perkampungan tradisional Suku Sasak dengan rumah lumbung beratap alang-alang, proses menenun kain songket tradisional, dan tari peresean.',
       },
@@ -501,6 +524,7 @@ export const destinations = {
         category: 'Budaya & Kuliner',
         rating: '4.7',
         bestTime: '17.00 - 21.00 WITA',
+        image: '/images/destinasi/lombokSenggigi.jpg',
         description:
           'Garis pantai klasik menghadap Gunung Agung Bali saat senja, dilengkapi wisata kuliner khas Lombok seperti Ayam Taliwang, Plecing Kangkung, dan Sate Rembiga.',
       },
