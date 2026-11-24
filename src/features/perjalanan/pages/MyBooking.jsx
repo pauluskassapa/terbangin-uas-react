@@ -28,7 +28,7 @@ function MyBooking() {
   return (
     <main className="journey-page page-wrap">
       <section className="journey-hero"><p>Perjalananmu</p><h1>Atur perjalananmu dengan mudah.</h1><p>Lihat detail pemesanan, cek status penerbangan, dan siapkan perjalananmu sebelum berangkat.</p></section>
-      <section className="journey-section">
+      <section className="journey-section" id="my-booking-search">
         <div className="journey-section-heading"><p>My Booking</p><h2>Cari pemesanan</h2><span>Masukkan kode booking dan email yang digunakan saat pemesanan.</span></div>
         <form className="journey-form" onSubmit={handleSubmit}>
           <label>Kode Booking<input value={code} onChange={(event) => setCode(event.target.value)} placeholder="Contoh: TRB123" required /></label>
@@ -39,11 +39,11 @@ function MyBooking() {
         {result && <article className="journey-booking-card" aria-live="polite">
           <div className="journey-booking-top"><div><span>Kode Booking</span><h3>{result.code}</h3></div><strong className={`journey-status status-${result.status === 'Pembayaran Berhasil' ? 'selesai' : result.status === 'Dibatalkan' ? 'dibatalkan' : 'menunggu'}`}>{result.status}</strong></div>
           <div className="journey-route"><strong>{cityName(result.from)} ({result.from})</strong><span aria-hidden="true">✈</span><strong>{cityName(result.to)} ({result.to})</strong></div>
-          <div className="journey-info"><div><span>Tanggal</span><strong>{journeyDate(result.date)}</strong></div><div><span>Maskapai</span><strong>{result.airline || '-'}</strong></div><div><span>Penumpang</span><strong>{result.passengers?.length || 0} orang</strong></div><div><span>Status perjalanan</span><strong>{result.checkedIn ? 'Sudah Check-in' : 'Siap Berangkat'}</strong></div></div>
-          <div className="journey-actions"><span className="journey-coming-soon">Online Check-in · minggu depan</span><Link className="button journey-secondary" to="/booking-history">Booking History</Link></div>
+          <div className="journey-info"><div><span>Tanggal</span><strong>{journeyDate(result.date)}</strong></div><div><span>Maskapai</span><strong>{result.airline || '-'}</strong></div><div><span>Penumpang</span><strong>{result.passengers?.length || 0} orang</strong></div><div><span>Status perjalanan</span><strong>{result.checkedIn ? 'Sudah Check-in' : 'Siap Berangkat'}</strong></div>{result.checkedIn && <div><span>Kursi</span><strong>{result.passengers.map((passenger) => passenger.seat).join(', ')}</strong></div>}</div>
+          <div className="journey-actions">{result.checkedIn ? <span className="journey-checkin-success">✓ Check-in berhasil</span> : result.status === 'Pembayaran Berhasil' ? <Link className="button button-primary" to={`/online-check-in?code=${encodeURIComponent(result.code)}`}>Online Check-in</Link> : <span className="journey-coming-soon">Selesaikan pembayaran sebelum check-in.</span>}<Link className="button journey-secondary" to="/booking-history">Booking History</Link></div>
         </article>}
       </section>
-      <section className="journey-section"><div className="journey-section-heading"><p>Informasi Perjalanan</p><h2>Siapkan perjalananmu</h2></div><div className="journey-link-grid"><article className="journey-link-disabled"><span>✓</span><h3>Online Check-in</h3><p>Fitur check-in dan pilih kursi akan dikerjakan minggu depan.</p><small>Segera hadir</small></article><Link to="/booking-history"><span>▤</span><h3>Booking History</h3><p>Lihat riwayat pemesanan dan status perjalanan.</p></Link></div></section>
+      <section className="journey-section"><div className="journey-section-heading"><p>Informasi Perjalanan</p><h2>Siapkan perjalananmu</h2></div><div className="journey-link-grid"><Link to="/my-booking#my-booking-search"><span>✓</span><h3>Online Check-in</h3><p>Cari booking yang sudah dibayar untuk memilih kursi dan menyimpan status check-in.</p></Link><Link to="/booking-history"><span>▤</span><h3>Booking History</h3><p>Lihat riwayat pemesanan dan status perjalanan.</p></Link></div></section>
     </main>
   )
 }
