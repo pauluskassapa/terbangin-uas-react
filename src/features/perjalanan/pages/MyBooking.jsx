@@ -1,11 +1,64 @@
 import { useState } from 'react'
 import { Link } from 'react-router'
 import { cityName, completeJourneyCheckIn, getJourneyBookings, journeyDate } from '../data/journeyData.js'
+import '../../penerbangan/pages/FlightSeats.css'
 import './JourneyPages.css'
 
-const seatOptions = Array.from({ length: 18 }, (_, index) => index + 1)
-  .flatMap((row) => ['A', 'B', 'C', 'D', 'E', 'F'].map((column) => `${row}${column}`))
+const seatColumns = ['A', 'B', 'C', 'D', 'E', 'F']
+const seatRows = Array.from({ length: 18 }, (_, index) => index + 1)
 const occupiedSeats = new Set(['1A', '1B', '2F', '3C', '4D', '4E', '5A', '6F', '7B', '7C', '9D', '10A', '10B', '12E', '14F', '15C', '16D', '17A'])
+
+function seatPosition(seat) {
+  if (!seat) return 'Belum dipilih'
+  const column = seat.slice(-1)
+  return column === 'A' || column === 'F' ? 'Jendela' : column === 'C' || column === 'D' ? 'Dekat lorong' : 'Tengah'
+}
+
+function CheckInSeatPicker({ passengers, selectedSeats, onSeatClick, onClear, onSubmit }) {
+  const selectedCount = selectedSeats.filter(Boolean).length
+
+  return (
+    <form className="seat-layout" onSubmit={onSubmit}>
+      <section className="seat-map-panel" aria-label="Denah kursi pesawat">
+        <div className="seat-legend"><span><i />Tersedia</span><span><i className="chosen" />Pilihanmu</span><span><i className="taken" />Terpesan (demo)</span></div>
+        <p className="seat-map-hint">Klik kursi untuk memilih atau membatalkan pilihan. A/F: jendela · B/E: tengah · C/D: dekat lorong.</p>
+        <div className="seat-selection-strip" aria-label="Pilihan kursi per penumpang">
+          {passengers.map((passenger, index) => <span key={`${passenger.name}-${index}`} className={selectedSeats[index] ? 'filled' : ''}>P{index + 1}<strong>{selectedSeats[index] || '—'}</strong>{selectedSeats[index] && <small>{seatPosition(selectedSeats[index])}</small>}</span>)}
+        </div>
+        <div className="seat-aircraft-area">
+          <div className="seat-aircraft">
+            <p className="seat-front">Depan Pesawat</p>
+            <div className="seat-column-labels" aria-hidden="true">{seatColumns.map((column) => <span key={column}>{column}</span>)}</div>
+            <div className="seat-rows">
+              {seatRows.map((row) => <div className="seat-row" key={row}>
+                {seatColumns.map((column) => {
+                  const seat = `${row}${column}`
+                  const taken = occupiedSeats.has(seat)
+                  const passengerIndex = selectedSeats.indexOf(seat)
+                  const chosen = passengerIndex >= 0
+                  return <button key={seat} type="button" className={`seat-chair${chosen ? ' chosen' : ''}`} disabled={taken} aria-pressed={chosen} aria-label={`Kursi ${seat}${chosen ? `, penumpang ${passengerIndex + 1}` : ''}${taken ? ', terpesan dalam demo' : ''}`} onClick={() => onSeatClick(seat)}>{seat}{chosen && <span className="seat-passenger-badge" aria-hidden="true">{passengerIndex + 1}</span>}</button>
+                })}
+                <span className="seat-row-number" aria-hidden="true">{row}</span>
+              </div>)}
+            </div>
+            <div className="seat-rear" aria-hidden="true">Belakang pesawat</div>
+          </div>
+        </div>
+      </section>
+      <aside className="seat-summary" aria-labelledby="checkin-seat-summary-title">
+        <div className="seat-summary-heading"><h2 id="checkin-seat-summary-title">Kursi pilihanmu</h2><p role="status" aria-live="polite">{selectedCount} dari {passengers.length} kursi dipilih</p></div>
+        <div className="seat-summary-body">
+          <ol className="seat-passengers">{passengers.map((passenger, index) => <li key={`${passenger.name}-${index}`}><span>Penumpang {index + 1}<br /><small>{passenger.name || 'Tanpa nama'}</small></span><span className="seat-passenger-choice"><strong>{selectedSeats[index] || 'Belum dipilih'}</strong>{selectedSeats[index] && <small>{seatPosition(selectedSeats[index])}</small>}</span></li>)}</ol>
+          {selectedCount > 0 && <button className="seat-clear" type="button" onClick={onClear}>Hapus pilihan kursi</button>}
+          <p className="seat-feedback" role="status" aria-live="polite">{selectedCount < passengers.length ? `Pilih ${passengers.length - selectedCount} kursi lagi untuk melanjutkan.` : 'Pilihan lengkap. Kamu bisa menyelesaikan check-in.'}</p>
+          <div className="seat-total"><span>Biaya pilih kursi</span><strong>Gratis</strong><small>Kursi demo tidak menambah biaya tiket.</small></div>
+          <button className="button button-primary seat-continue" type="submit" disabled={selectedCount !== passengers.length}>Konfirmasi Check-in →</button>
+          <p className="seat-demo-note">Denah dan kursi terpesan merupakan contoh untuk demo.</p>
+        </div>
+      </aside>
+    </form>
+  )
+}
 
 function MyBooking() {
   const [code, setCode] = useState('')
@@ -44,6 +97,23 @@ function MyBooking() {
     setMessage('Check-in berhasil. Kursi dan status perjalanan sudah disimpan.')
   }
 
+  function handleSeatClick(seat) {
+    if (occupiedSeats.has(seat)) return
+    if (!selectedSeats.includes(seat) && !selectedSeats.includes('')) {
+      setMessage(`Sudah memilih ${selectedSeats.length} kursi. Klik kursi pilihanmu untuk melepasnya sebelum memilih kursi lain.`)
+      return
+    }
+    setSelectedSeats((current) => {
+      if (current.includes(seat)) return current.map((selected) => selected === seat ? '' : selected)
+      const next = [...current]
+      const emptyIndex = next.indexOf('')
+      if (emptyIndex < 0) return current
+      next[emptyIndex] = seat
+      return next
+    })
+    setMessage('')
+  }
+
   return (
     <main className="journey-page page-wrap">
       <section className="journey-hero"><p>Perjalananmu</p><h1>Atur perjalananmu dengan mudah.</h1><p>Lihat detail pemesanan, cek status penerbangan, dan siapkan perjalananmu sebelum berangkat.</p></section>
@@ -64,15 +134,7 @@ function MyBooking() {
 
         {result && result.status === 'Pembayaran Berhasil' && !result.checkedIn && <section className="journey-checkin" aria-labelledby="journey-checkin-title">
           <div className="journey-section-heading"><p>Online Check-in</p><h2 id="journey-checkin-title">Pilih kursi penumpang</h2><span>Pilih satu kursi berbeda untuk setiap penumpang. Kursi abu-abu sudah terisi pada demo.</span></div>
-          <form className="journey-checkin-form" onSubmit={handleCheckIn}>
-            {(result.passengers || []).map((passenger, index) => <label key={`${passenger.name}-${index}`}>Penumpang {index + 1} · {passenger.name || 'Tanpa nama'}
-              <select required value={selectedSeats[index] || ''} onChange={(event) => setSelectedSeats((current) => current.map((seat, seatIndex) => seatIndex === index ? event.target.value : seat))}>
-                <option value="">Pilih kursi</option>
-                {seatOptions.map((seat) => <option key={seat} value={seat} disabled={occupiedSeats.has(seat) || selectedSeats.some((selected, selectedIndex) => selectedIndex !== index && selected === seat)}>{seat}{occupiedSeats.has(seat) ? ' · Terisi' : ''}</option>)}
-              </select>
-            </label>)}
-            <button className="button button-primary" type="submit">Konfirmasi Check-in</button>
-          </form>
+          <CheckInSeatPicker passengers={result.passengers || []} selectedSeats={selectedSeats} onSeatClick={handleSeatClick} onClear={() => setSelectedSeats((result.passengers || []).map(() => ''))} onSubmit={handleCheckIn} />
         </section>}
       </section>
       <section className="journey-section"><div className="journey-section-heading"><p>Informasi Perjalanan</p><h2>Siapkan perjalananmu</h2></div><div className="journey-link-grid"><Link to="/my-booking#my-booking-search"><span>✓</span><h3>Online Check-in</h3><p>Cari booking yang sudah dibayar untuk memilih kursi dan menyimpan status check-in.</p></Link><Link to="/booking-history"><span>▤</span><h3>Booking History</h3><p>Lihat riwayat pemesanan dan status perjalanan.</p></Link></div></section>

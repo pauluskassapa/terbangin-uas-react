@@ -12,16 +12,10 @@
 .seat-legend i.taken { background: #687985; border-color: #52616b; }
 .seat-map-hint { max-width: 430px; margin: 4px auto 0; padding-inline: 16px; color: #52697a; font-size: 12px; line-height: 1.7; text-align: center; }
 .seat-aircraft-area { position: relative; padding: 28px 16px 40px; }
-.seat-aircraft { position: relative; z-index: 1; width: min(100%, 390px); margin-inline: auto; padding: 54px 22px 40px; border: 2px solid #b8c2c9; border-radius: 48% 48% 26% 26% / 135px 135px 90px 90px; background: linear-gradient(90deg, #cbd2d7, #edf0f2 8%, #e6eaed 50%, #edf0f2 92%, #cbd2d7); box-shadow: 0 14px 25px rgb(24 50 75 / 10%); }
-.seat-cockpit { display: flex; justify-content: center; gap: 6px; margin: 0 auto 24px; }
-.seat-cockpit i { width: 42px; height: 22px; border-radius: 18px 6px 6px 4px; background: #52697a; transform: rotate(-12deg); }
-.seat-cockpit i:last-child { transform: rotate(12deg); border-radius: 6px 18px 4px 6px; }
+.seat-aircraft { position: relative; z-index: 1; width: min(100%, 390px); margin-inline: auto; padding: 54px 22px 40px; border: 2px solid #b8c2c9; border-radius: 48% 48% 26% 26% / 135px 135px 90px 90px; background: #edf0f2; box-shadow: none; }
 .seat-front, .seat-rear { text-align: center; color: #52616b; font-size: 12px; }
-.seat-front { margin-bottom: 22px; }
+.seat-front { margin-bottom: 22px; text-align: center; font-size: 16px; font-weight: 700; }
 .seat-rear { margin-top: 28px; padding-top: 18px; border-top: 1px solid #c1cbd2; }
-.seat-wing { position: absolute; top: 38%; width: 30%; height: 240px; background: #bfc9d1; }
-.seat-wing-left { left: 0; clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 80%); }
-.seat-wing-right { right: 0; clip-path: polygon(0 0, 100% 80%, 100% 100%, 0 100%); }
 .seat-row, .seat-column-labels { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)) 24px repeat(3, minmax(0, 1fr)); gap: 6px; align-items: center; }
 .seat-column-labels { margin-bottom: 12px; text-align: center; font-size: 12px; font-weight: 700; color: #52697a; }
 .seat-column-labels > span:nth-child(4), .seat-row > button:nth-child(4) { grid-column: 5; }
