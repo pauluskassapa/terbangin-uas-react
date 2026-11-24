@@ -204,6 +204,14 @@ function DestinationContent({ destination }) {
                 </Link>
               )
             })}
+            <Link
+              to="/destinasi/tersimpan"
+              className="destination-switcher-item is-saved-link"
+            >
+              <span className="destination-switcher-text">
+                <strong>♥ Tersimpan</strong>
+              </span>
+            </Link>
           </div>
         </div>
       </nav>

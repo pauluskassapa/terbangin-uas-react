@@ -16,6 +16,7 @@ import Booking from './features/pemesanan/pages/Booking.jsx'
 import Payment from './features/pemesanan/pages/Payment.jsx'
 import PaymentSuccess from './features/pemesanan/pages/PaymentSuccess.jsx'
 import Destination from './features/destinasi/pages/Destination.jsx'
+import SavedSpots from './features/destinasi/pages/SavedSpots.jsx'
 import Faq from './features/bantuan/pages/Faq.jsx'
 import './App.css'
 
@@ -50,6 +51,7 @@ function App() {
         <Route path="/my-booking" element={<MyBooking />} />
         <Route path="/booking-history" element={<BookingHistory />} />
         <Route path="/destinasi" element={<Destination />} />
+        <Route path="/destinasi/tersimpan" element={<SavedSpots />} />
         <Route path="/destinasi/:code" element={<Destination />} />
         <Route path="/faq" element={<Faq />} />
         <Route path="*" element={<RoutePlaceholder title="Halaman tidak ditemukan" />} />

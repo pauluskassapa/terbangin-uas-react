@@ -64,6 +64,25 @@
   box-shadow: 0 6px 18px rgba(8, 127, 140, 0.22);
 }
 
+.destination-switcher-item.is-saved-link {
+  padding: 9px 15px;
+  border-color: #fecdd3;
+  background: #fff1f2;
+  color: #e11d48;
+}
+
+.destination-switcher-item.is-saved-link:hover {
+  border-color: #fda4af;
+  background: #ffe4e6;
+}
+
+.destination-switcher-item.is-saved-link.is-active {
+  border-color: #e11d48;
+  background: #e11d48;
+  color: #ffffff;
+  box-shadow: 0 6px 18px rgba(225, 29, 72, 0.22);
+}
+
 .destination-switcher-item img {
   width: 30px;
   height: 30px;
