@@ -1,10 +1,36 @@
+import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router'
 import { formatRupiah } from '../../../data/penerbangan.js'
+import { getJourneyBookings, saveJourneyBookings } from '../../perjalanan/data/journeyData.js'
 import './PaymentSuccess.css'
 
 function PaymentSuccess() {
     const location = useLocation()
     const payment = location.state?.payment
+    const [bookingCode] = useState(() => `TRB${Date.now().toString().slice(-7)}`)
+
+    useEffect(() => {
+        if (!payment?.booking) return
+        const bookings = getJourneyBookings()
+        if (bookings.some((item) => item.code === bookingCode)) return
+        const { booking } = payment
+        saveJourneyBookings([{
+            code: bookingCode,
+            status: 'Pembayaran Berhasil',
+            createdAt: payment.paymentDate,
+            paidAt: payment.paymentDate,
+            date: booking.date,
+            from: booking.from.code,
+            to: booking.to.code,
+            airline: booking.flight.airline,
+            flightNumber: booking.flight.number,
+            email: booking.contact.email,
+            phone: booking.contact.phone,
+            passengers: booking.passengers,
+            total: payment.grandTotal,
+            checkedIn: false,
+        }, ...bookings])
+    }, [payment, bookingCode])
 
     if (!payment?.booking) {
         return (
@@ -69,6 +95,11 @@ function PaymentSuccess() {
                     <span className="success-label">STATUS PEMBAYARAN</span>
                     <h2>Pembayaran Berhasil</h2>
                 </div>
+
+            <div className="success-detail-item success-booking-code">
+                <span>Kode Booking · simpan untuk check-in</span>
+                <strong>{bookingCode}</strong>
+            </div>
 
                 <span className="success-status">Berhasil</span>
             </div>
@@ -154,8 +185,8 @@ function PaymentSuccess() {
         </section>
 
         <div className="success-actions">
-            <Link to="/my-ticket" className="button button-primary">
-            Lihat Tiket Saya
+            <Link to="/my-booking" className="button button-primary">
+            Buka My Booking
             </Link>
 
             <Link to="/" className="button success-home-button">

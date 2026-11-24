@@ -13,23 +13,29 @@
 .home-booking-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 24px; }
 .home-booking-heading h2, .home-route-heading h2 { margin: 0; font: 700 23px 'Manrope', sans-serif; letter-spacing: -.6px; }
 .home-booking-heading > span { padding: 8px 12px; border-radius: 20px; background: #dff4f1; color: var(--teal-dark); font-size: 12px; }
-.home-flight-form { display: grid; grid-template-columns: minmax(0, 1fr) 32px minmax(0, 1fr) minmax(165px, .9fr) 128px; gap: 10px; align-items: end; }
+.home-flight-form { display: grid; grid-template-columns: minmax(0, 2fr) minmax(170px, 1fr) 154px; gap: 16px; align-items: start; }
+.home-airports { display: grid; grid-template-columns: minmax(0, 1fr) 44px minmax(0, 1fr); gap: 8px; padding: 12px; border: 1px solid #d4e4e8; border-radius: 16px; background: #f5f8fc; }
+.home-airports .home-input-group select { background: white; }
+.home-airport-code { color: var(--teal-dark); font-size: 11px; background: #dff4f1; border-radius: 6px; padding: 3px 5px; }
 .home-input-group { min-width: 0; display: grid; gap: 9px; }
-.home-input-group > span { font-size: 13px; font-weight: 600; }
+.home-input-group > span { display: flex; align-items: center; justify-content: space-between; min-height: 22px; gap: 4px; font-size: 13px; font-weight: 600; }
 .home-input-group select, .home-input-group input { width: 100%; min-width: 0; min-height: 50px; padding: 10px; border: 1px solid #cbd8e0; border-radius: 12px; color: var(--ink); background: #f5f8fc; font-size: 14px; }
 .home-input-group select { cursor: pointer; }
-.home-swap { height: 36px; margin-bottom: 7px; padding: 0; border: 1px solid var(--line); border-radius: 50%; background: white; color: var(--teal); font-size: 22px; cursor: pointer; }
+.home-swap { height: 44px; width: 44px; align-self: start; margin-top: 34px; padding: 0; border: 1px solid var(--line); border-radius: 50%; background: white; color: var(--teal); font-size: 22px; cursor: pointer; }
 .home-swap:hover { background: #dff4f1; }
-.home-flight-form .passenger-picker { padding: 0; border: 0; border-radius: 0; background: transparent; }
-.home-flight-form .passenger-label { margin-bottom: 9px; color: var(--ink); font-size: 13px; font-weight: 600; letter-spacing: 0; text-transform: lowercase; }
+.home-flight-form .passenger-picker { padding: 13px 0 0; border: 0; border-radius: 0; background: transparent; }
+.home-flight-form .passenger-label { min-height: 22px; margin-bottom: 9px; color: var(--ink); font-size: 13px; font-weight: 600; letter-spacing: 0; text-transform: lowercase; }
 .home-flight-form .passenger-label::first-letter { text-transform: uppercase; }
 .home-flight-form .passenger-controls { min-height: 50px; padding: 6px; border: 1px solid #cbd8e0; border-radius: 12px; background: #f5f8fc; gap: 4px; }
-.home-flight-form .passenger-controls button { width: 30px; height: 32px; border: 0; border-radius: 8px; background: white; font-size: 20px; }
+.home-flight-form .passenger-controls button { width: 44px; height: 44px; border: 0; border-radius: 8px; background: white; font-size: 20px; }
 .home-flight-form .passenger-controls output { font-size: 15px; }
 .home-form-bottom { grid-column: 1 / -1; display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-top: 12px; }
 .home-form-bottom p { margin: 0; color: #52697a; font-size: 13px; line-height: 1.5; }
 .home-find-button { min-height: 48px; padding-inline: 26px; border-radius: 12px; font-size: 14px; cursor: pointer; }
-.home-booking .form-error { font-size: 14px; }
+.home-date { padding-top: 13px; }
+.home-field-error { margin: 0; color: #a12d36; font-size: 12px; line-height: 1.6; font-weight: 400; }
+.home-airports .home-field-error { grid-column: 1 / -1; }
+.home-input-group [aria-invalid="true"] { border-color: #a12d36; }
 .home-route-options { padding-top: 48px; }
 .home-route-heading p { margin: 10px 0 24px; color: #52697a; font-size: 14px; }
 .home-destination-list { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
@@ -46,8 +52,8 @@
 .home-destination-action { display: flex; align-items: center; gap: 12px; padding-top: 20px; margin-top: auto; color: var(--teal); font-size: 12px; font-weight: 600; }
 .home-page :is(a, button, input, select):focus-visible { outline: 3px solid var(--teal); outline-offset: 3px; }
 @media (max-width: 1000px) {
-  .home-flight-form { grid-template-columns: minmax(0, 1fr) 36px minmax(0, 1fr); }
-  .home-date { grid-column: 1 / 3; }
+  .home-flight-form { grid-template-columns: minmax(0, 1fr) 154px; }
+  .home-airports { grid-column: 1 / -1; }
   .home-destination-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .home-destination-image { aspect-ratio: 1.8; }
 }
@@ -63,8 +69,12 @@
   .home-booking { width: calc(100% - 48px); margin-top: -24px; padding: 22px 16px; border-radius: 18px; }
   .home-booking-heading { flex-direction: column; align-items: flex-start; gap: 10px; }
   .home-flight-form { grid-template-columns: minmax(0, 1fr); gap: 12px; }
-  .home-date { grid-column: auto; }
-  .home-swap { justify-self: end; width: 36px; margin: -6px 4px -30px 0; position: relative; z-index: 1; }
+  .home-date { padding-top: 0; }
+  .home-airports { grid-template-columns: minmax(0, 1fr) 44px; gap: 16px 8px; }
+  .home-airports .home-input-group { grid-column: 1; }
+  .home-swap { grid-column: 2; grid-row: 1 / 3; align-self: center; margin: 0; transform: rotate(90deg); }
+  .home-flight-form .passenger-picker { padding-top: 0; }
+  .home-input-group select, .home-input-group input { font-size: 16px; }
   .home-form-bottom { flex-direction: column; align-items: stretch; margin-top: 6px; }
   .home-route-options { padding-top: 36px; }
   .home-destination-list { gap: 12px; }

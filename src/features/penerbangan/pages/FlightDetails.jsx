@@ -31,8 +31,7 @@ function FlightDetails() {
     : 'Tanggal perjalanan'
   const totalPrice = flight.price * passengers
   const bookingParams = new URLSearchParams({ flightId: flight.id, from: from.code, to: to.code, date: date || '', passengers: String(passengers) })
-
-  const seatUrl = `/penerbangan/${flight.id}/kursi?${bookingParams.toString()}`
+  const bookingUrl = `/booking?${bookingParams.toString()}`
 
   return (
     <main className="flight-detail-page page-wrap">
@@ -87,14 +86,14 @@ function FlightDetails() {
             </dl>
             <p className="detail-price-calculation">{formatRupiah(flight.price)} × {passengers} penumpang</p>
             <div className="detail-total"><span>Total untuk {passengers} penumpang</span><strong>{formatRupiah(totalPrice)}</strong></div>
-            <Link className="button button-primary detail-book-button" to={seatUrl}>Pilih kursi <span aria-hidden="true">→</span></Link>
-            <p className="detail-next-step">Pilih tempat duduk sebelum mengisi data pemesanan.</p>
+            <Link className="button button-primary detail-book-button" to={bookingUrl}>Lanjutkan pemesanan <span aria-hidden="true">→</span></Link>
+            <p className="detail-next-step">Lengkapi data dan pembayaran. Pilih kursi saat online check-in.</p>
           </div>
         </aside>
       </div>
       <div className="detail-mobile-action">
         <div><span>Total · {passengers} penumpang</span><strong>{formatRupiah(totalPrice)}</strong></div>
-        <Link className="button button-primary" to={seatUrl}>Pilih kursi <span aria-hidden="true">→</span></Link>
+        <Link className="button button-primary" to={bookingUrl}>Lanjutkan pemesanan <span aria-hidden="true">→</span></Link>
       </div>
       <p className="detail-demo-note">Jadwal dan harga menggunakan data contoh.</p>
     </main>
