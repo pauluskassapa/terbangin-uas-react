@@ -41,7 +41,7 @@ function CheckInSeatPicker({ passengers, selectedSeats, onSeatClick, onClear, on
                 <span className="seat-row-number" aria-hidden="true">{row}</span>
               </div>)}
             </div>
-            <div className="seat-rear" aria-hidden="true">Belakang pesawat</div>
+            <div className="seat-rear" aria-hidden="true">Belakang Pesawat</div>
           </div>
         </div>
       </section>

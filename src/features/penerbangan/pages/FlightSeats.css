@@ -13,8 +13,8 @@
 .seat-map-hint { max-width: 430px; margin: 4px auto 0; padding-inline: 16px; color: #52697a; font-size: 12px; line-height: 1.7; text-align: center; }
 .seat-aircraft-area { position: relative; padding: 28px 16px 40px; }
 .seat-aircraft { position: relative; z-index: 1; width: min(100%, 390px); margin-inline: auto; padding: 54px 22px 40px; border: 2px solid #b8c2c9; border-radius: 48% 48% 26% 26% / 135px 135px 90px 90px; background: #edf0f2; box-shadow: none; }
-.seat-front, .seat-rear { text-align: center; color: #52616b; font-size: 12px; }
-.seat-front { margin-bottom: 22px; text-align: center; font-size: 16px; font-weight: 700; }
+.seat-front, .seat-rear { text-align: center; color: #52616b; font-size: 16px; font-weight: 700; }
+.seat-front { margin-bottom: 22px; }
 .seat-rear { margin-top: 28px; padding-top: 18px; border-top: 1px solid #c1cbd2; }
 .seat-row, .seat-column-labels { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)) 24px repeat(3, minmax(0, 1fr)); gap: 6px; align-items: center; }
 .seat-column-labels { margin-bottom: 12px; text-align: center; font-size: 12px; font-weight: 700; color: #52697a; }
