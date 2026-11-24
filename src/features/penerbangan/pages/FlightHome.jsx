@@ -48,10 +48,8 @@ function FlightHome() {
     setError('')
   }
 
-  function selectDestination(code) {
-    setTo(code)
-    setError('')
-    document.getElementById('flight-search')?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    function selectDestination(code) {
+    navigate(`/destinasi/${code}`)
   }
 
   return (

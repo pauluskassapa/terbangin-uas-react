@@ -21,6 +21,7 @@ function SiteHeader() {
           <NavLink to="/penerbangan">Cari Penerbangan</NavLink>
           <NavLink to="/my-booking">My Booking</NavLink>
           <NavLink to="/booking-history">Booking History</NavLink>
+          <NavLink to="/destinasi">Destinasi</NavLink>
           <NavLink to="/faq">FAQ</NavLink>
         </nav>
         {user ? (
