@@ -1,7 +1,19 @@
 import { useState } from 'react'
 
-function DestinationSpotCard({ spot, index, fallbackImage }) {
+function DestinationSpotCard({
+  spot,
+  index,
+  fallbackImage,
+  isSaved = false,
+  isSaving = false,
+  onToggleSave,
+}) {
   const [isOpen, setIsOpen] = useState(false)
+
+  function handleSaveClick(event) {
+    event.stopPropagation()
+    onToggleSave?.(spot)
+  }
 
   return (
     <article
@@ -54,6 +66,18 @@ function DestinationSpotCard({ spot, index, fallbackImage }) {
 
         <div className="destination-spot-footer">
           <span>🕒 Waktu terbaik: <strong>{spot.bestTime}</strong></span>
+          {onToggleSave && (
+            <button
+              type="button"
+              className={`destination-spot-save-btn${isSaved ? ' is-saved' : ''}`}
+              aria-pressed={isSaved}
+              disabled={isSaving}
+              onClick={handleSaveClick}
+              onKeyDown={(event) => event.stopPropagation()}
+            >
+              {isSaving ? 'Menyimpan...' : isSaved ? '♥ Tersimpan' : '♡ Simpan'}
+            </button>
+          )}
         </div>
       </div>
     </article>

@@ -1,11 +1,34 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router'
 import { airports, formatRupiah } from '../../../data/penerbangan.js'
+import { supabase } from '../../../lib/supabaseClient.js'
 import DestinationSpotCard from '../components/DestinationSpotCard.jsx'
 import { defaultDestinationCode, destinations } from '../data/destinationData.js'
 import './Destination.css'
 
 const destinationList = Object.values(destinations)
+const SAVED_SPOTS_STORAGE_KEY = 'terbangin_saved_spots'
+const SAVED_FILTER_KEY = '__SAVED__'
+
+function readLocalSavedSpots(destinationCode) {
+  try {
+    const raw = JSON.parse(localStorage.getItem(SAVED_SPOTS_STORAGE_KEY) || '{}')
+    const ids = raw?.[destinationCode]
+    return Array.isArray(ids) ? new Set(ids) : new Set()
+  } catch {
+    return new Set()
+  }
+}
+
+function writeLocalSavedSpots(destinationCode, spotIdSet) {
+  try {
+    const raw = JSON.parse(localStorage.getItem(SAVED_SPOTS_STORAGE_KEY) || '{}')
+    raw[destinationCode] = Array.from(spotIdSet)
+    localStorage.setItem(SAVED_SPOTS_STORAGE_KEY, JSON.stringify(raw))
+  } catch {
+    // Abaikan jika storage browser tidak tersedia
+  }
+}
 
 function getTodayDate() {
   const today = new Date()
@@ -39,12 +62,104 @@ function DestinationContent({ destination }) {
   )
   const [searchQuery, setSearchQuery] = useState('')
   const [activePhoto, setActivePhoto] = useState(null)
+  const [savedSpotIds, setSavedSpotIds] = useState(() =>
+    supabase ? new Set() : readLocalSavedSpots(destination.code)
+  )
+  const [savingSpotId, setSavingSpotId] = useState(null)
+  const [saveError, setSaveError] = useState('')
+
+  useEffect(() => {
+    if (!supabase) return
+
+    let isCancelled = false
+
+    async function loadSavedSpots() {
+      const { data, error } = await supabase
+        .from('saved_spots')
+        .select('spot_id')
+        .eq('destination_code', destination.code)
+
+      if (isCancelled) return
+
+      if (error) {
+        setSaveError('Gagal memuat spot tersimpan dari Supabase.')
+        return
+      }
+
+      setSavedSpotIds(new Set((data || []).map((row) => row.spot_id)))
+      setSaveError('')
+    }
+
+    loadSavedSpots()
+
+    return () => {
+      isCancelled = true
+    }
+  }, [destination.code])
+
+  async function handleToggleSaveSpot(spot) {
+    if (savingSpotId === spot.id) return
+
+    const alreadySaved = savedSpotIds.has(spot.id)
+    setSaveError('')
+
+    if (!supabase) {
+      setSavedSpotIds((prev) => {
+        const next = new Set(prev)
+        if (alreadySaved) next.delete(spot.id)
+        else next.add(spot.id)
+        writeLocalSavedSpots(destination.code, next)
+        return next
+      })
+      return
+    }
+
+    setSavingSpotId(spot.id)
+    try {
+      if (alreadySaved) {
+        const { error } = await supabase
+          .from('saved_spots')
+          .delete()
+          .eq('destination_code', destination.code)
+          .eq('spot_id', spot.id)
+
+        if (error) throw error
+
+        setSavedSpotIds((prev) => {
+          const next = new Set(prev)
+          next.delete(spot.id)
+          return next
+        })
+      } else {
+        const { error } = await supabase.from('saved_spots').insert({
+          destination_code: destination.code,
+          spot_id: spot.id,
+          spot_name: spot.name,
+        })
+
+        if (error) throw error
+
+        setSavedSpotIds((prev) => {
+          const next = new Set(prev)
+          next.add(spot.id)
+          return next
+        })
+      }
+    } catch {
+      setSaveError('Gagal menyimpan perubahan ke Supabase. Cek koneksi atau policy tabel saved_spots.')
+    } finally {
+      setSavingSpotId(null)
+    }
+  }
 
   const filteredSpots = useMemo(() => {
     const query = searchQuery.trim().toLowerCase()
     return destination.spots.filter((spot) => {
       const matchesCategory =
-        selectedCategory === 'Semua' || spot.category === selectedCategory
+        selectedCategory === 'Semua' ||
+        (selectedCategory === SAVED_FILTER_KEY
+          ? savedSpotIds.has(spot.id)
+          : spot.category === selectedCategory)
       const matchesSearch =
         !query ||
         spot.name.toLowerCase().includes(query) ||
@@ -52,7 +167,7 @@ function DestinationContent({ destination }) {
         spot.description.toLowerCase().includes(query)
       return matchesCategory && matchesSearch
     })
-  }, [destination.spots, selectedCategory, searchQuery])
+  }, [destination.spots, selectedCategory, searchQuery, savedSpotIds])
 
   const searchHint = destination.spots[0]?.area?.split('·')[0]?.trim() || destination.city
 
@@ -270,6 +385,19 @@ function DestinationContent({ destination }) {
                 {category}
               </button>
             ))}
+            <button
+              type="button"
+              role="tab"
+              aria-selected={selectedCategory === SAVED_FILTER_KEY}
+              className={
+                selectedCategory === SAVED_FILTER_KEY
+                  ? 'destination-category-btn is-saved-tab active'
+                  : 'destination-category-btn is-saved-tab'
+              }
+              onClick={() => setSelectedCategory(SAVED_FILTER_KEY)}
+            >
+              ♥ Tersimpan ({savedSpotIds.size})
+            </button>
           </div>
 
           <div className="destination-search-control">
@@ -284,6 +412,12 @@ function DestinationContent({ destination }) {
           </div>
         </div>
 
+        {saveError && (
+          <p className="destination-save-error" role="alert">
+            {saveError}
+          </p>
+        )}
+
         <div className="destination-layout">
           <div>
             {filteredSpots.length > 0 ? (
@@ -294,6 +428,9 @@ function DestinationContent({ destination }) {
                     spot={spot}
                     index={index}
                     fallbackImage={destination.heroImage}
+                    isSaved={savedSpotIds.has(spot.id)}
+                    isSaving={savingSpotId === spot.id}
+                    onToggleSave={handleToggleSaveSpot}
                   />
                 ))}
               </div>
