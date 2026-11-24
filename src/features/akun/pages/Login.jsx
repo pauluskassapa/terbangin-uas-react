@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link, Navigate, useNavigate } from 'react-router'
-import { useAuth } from '../context/AuthContext.jsx'
+import { useAuth } from '../context/useAuth.js'
 import './AccountPages.css'
 
 function Login() {
@@ -33,6 +33,7 @@ function Login() {
           <form className="account-form" onSubmit={handleSubmit}>
             <label className="register-field"><span>Email</span><input name="email" type="email" placeholder="nama@email.com" autoComplete="email" required /></label>
             <label className="register-field"><span>Kata sandi</span><span className="register-password-wrap"><input name="password" type={showPassword ? 'text' : 'password'} placeholder="Masukkan kata sandi" autoComplete="current-password" required /><button type="button" className="password-toggle" onClick={() => setShowPassword((value) => !value)}>{showPassword ? 'Sembunyikan' : 'Tampilkan'}</button></span></label>
+            <Link className="forgot-password-link" to="/forgot-password">Lupa kata sandi?</Link>
             {error && <p className="register-error" role="alert">{error}</p>}
             <button className="button button-primary account-submit" type="submit">Masuk <span aria-hidden="true">→</span></button>
           </form>

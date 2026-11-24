@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { Link, useNavigate, useSearchParams } from 'react-router'
 import PassengerPicker from '../components/PassengerPicker.jsx'
 import { airports, flights, formatRupiah, getPassengerCount } from '../../../data/penerbangan.js'
@@ -27,16 +27,28 @@ function getValidDate(value) {
   return normalized === value ? value : ''
 }
 
+function getLocalDate(value) {
+  const year = value.getFullYear()
+  const month = String(value.getMonth() + 1).padStart(2, '0')
+  const day = String(value.getDate()).padStart(2, '0')
+  return `${year}-${month}-${day}`
+}
+
 function FlightSearch() {
   const [searchParams] = useSearchParams()
+  const queryString = searchParams.toString()
+  return <FlightSearchContent key={queryString} queryString={queryString} />
+}
+
+function FlightSearchContent({ queryString }) {
   const navigate = useNavigate()
+  const [today] = useState(() => getLocalDate(new Date()))
   const [airlineFilter, setAirlineFilter] = useState('Semua')
   const [timeFilters, setTimeFilters] = useState([])
   const [maxPrice, setMaxPrice] = useState(highestFlightPrice)
   const [sort, setSort] = useState('recommended')
   const [filtersOpen, setFiltersOpen] = useState(false)
   const activeFilterCount = Number(airlineFilter !== 'Semua') + timeFilters.length + Number(maxPrice < highestFlightPrice)
-  const queryString = searchParams.toString()
   const query = new URLSearchParams(queryString)
   const searchedFrom = getAirportCode(query.get('from'), 'CGK')
   const searchedTo = getAirportCode(query.get('to'), 'DPS')
@@ -50,15 +62,6 @@ function FlightSearch() {
   const origin = airports.find((airport) => airport.code === searchedFrom)
   const destination = airports.find((airport) => airport.code === searchedTo)
   const airlines = ['Semua', ...new Set(flights.map((flight) => flight.airline))]
-
-  useEffect(() => {
-    const params = new URLSearchParams(queryString)
-    setFrom(getAirportCode(params.get('from'), 'CGK'))
-    setTo(getAirportCode(params.get('to'), 'DPS'))
-    setDate(getValidDate(params.get('date')))
-    setPassengers(getPassengerCount(params.get('passengers')))
-    setFormError('')
-  }, [queryString])
 
   function handleSearch(event) {
     event.preventDefault()
@@ -81,12 +84,6 @@ function FlightSearch() {
     setFormError('')
   }
 
-  function getLocalDate(value) {
-    const year = value.getFullYear()
-    const month = String(value.getMonth() + 1).padStart(2, '0')
-    const day = String(value.getDate()).padStart(2, '0')
-    return `${year}-${month}-${day}`
-  }
   function toggleTimeFilter(periodId) {
     setTimeFilters((currentFilters) => currentFilters.includes(periodId)
       ? currentFilters.filter((filter) => filter !== periodId)
@@ -140,7 +137,7 @@ function FlightSearch() {
         <label className="results-search-field"><span>Berangkat dari</span><select value={from} onChange={(event) => setFrom(event.target.value)} aria-label="Kota asal">{airports.map((airport) => <option key={airport.code} value={airport.code}>{airport.city} ({airport.code})</option>)}</select></label>
         <button className="results-swap-button" type="button" onClick={swapAirports} aria-label="Tukar kota asal dan tujuan">⇄</button>
         <label className="results-search-field"><span>Tujuan</span><select value={to} onChange={(event) => setTo(event.target.value)} aria-label="Kota tujuan">{airports.map((airport) => <option key={airport.code} value={airport.code}>{airport.city} ({airport.code})</option>)}</select></label>
-        <label className="results-search-field results-date-field"><span>Tanggal pergi</span><input type="date" min={getLocalDate(new Date())} value={date} onChange={(event) => setDate(event.target.value)} required /></label>
+        <label className="results-search-field results-date-field"><span>Tanggal pergi</span><input type="date" min={today} value={date} onChange={(event) => setDate(event.target.value)} required /></label>
         <PassengerPicker value={passengers} onChange={setPassengers} />
         <button className="button button-primary results-search-button" type="submit">Cari lagi <span>→</span></button>
         {formError && <p className="form-error results-form-error" role="alert">{formError}</p>}

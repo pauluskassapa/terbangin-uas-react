@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router'
-import { useAuth } from '../context/AuthContext.jsx'
+import { useAuth } from '../context/useAuth.js'
 import './Register.css'
 
 function Register() {
@@ -71,9 +71,10 @@ function Register() {
                 <label className="register-field">
                   <span>Kata sandi</span>
                   <span className="register-password-wrap">
-                    <input name="password" type={showPassword ? 'text' : 'password'} placeholder="Minimal 8 karakter" autoComplete="new-password" minLength="8" required />
+                    <input name="password" type={showPassword ? 'text' : 'password'} placeholder="Buat kata sandi" autoComplete="new-password" minLength="8" pattern="(?=.*[A-Z])(?=.*[^A-Za-z0-9]).{8,}" title="Minimal 8 karakter, 1 huruf kapital, dan 1 simbol." required />
                     <button type="button" className="password-toggle" onClick={() => setShowPassword((visible) => !visible)} aria-label={showPassword ? 'Sembunyikan kata sandi' : 'Tampilkan kata sandi'}>{showPassword ? 'Sembunyikan' : 'Tampilkan'}</button>
                   </span>
+                  <small className="password-requirements">Minimal 8 karakter, 1 huruf kapital, dan 1 simbol.</small>
                 </label>
                 <label className="register-field">
                   <span>Konfirmasi kata sandi</span>

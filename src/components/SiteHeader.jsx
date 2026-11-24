@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link, NavLink } from 'react-router'
-import { useAuth } from '../features/akun/context/AuthContext.jsx'
+import { useAuth } from '../features/akun/context/useAuth.js'
 
 function SiteHeader() {
   const { user, logout } = useAuth()
@@ -19,8 +19,9 @@ function SiteHeader() {
         <nav className="main-nav" aria-label="Navigasi utama">
           <NavLink to="/" end>Beranda</NavLink>
           <NavLink to="/penerbangan">Cari Penerbangan</NavLink>
-          <NavLink to="/my-booking">Perjalanan</NavLink>
+          <NavLink to="/my-booking">My Booking</NavLink>
           <NavLink to="/booking-history">Booking History</NavLink>
+          <NavLink to="/destinasi">Destinasi</NavLink>
           <NavLink to="/faq">FAQ</NavLink>
         </nav>
         {user ? (

@@ -24,6 +24,7 @@ function getLocalDate(date) {
 
 function FlightHome() {
   const navigate = useNavigate()
+  const [today] = useState(() => getLocalDate(new Date()))
   const [from, setFrom] = useState('CGK')
   const [to, setTo] = useState('DPS')
   const [date, setDate] = useState(() => getLocalDate(new Date()))
@@ -57,9 +58,7 @@ function FlightHome() {
   }
 
   function selectDestination(code) {
-    setTo(code)
-    setErrors((current) => ({ ...current, route: '' }))
-    document.getElementById('flight-search')?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    navigate(`/destinasi/${code}`)
   }
 
   return (
@@ -100,7 +99,7 @@ function FlightHome() {
           </div>
           <label className="home-input-group home-date">
             <span>Tanggal pergi</span>
-            <input ref={dateRef} aria-invalid={Boolean(errors.date)} aria-describedby={errors.date ? 'home-date-error' : undefined} type="date" min={getLocalDate(new Date())} value={date} onChange={(event) => { setDate(event.target.value); setErrors((current) => ({ ...current, date: '' })) }} required />
+            <input ref={dateRef} aria-invalid={Boolean(errors.date)} aria-describedby={errors.date ? 'home-date-error' : undefined} type="date" min={today} value={date} onChange={(event) => { setDate(event.target.value); setErrors((current) => ({ ...current, date: '' })) }} required />
             {errors.date && <small id="home-date-error" className="home-field-error" role="alert">{errors.date}</small>}
           </label>
           <PassengerPicker value={passengers} onChange={setPassengers} />

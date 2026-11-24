@@ -13,6 +13,18 @@
 .account-submit { width: 100%; min-height: 44px; gap: 9px; margin-top: 3px; cursor: pointer; }
 .account-switch { margin: 21px 0 0; text-align: center; color: #87959c; font-size: 10px; }
 .account-switch a { color: var(--teal); font-weight: 700; }
+.forgot-password-link { justify-self: end; margin-top: -10px; color: var(--teal); text-decoration: none; font-size: 10px; font-weight: 700; }
+.forgot-password-link:hover { text-decoration: underline; }
+.password-requirements { margin-top: -2px; color: #839198; font-size: 9px; font-weight: 500; }
+.recovery-request-form { margin-bottom: 14px; }
+.recovery-notice { margin: 13px 0; padding: 10px 12px; border-radius: 8px; color: #405d68; background: #eaf5f4; font-size: 10px; line-height: 1.6; }
+.recovery-demo-code { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 14px 0; padding: 12px; border: 1px dashed #9bcac9; border-radius: 9px; background: #f5fbfa; }
+.recovery-demo-code span { color: #5d777d; font-size: 8px; font-weight: 700; letter-spacing: .5px; }
+.recovery-demo-code strong { color: var(--teal); font: 800 23px 'Manrope', sans-serif; letter-spacing: 4px; }
+.recovery-reset-form { padding-top: 5px; border-top: 1px solid var(--line); }
+.recovery-error { margin-top: 12px; }
+.recovery-success { display: flex; flex-direction: column; align-items: flex-start; }
+.recovery-success .register-success-icon { margin-bottom: 22px; }
 .account-page :is(a, button, input):focus-visible { outline: 3px solid rgb(8 127 140 / 28%); outline-offset: 2px; }
 .profile-page { display: block; width: min(850px, calc(100% - 48px)); padding-block: 55px 70px; }
 .profile-heading { margin-bottom: 25px; }

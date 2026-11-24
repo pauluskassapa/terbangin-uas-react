@@ -1,5 +1,7 @@
 import { Link } from 'react-router'
 
+const currentYear = new Date().getFullYear()
+
 function SiteFooter() {
   return (
     <footer className="site-footer">
@@ -35,7 +37,7 @@ function SiteFooter() {
           </section>
         </div>
         <div className="travel-footer-bottom">
-          <span>© {new Date().getFullYear()} Terbangin</span>
+          <span>© {currentYear} Terbangin</span>
           <p>Proyek UAS · Informasi kantor dan layanan di atas merupakan contoh.</p>
         </div>
       </div>
