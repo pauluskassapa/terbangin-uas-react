@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { useNavigate } from 'react-router'
 import PassengerPicker from '../components/PassengerPicker.jsx'
 import { airports } from '../../../data/penerbangan.js'
@@ -27,17 +27,26 @@ function FlightHome() {
   const [today] = useState(() => getLocalDate(new Date()))
   const [from, setFrom] = useState('CGK')
   const [to, setTo] = useState('DPS')
-  const [date, setDate] = useState(() => getLocalDate(new Date()))
+  const [date, setDate] = useState('')
   const [passengers, setPassengers] = useState(1)
-  const [error, setError] = useState('')
+  const [errors, setErrors] = useState({})
+  const destinationRef = useRef(null)
+  const dateRef = useRef(null)
 
   function handleSearch(event) {
     event.preventDefault()
-    if (from === to) {
-      setError('Kota asal dan tujuan harus berbeda.')
+    const nextErrors = {}
+    if (from === to) nextErrors.route = 'Pilih kota tujuan yang berbeda dari kota asal.'
+    const parsed = new Date(`${date}T00:00:00`)
+    if (!date) nextErrors.date = 'Pilih tanggal keberangkatan dulu.'
+    else if (Number.isNaN(parsed.getTime()) || getLocalDate(parsed) !== date) nextErrors.date = 'Tanggal keberangkatan tidak valid.'
+    else if (date < getLocalDate(new Date())) nextErrors.date = 'Tanggal keberangkatan tidak boleh sebelum hari ini.'
+    setErrors(nextErrors)
+    if (nextErrors.route || nextErrors.date) {
+      if (nextErrors.route) destinationRef.current?.focus()
+      else dateRef.current?.focus()
       return
     }
-    setError('')
     const params = new URLSearchParams({ from, to, date, passengers: String(passengers) })
     navigate(`/penerbangan?${params.toString()}`)
   }
@@ -45,10 +54,10 @@ function FlightHome() {
   function swapAirports() {
     setFrom(to)
     setTo(from)
-    setError('')
+    setErrors((current) => ({ ...current, route: '' }))
   }
 
-    function selectDestination(code) {
+  function selectDestination(code) {
     navigate(`/destinasi/${code}`)
   }
 
@@ -71,23 +80,27 @@ function FlightHome() {
           <h2 id="search-heading">Cari penerbangan</h2>
           <span>Sekali jalan · Ekonomi</span>
         </div>
-        <form className="home-flight-form" onSubmit={handleSearch}>
+        <form className="home-flight-form" onSubmit={handleSearch} noValidate>
+          <div className="home-airports">
           <label className="home-input-group">
-            <span>Berangkat dari</span>
-            <select value={from} onChange={(event) => setFrom(event.target.value)}>
+            <span>Berangkat dari <b className="home-airport-code" aria-hidden="true">{from}</b></span>
+            <select value={from} onChange={(event) => { setFrom(event.target.value); setErrors((current) => ({ ...current, route: '' })) }}>
               {airports.map((airport) => <option key={airport.code} value={airport.code}>{airport.city} ({airport.code})</option>)}
             </select>
           </label>
           <button className="home-swap" type="button" onClick={swapAirports} aria-label="Tukar kota asal dan tujuan">⇄</button>
           <label className="home-input-group">
-            <span>Tujuan</span>
-            <select value={to} onChange={(event) => setTo(event.target.value)}>
+            <span>Tujuan <b className="home-airport-code" aria-hidden="true">{to}</b></span>
+            <select ref={destinationRef} value={to} aria-invalid={Boolean(errors.route)} aria-describedby={errors.route ? 'home-route-error' : undefined} onChange={(event) => { setTo(event.target.value); setErrors((current) => ({ ...current, route: '' })) }}>
               {airports.map((airport) => <option key={airport.code} value={airport.code}>{airport.city} ({airport.code})</option>)}
             </select>
           </label>
+          {errors.route && <p id="home-route-error" className="home-field-error" role="alert">{errors.route}</p>}
+          </div>
           <label className="home-input-group home-date">
             <span>Tanggal pergi</span>
-            <input type="date" min={today} value={date} onChange={(event) => setDate(event.target.value)} required />
+            <input ref={dateRef} aria-invalid={Boolean(errors.date)} aria-describedby={errors.date ? 'home-date-error' : undefined} type="date" min={today} value={date} onChange={(event) => { setDate(event.target.value); setErrors((current) => ({ ...current, date: '' })) }} required />
+            {errors.date && <small id="home-date-error" className="home-field-error" role="alert">{errors.date}</small>}
           </label>
           <PassengerPicker value={passengers} onChange={setPassengers} />
           <div className="home-form-bottom">
@@ -95,7 +108,6 @@ function FlightHome() {
             <button className="button button-primary home-find-button" type="submit">Cari penerbangan</button>
           </div>
         </form>
-        {error && <p className="form-error" role="alert">{error}</p>}
       </section>
 
       <section className="home-route-options page-wrap" aria-labelledby="destinations-heading">
