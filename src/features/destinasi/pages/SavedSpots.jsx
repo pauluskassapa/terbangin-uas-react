@@ -160,10 +160,30 @@ function SavedSpots() {
     return Array.from(counts.values())
   }, [enrichedSpots])
 
+  const activeCityFilter = useMemo(() => {
+    if (selectedCity === 'ALL') return 'ALL'
+    return citySummary.some((city) => city.code === selectedCity) ? selectedCity : 'ALL'
+  }, [citySummary, selectedCity])
+
   const visibleSpots = useMemo(() => {
-    if (selectedCity === 'ALL') return enrichedSpots
-    return enrichedSpots.filter((spot) => spot.destinationCode === selectedCity)
-  }, [enrichedSpots, selectedCity])
+    if (activeCityFilter === 'ALL') return enrichedSpots
+    return enrichedSpots.filter((spot) => spot.destinationCode === activeCityFilter)
+  }, [enrichedSpots, activeCityFilter])
+
+  function removeSpotFromState(destinationCode, spotId) {
+    setSavedRows((prev) => {
+      const next = prev.filter(
+        (row) => !(row.destination_code === destinationCode && row.spot_id === spotId)
+      )
+      const hasRemainingInSelectedCity = next.some(
+        (row) => row.destination_code === selectedCity
+      )
+      if (selectedCity !== 'ALL' && !hasRemainingInSelectedCity) {
+        setSelectedCity('ALL')
+      }
+      return next
+    })
+  }
 
   async function handleRemoveSpot(spot) {
     if (removingKey === spot.key) return
@@ -171,11 +191,7 @@ function SavedSpots() {
 
     if (!supabase) {
       removeLocalSavedSpot(spot.destinationCode, spot.spotId)
-      setSavedRows((prev) =>
-        prev.filter(
-          (row) => !(row.destination_code === spot.destinationCode && row.spot_id === spot.spotId)
-        )
-      )
+      removeSpotFromState(spot.destinationCode, spot.spotId)
       return
     }
 
@@ -189,11 +205,7 @@ function SavedSpots() {
 
       if (error) throw error
 
-      setSavedRows((prev) =>
-        prev.filter(
-          (row) => !(row.destination_code === spot.destinationCode && row.spot_id === spot.spotId)
-        )
-      )
+      removeSpotFromState(spot.destinationCode, spot.spotId)
     } catch {
       setErrorMessage('Gagal menghapus spot dari Supabase. Coba ulangi beberapa saat lagi.')
     } finally {
@@ -265,9 +277,9 @@ function SavedSpots() {
             <button
               type="button"
               role="tab"
-              aria-selected={selectedCity === 'ALL'}
+              aria-selected={activeCityFilter === 'ALL'}
               className={
-                selectedCity === 'ALL'
+                activeCityFilter === 'ALL'
                   ? 'destination-category-btn active'
                   : 'destination-category-btn'
               }
@@ -280,9 +292,9 @@ function SavedSpots() {
                 key={city.code}
                 type="button"
                 role="tab"
-                aria-selected={selectedCity === city.code}
+                aria-selected={activeCityFilter === city.code}
                 className={
-                  selectedCity === city.code
+                  activeCityFilter === city.code
                     ? 'destination-category-btn active'
                     : 'destination-category-btn'
                 }
