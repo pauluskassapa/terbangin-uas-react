@@ -7,11 +7,11 @@ function Profile() {
   const [saved, setSaved] = useState(false)
   const [error, setError] = useState('')
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault()
     const form = new FormData(event.currentTarget)
     try {
-      updateProfile({ name: form.get('name'), phone: form.get('phone') })
+      await updateProfile({ name: form.get('name'), phone: form.get('phone') })
       setSaved(true)
       setError('')
     } catch (updateError) {

@@ -9,6 +9,7 @@ import FlightSearch from './features/penerbangan/pages/FlightSearch.jsx'
 import Register from './features/akun/pages/Register.jsx'
 import Login from './features/akun/pages/Login.jsx'
 import ForgotPassword from './features/akun/pages/ForgotPassword.jsx'
+import ResetPassword from './features/akun/pages/ResetPassword.jsx'
 import Profile from './features/akun/pages/Profile.jsx'
 import MyBooking from './features/perjalanan/pages/MyBooking.jsx'
 import BookingHistory from './features/perjalanan/pages/BookingHistory.jsx'
@@ -32,7 +33,7 @@ function RoutePlaceholder({ title }) {
 }
 
 function App() {
-  const { user } = useAuth()
+  const { user, authLoading } = useAuth()
   return (
     <>
       <SiteHeader />
@@ -47,7 +48,8 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/profile" element={user ? <Profile /> : <Navigate to="/login" replace />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
+        <Route path="/profile" element={authLoading ? <RoutePlaceholder title="Memuat akun…" /> : user ? <Profile /> : <Navigate to="/login" replace />} />
         <Route path="/my-booking" element={<MyBooking />} />
         <Route path="/online-check-in" element={<OnlineCheckIn />} />
         <Route path="/booking-history" element={<BookingHistory />} />

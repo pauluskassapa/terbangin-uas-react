@@ -5,6 +5,16 @@ import { useAuth } from '../features/akun/context/useAuth.js'
 function SiteHeader() {
   const { user, logout } = useAuth()
   const [menuOpen, setMenuOpen] = useState(false)
+  const [logoutError, setLogoutError] = useState('')
+
+  async function handleLogout() {
+    setLogoutError('')
+    try {
+      await logout()
+    } catch {
+      setLogoutError('Belum berhasil keluar. Periksa koneksi lalu coba lagi.')
+    }
+  }
   return (
     <header className="site-header" onKeyDown={(event) => { if (event.key === 'Escape') { setMenuOpen(false); event.currentTarget.querySelector('.header-menu-toggle')?.focus() } }}>
       <div className="header-inner page-wrap">
@@ -27,7 +37,8 @@ function SiteHeader() {
         {user ? (
           <div className="header-account">
             <Link className="header-account-name" to="/profile">Hai, {user.name.split(' ')[0]}</Link>
-            <button className="header-cta header-logout" type="button" onClick={logout}>Keluar</button>
+            <button className="header-cta header-logout" type="button" onClick={handleLogout}>Keluar</button>
+            {logoutError && <span className="header-account-error" role="alert">{logoutError}</span>}
           </div>
         ) : (
           <div className="header-account">
