@@ -10,6 +10,7 @@ import Login from './features/akun/pages/Login.jsx'
 import Profile from './features/akun/pages/Profile.jsx'
 import MyBooking from './features/perjalanan/pages/MyBooking.jsx'
 import BookingHistory from './features/perjalanan/pages/BookingHistory.jsx'
+import OnlineCheckIn from './features/perjalanan/pages/OnlineCheckIn.jsx'
 import Booking from './features/pemesanan/pages/Booking.jsx'
 import Payment from './features/pemesanan/pages/Payment.jsx'
 import PaymentSuccess from './features/pemesanan/pages/PaymentSuccess.jsx'
@@ -45,6 +46,7 @@ function App() {
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/profile" element={user ? <Profile /> : <Navigate to="/login" replace />} />
         <Route path="/my-booking" element={<MyBooking />} />
+        <Route path="/online-check-in" element={<OnlineCheckIn />} />
         <Route path="/booking-history" element={<BookingHistory />} />
         <Route path="/faq" element={<Faq />} />
         <Route path="*" element={<RoutePlaceholder title="Halaman tidak ditemukan" />} />
