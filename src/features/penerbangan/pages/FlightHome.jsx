@@ -27,7 +27,7 @@ function FlightHome() {
   const [today] = useState(() => getLocalDate(new Date()))
   const [from, setFrom] = useState('CGK')
   const [to, setTo] = useState('DPS')
-  const [date, setDate] = useState(() => getLocalDate(new Date()))
+  const [date, setDate] = useState('')
   const [passengers, setPassengers] = useState(1)
   const [errors, setErrors] = useState({})
   const destinationRef = useRef(null)
