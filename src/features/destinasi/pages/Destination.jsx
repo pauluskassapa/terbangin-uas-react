@@ -69,6 +69,17 @@ function DestinationContent({ destination }) {
   const [saveError, setSaveError] = useState('')
 
   useEffect(() => {
+    if (!activePhoto) return undefined
+
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+
+    return () => {
+      document.body.style.overflow = previousOverflow
+    }
+  }, [activePhoto])
+
+  useEffect(() => {
     if (!supabase) return
 
     let isCancelled = false
