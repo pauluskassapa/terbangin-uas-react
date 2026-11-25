@@ -67,6 +67,27 @@ const faqItems = [
     answer:
       'Ketentuan perubahan jadwal (reschedule) dan pengembalian dana (refund) mengikuti kebijakan masing-masing maskapai. Pastikan memeriksa kembali rute, tanggal keberangkatan, dan ejaan nama penumpang sebelum mengonfirmasi pembayaran.',
   },
+  {
+    id: 'faq-9',
+    category: 'Pemesanan',
+    question: 'Gimana caranya mengajukan refund?',
+    answer:
+      'Untuk mengajukan refund, kamu dapat menghubungi layanan pelanggan Terbangin melalui nomor layanan pelanggan di aplikasi atau website. Pastikan kamu memiliki bukti pembayaran dan detail penerbangan yang relevan saat mengajukan permintaan refund.',
+  },
+  {
+    id: 'faq-10',
+    category: 'Pembayaran',
+    question: 'Apakah ada biaya tambahan untuk metode pembayaran tertentu?',
+    answer:
+      'Terbangin tidak membebankan biaya tambahan untuk metode pembayaran yang tersedia. Semua harga yang ditampilkan sudah termasuk pajak dan biaya layanan dasar. Namun, pastikan untuk memeriksa syarat dan ketentuan masing-masing metode pembayaran yang digunakan.',
+  },
+  {
+    id: 'faq-11',
+    category: 'Tiket',
+    question: 'Saya telah menyelesaikan pembayaran, tapi belum menerima tiket elektronik. Apa yang harus saya lakukan?',
+    answer:
+      'Jika kamu telah menyelesaikan pembayaran namun belum menerima tiket elektronik, periksa folder spam atau kotak masuk email yang digunakan saat pemesanan. Jika masih belum diterima, hubungi layanan pelanggan Terbangin dengan menyertakan bukti pembayaran dan detail penerbangan untuk bantuan lebih lanjut.',
+  }
 ]
 
 function Faq() {
