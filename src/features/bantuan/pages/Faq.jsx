@@ -7,7 +7,8 @@ const faqCategories = [
   { id: 'Pemesanan', label: 'Pemesanan' },
   { id: 'Pembayaran', label: 'Pembayaran' },
   { id: 'Bagasi', label: 'Bagasi & Check-in' },
-  { id: 'Akun', label: 'Akun & Tiket' },
+  { id: 'Akun', label: 'Akun ' },
+  { id: 'Tiket', label: 'Tiket' }
 ]
 
 const faqItems = [
@@ -129,19 +130,25 @@ function Faq() {
             </p>
           </div>
 
-          <div className="faq-search-box">
-            <label htmlFor="faq-search-input" className="faq-search-label">
-              CARI PERTANYAAN
-            </label>
-            <div className="faq-search-control">
-              <span aria-hidden="true">⌕</span>
-              <input
-                id="faq-search-input"
-                type="search"
-                value={searchQuery}
-                onChange={(event) => setSearchQuery(event.target.value)}
-                placeholder="Ketik kata kunci, misal: bagasi, QRIS, penumpang..."
-              />
+          <div className="faq-search-column">
+            <div className="faq-search-heading">
+              <h2>Pusat Bantuan</h2>
+              <p>Cari jawaban cepat seputar penerbangan &amp; perjalananmu.</p>
+            </div>
+            <div className="faq-search-box">
+              <label htmlFor="faq-search-input" className="faq-search-label">
+                CARI PERTANYAAN
+              </label>
+              <div className="faq-search-control">
+                <span aria-hidden="true">⌕</span>
+                <input
+                  id="faq-search-input"
+                  type="search"
+                  value={searchQuery}
+                  onChange={(event) => setSearchQuery(event.target.value)}
+                  placeholder="Ketik kata kunci, misal: bagasi, QRIS, penumpang..."
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -185,7 +192,7 @@ function Faq() {
                         <strong>{item.question}</strong>
                       </span>
                       <span className="faq-toggle-icon" aria-hidden="true">
-                        {isOpen ? '−' : '+'}
+                        {isOpen ? '⌃' : '⌄ '}
                       </span>
                     </button>
                     {isOpen && (
