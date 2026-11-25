@@ -141,8 +141,10 @@ function SavedSpots() {
         category: detail?.category || 'Wisata',
         rating: detail?.rating || '4.8',
         bestTime: detail?.bestTime || 'Pagi - Sore',
+        priceRange: detail?.priceRange || null,
+        specialty: detail?.specialty || null,
         description: detail?.description || 'Spot wisata pilihan yang kamu simpan untuk perjalanan berikutnya.',
-        image: detail?.image || destination?.heroImage,
+        image: detail?.image || null,
         fallbackImage: destination?.heroImage,
         savedLabel: formatSavedTime(row.created_at),
       })
@@ -332,40 +334,78 @@ function SavedSpots() {
                 passengers: '1',
               })
 
+              const isCulinary = spot.category === 'Kuliner'
+              const isSouvenir = spot.category === 'Oleh-Oleh'
+              const hasPhoto = Boolean(spot.image)
+
               return (
-                <article key={spot.key} className="saved-spot-card">
-                  <div className="saved-spot-photo">
-                    <img
-                      src={spot.image || spot.fallbackImage}
-                      alt={spot.name}
-                      loading="lazy"
-                      onError={(event) => {
-                        if (spot.fallbackImage && event.currentTarget.src !== spot.fallbackImage) {
-                          event.currentTarget.src = spot.fallbackImage
-                        }
-                      }}
-                    />
-                    <div className="saved-spot-badges">
-                      <span className="saved-spot-city-pill">
-                        {spot.city} · {spot.destinationCode}
-                      </span>
-                      <span className="destination-spot-badge">{spot.category}</span>
-                      <span className="destination-spot-rating">★ {spot.rating}</span>
+                <article
+                  key={spot.key}
+                  className={`saved-spot-card${!hasPhoto ? ' is-text-card' : ''}${isCulinary ? ' is-culinary' : ''}${isSouvenir ? ' is-souvenir' : ''}`}
+                >
+                  {hasPhoto ? (
+                    <div className="saved-spot-photo">
+                      <img
+                        src={spot.image}
+                        alt={spot.name}
+                        loading="lazy"
+                        onError={(event) => {
+                          if (spot.fallbackImage && event.currentTarget.src !== spot.fallbackImage) {
+                            event.currentTarget.src = spot.fallbackImage
+                          }
+                        }}
+                      />
+                      <div className="saved-spot-badges">
+                        <span className="saved-spot-city-pill">
+                          {spot.city} · {spot.destinationCode}
+                        </span>
+                        <span className="destination-spot-badge">{spot.category}</span>
+                        <span className="destination-spot-rating">★ {spot.rating}</span>
+                      </div>
+                      <div className="saved-spot-photo-bottom">
+                        <span>📍 {spot.area}</span>
+                        <small>{spot.savedLabel}</small>
+                      </div>
                     </div>
-                    <div className="saved-spot-photo-bottom">
-                      <span>📍 {spot.area}</span>
-                      <small>{spot.savedLabel}</small>
+                  ) : (
+                    <div className="saved-spot-text-header">
+                      <div className="saved-spot-text-badges">
+                        <span className="saved-spot-city-pill">
+                          {spot.city} · {spot.destinationCode}
+                        </span>
+                        <span
+                          className={`destination-local-badge${isCulinary ? ' is-culinary' : ' is-souvenir'}`}
+                        >
+                          {isCulinary ? '🍽 Kuliner' : isSouvenir ? '🛍 Oleh-Oleh' : spot.category}
+                        </span>
+                        <span className="destination-spot-rating">★ {spot.rating}</span>
+                      </div>
+                      <div className="saved-spot-text-submeta">
+                        <span>📍 {spot.area}</span>
+                        <small>{spot.savedLabel}</small>
+                      </div>
                     </div>
-                  </div>
+                  )}
 
                   <div className="saved-spot-body">
                     <h3>{spot.name}</h3>
+                    {spot.specialty && (
+                      <div className="saved-spot-specialty">
+                        <span>{isCulinary ? 'Menu Andalan' : 'Produk Unggulan'}</span>
+                        <strong>{spot.specialty}</strong>
+                      </div>
+                    )}
                     <p>{spot.description}</p>
 
                     <div className="saved-spot-meta">
                       <span>
-                        🕒 Waktu terbaik: <strong>{spot.bestTime}</strong>
+                        🕒 {hasPhoto ? 'Waktu terbaik' : 'Jam buka'}: <strong>{spot.bestTime}</strong>
                       </span>
+                      {spot.priceRange && (
+                        <span className="saved-spot-price">
+                          💳 <strong>{spot.priceRange}</strong>
+                        </span>
+                      )}
                     </div>
 
                     <div className="saved-spot-actions">

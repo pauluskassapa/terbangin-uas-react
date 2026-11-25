@@ -132,6 +132,87 @@
   box-shadow: 0 14px 32px rgba(24, 50, 75, 0.08);
 }
 
+.saved-spot-card.is-text-card.is-culinary {
+  border-top: 3px solid #d97706;
+}
+
+.saved-spot-card.is-text-card.is-souvenir {
+  border-top: 3px solid var(--teal);
+}
+
+.saved-spot-text-header {
+  padding: 16px 18px 0;
+}
+
+.saved-spot-text-badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.saved-spot-text-badges .destination-spot-rating {
+  margin-left: auto;
+  padding: 4px 9px;
+  border-radius: 99px;
+  background: var(--page);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.saved-spot-text-submeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.saved-spot-text-submeta small {
+  padding: 3px 8px;
+  border-radius: 99px;
+  background: var(--page);
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.saved-spot-specialty {
+  margin-bottom: 10px;
+  padding: 9px 11px;
+  border-radius: 10px;
+  background: var(--page);
+  border: 1px solid var(--line);
+}
+
+.saved-spot-specialty span {
+  display: block;
+  margin-bottom: 2px;
+  color: var(--teal);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+}
+
+.saved-spot-card.is-culinary .saved-spot-specialty span {
+  color: #b45309;
+}
+
+.saved-spot-specialty strong {
+  color: var(--ink);
+  font: 700 12px / 1.4 'Manrope', sans-serif;
+}
+
+.saved-spot-price {
+  display: block;
+  margin-top: 4px;
+}
+
 .saved-spot-photo {
   position: relative;
   width: 100%;
