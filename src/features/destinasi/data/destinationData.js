@@ -13,7 +13,7 @@ export const destinations = {
     heroTitle: 'Jelajahi Pesona',
     heroAccent: 'Bali.',
     heroImage: baliPhoto,
-    startingPrice: 760000,
+    startingPrice: 650000,
     flightDuration: '1j 50m dari Jakarta (CGK)',
     bestSeason: 'April - Oktober (Musim Kemarau)',
     videoTitle: 'Cinematic Preview · Pesona Pulau Dewata',
@@ -23,7 +23,7 @@ export const destinations = {
     highlights: [
       { label: 'KODE BANDARA', value: 'DPS · Denpasar' },
       { label: 'DURASI RATA-RATA', value: '1 Jam 50 Menit' },
-      { label: 'HARGA MULAI', value: 'Rp760.000 / org' },
+      { label: 'HARGA MULAI', value: 'Rp650.000 / org' },
     ],
     categories: ['Semua', 'Pantai & Laut', 'Budaya & Alam', 'Kuliner & Sunset'],
     gallery: [
@@ -571,7 +571,7 @@ export const destinations = {
     heroTitle: 'Berlayar Menuju',
     heroAccent: 'Labuan Bajo.',
     heroImage: bajoPhoto,
-    startingPrice: 760000,
+    startingPrice: 800000,
     flightDuration: '2j 25m dari Jakarta (CGK)',
     bestSeason: 'April - November (Musim Kemarau)',
     videoTitle: 'Cinematic Preview · Keajaiban Labuan Bajo',
@@ -581,7 +581,7 @@ export const destinations = {
     highlights: [
       { label: 'KODE BANDARA', value: 'LBJ · Manggarai Barat' },
       { label: 'DURASI RATA-RATA', value: '2 Jam 25 Menit' },
-      { label: 'HARGA MULAI', value: 'Rp760.000 / org' },
+      { label: 'HARGA MULAI', value: 'Rp800.000 / org' },
     ],
     categories: ['Semua', 'Pulau & Laut', 'Taman Nasional', 'Bukit & Sunset'],
     gallery: [
@@ -850,7 +850,7 @@ export const destinations = {
     heroTitle: 'Temukan Ketenangan',
     heroAccent: 'Lombok.',
     heroImage: lombokPhoto,
-    startingPrice: 760000,
+    startingPrice: 850000,
     flightDuration: '2j 05m dari Jakarta (CGK)',
     bestSeason: 'Mei - Oktober (Musim Kemarau)',
     videoTitle: 'Cinematic Preview · Pesona Pulau Lombok',
@@ -860,7 +860,7 @@ export const destinations = {
     highlights: [
       { label: 'KODE BANDARA', value: 'LOP · Lombok Tengah' },
       { label: 'DURASI RATA-RATA', value: '2 Jam 5 Menit' },
-      { label: 'HARGA MULAI', value: 'Rp760.000 / org' },
+      { label: 'HARGA MULAI', value: 'Rp850.000 / org' },
     ],
     categories: ['Semua', 'Pantai & Gili', 'Alam & Gunung', 'Budaya & Kuliner'],
     gallery: [

@@ -602,7 +602,7 @@ function DestinationContent({ destination }) {
                 }
                 onClick={() => setLocalFlavorTab('Kuliner')}
               >
-                🍽 Kuliner Khas ({culinaryItems.length})
+                 Kuliner Khas ({culinaryItems.length})
               </button>
               <button
                 type="button"
@@ -615,7 +615,7 @@ function DestinationContent({ destination }) {
                 }
                 onClick={() => setLocalFlavorTab('Oleh-Oleh')}
               >
-                🛍 Pusat Oleh-Oleh ({souvenirItems.length})
+                Pusat Oleh-Oleh ({souvenirItems.length})
               </button>
             </div>
           </div>
@@ -635,7 +635,7 @@ function DestinationContent({ destination }) {
                     <span
                       className={`destination-local-badge${isCulinary ? ' is-culinary' : ' is-souvenir'}`}
                     >
-                      {isCulinary ? '🍽 Kuliner' : '🛍 Oleh-Oleh'}
+                      {isCulinary ? 'Kuliner' : 'Oleh-Oleh'}
                     </span>
                     <span
                       className="destination-spot-rating"
