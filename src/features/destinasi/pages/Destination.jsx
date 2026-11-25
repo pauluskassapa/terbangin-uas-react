@@ -55,6 +55,7 @@ function DestinationContent({ destination }) {
   )
 
   const [selectedCategory, setSelectedCategory] = useState('Semua')
+  const [localFlavorTab, setLocalFlavorTab] = useState('Semua')
   const [originCode, setOriginCode] = useState(() =>
     availableOrigins.some((airport) => airport.code === 'CGK')
       ? 'CGK'
@@ -197,6 +198,20 @@ function DestinationContent({ destination }) {
   }, [destination.spots, selectedCategory, searchQuery, savedSpotIds])
 
   const searchHint = destination.spots[0]?.area?.split('·')[0]?.trim() || destination.city
+
+  const culinaryItems = useMemo(() => destination.culinary || [], [destination.culinary])
+  const souvenirItems = useMemo(() => destination.souvenirs || [], [destination.souvenirs])
+
+  const filteredLocalPlaces = useMemo(() => {
+    if (localFlavorTab === 'Kuliner') return culinaryItems
+    if (localFlavorTab === 'Oleh-Oleh') return souvenirItems
+    return [...culinaryItems, ...souvenirItems]
+  }, [culinaryItems, souvenirItems, localFlavorTab])
+
+  const savedTouristSpotCount = useMemo(
+    () => destination.spots.filter((spot) => savedSpotIds.has(spot.id)).length,
+    [destination.spots, savedSpotIds]
+  )
 
   function handleSearchFlights() {
     const params = new URLSearchParams({
@@ -453,7 +468,7 @@ function DestinationContent({ destination }) {
               }
               onClick={() => setSelectedCategory(SAVED_FILTER_KEY)}
             >
-              ♥ Tersimpan ({savedSpotIds.size})
+              ♥ Tersimpan ({savedTouristSpotCount})
             </button>
           </div>
 
@@ -539,6 +554,132 @@ function DestinationContent({ destination }) {
           </aside>
         </div>
       </section>
+
+      {(culinaryItems.length > 0 || souvenirItems.length > 0) && (
+        <section
+          className="page-wrap destination-local-section"
+          aria-labelledby="local-flavor-heading"
+        >
+          <div className="destination-local-header">
+            <div>
+              <span className="eyebrow">
+                ✦ KULINER &amp; OLEH-OLEH · {destination.city.toUpperCase()}
+              </span>
+              <h2 id="local-flavor-heading">
+                Kuliner Khas &amp; Pusat Oleh-Oleh {destination.city}
+              </h2>
+              <p>
+                Lengkapi perjalananmu di {destination.city} dengan mencicipi hidangan autentik dan membawa pulang buah tangan pilihan.
+              </p>
+            </div>
+
+            <div
+              className="destination-categories"
+              role="tablist"
+              aria-label={`Filter kuliner dan oleh-oleh ${destination.city}`}
+            >
+              <button
+                type="button"
+                role="tab"
+                aria-selected={localFlavorTab === 'Semua'}
+                className={
+                  localFlavorTab === 'Semua'
+                    ? 'destination-category-btn active'
+                    : 'destination-category-btn'
+                }
+                onClick={() => setLocalFlavorTab('Semua')}
+              >
+                Semua ({culinaryItems.length + souvenirItems.length})
+              </button>
+              <button
+                type="button"
+                role="tab"
+                aria-selected={localFlavorTab === 'Kuliner'}
+                className={
+                  localFlavorTab === 'Kuliner'
+                    ? 'destination-category-btn active'
+                    : 'destination-category-btn'
+                }
+                onClick={() => setLocalFlavorTab('Kuliner')}
+              >
+                🍽 Kuliner Khas ({culinaryItems.length})
+              </button>
+              <button
+                type="button"
+                role="tab"
+                aria-selected={localFlavorTab === 'Oleh-Oleh'}
+                className={
+                  localFlavorTab === 'Oleh-Oleh'
+                    ? 'destination-category-btn active'
+                    : 'destination-category-btn'
+                }
+                onClick={() => setLocalFlavorTab('Oleh-Oleh')}
+              >
+                🛍 Pusat Oleh-Oleh ({souvenirItems.length})
+              </button>
+            </div>
+          </div>
+
+          <div className="destination-local-grid">
+            {filteredLocalPlaces.map((place) => {
+              const isCulinary = place.category === 'Kuliner'
+              const isSaved = savedSpotIds.has(place.id)
+              const isSaving = savingSpotId === place.id
+
+              return (
+                <article
+                  key={place.id}
+                  className={`destination-local-card${isCulinary ? ' is-culinary' : ' is-souvenir'}`}
+                >
+                  <div className="destination-local-card-top">
+                    <span
+                      className={`destination-local-badge${isCulinary ? ' is-culinary' : ' is-souvenir'}`}
+                    >
+                      {isCulinary ? '🍽 Kuliner' : '🛍 Oleh-Oleh'}
+                    </span>
+                    <span
+                      className="destination-spot-rating"
+                      aria-label={`Rating ${place.rating}`}
+                    >
+                      ★ {place.rating}
+                    </span>
+                  </div>
+
+                  <h3>{place.name}</h3>
+                  <span className="destination-local-area">📍 {place.area}</span>
+
+                  <div className="destination-local-specialty">
+                    <span>{isCulinary ? 'Menu Andalan' : 'Produk Unggulan'}</span>
+                    <strong>{place.specialty}</strong>
+                  </div>
+
+                  <p className="destination-local-desc">{place.description}</p>
+
+                  <div className="destination-local-meta">
+                    <span>🕒 {place.openHours}</span>
+                    <span>💳 {place.priceRange}</span>
+                  </div>
+
+                  <div className="destination-local-footer">
+                    <span className="destination-local-city-note">
+                      Rekomendasi {destination.city}
+                    </span>
+                    <button
+                      type="button"
+                      className={`destination-spot-save-btn${isSaved ? ' is-saved' : ''}`}
+                      aria-pressed={isSaved}
+                      disabled={isSaving}
+                      onClick={() => handleToggleSaveSpot(place)}
+                    >
+                      {isSaving ? 'Menyimpan...' : isSaved ? '♥ Tersimpan' : '♡ Simpan'}
+                    </button>
+                  </div>
+                </article>
+              )
+            })}
+          </div>
+        </section>
+      )}
     </main>
   )
 }

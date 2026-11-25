@@ -10,9 +10,15 @@ const SAVED_SPOTS_STORAGE_KEY = 'terbangin_saved_spots'
 
 const spotLookupMap = new Map()
 destinationList.forEach((destination) => {
-  destination.spots.forEach((spot) => {
+  const allPlaces = [
+    ...(destination.spots || []),
+    ...(destination.culinary || []),
+    ...(destination.souvenirs || []),
+  ]
+  allPlaces.forEach((spot) => {
     spotLookupMap.set(`${destination.code}:${spot.id}`, {
       ...spot,
+      bestTime: spot.bestTime || spot.openHours || 'Pagi - Malam',
       city: destination.city,
       destinationCode: destination.code,
       fallbackImage: destination.heroImage,
