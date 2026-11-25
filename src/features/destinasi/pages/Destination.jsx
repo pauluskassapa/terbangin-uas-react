@@ -61,12 +61,28 @@ function DestinationContent({ destination }) {
       : availableOrigins[0]?.code || 'CGK'
   )
   const [searchQuery, setSearchQuery] = useState('')
-  const [activePhoto, setActivePhoto] = useState(null)
+  const [activePhotoIndex, setActivePhotoIndex] = useState(null)
   const [savedSpotIds, setSavedSpotIds] = useState(() =>
     supabase ? new Set() : readLocalSavedSpots(destination.code)
   )
   const [savingSpotId, setSavingSpotId] = useState(null)
   const [saveError, setSaveError] = useState('')
+  const galleryItems = destination.gallery || []
+  const activePhoto = activePhotoIndex !== null ? galleryItems[activePhotoIndex] || null : null
+
+  function handlePrevPhoto() {
+    if (galleryItems.length < 2) return
+    setActivePhotoIndex((prev) =>
+      prev === null ? null : (prev - 1 + galleryItems.length) % galleryItems.length
+    )
+  }
+
+  function handleNextPhoto() {
+    if (galleryItems.length < 2) return
+    setActivePhotoIndex((prev) =>
+      prev === null ? null : (prev + 1) % galleryItems.length
+    )
+  }
 
   useEffect(() => {
     if (!activePhoto) return undefined
@@ -301,12 +317,12 @@ function DestinationContent({ destination }) {
           </div>
 
           <div className="destination-bento-grid">
-            {destination.gallery.map((item) => (
+            {galleryItems.map((item, index) => (
               <button
                 key={item.id}
                 type="button"
                 className={`destination-bento-item is-${item.layout || 'normal'}`}
-                onClick={() => setActivePhoto(item)}
+                onClick={() => setActivePhotoIndex(index)}
                 aria-label={`Perbesar foto ${item.title}`}
               >
                 <img
@@ -334,28 +350,50 @@ function DestinationContent({ destination }) {
           role="dialog"
           aria-modal="true"
           aria-label={activePhoto.title}
-          onClick={() => setActivePhoto(null)}
+          onClick={() => setActivePhotoIndex(null)}
         >
           <div
             className="destination-lightbox-content"
             onClick={(event) => event.stopPropagation()}
           >
-            <button
-              type="button"
-              className="destination-lightbox-close"
-              onClick={() => setActivePhoto(null)}
-              aria-label="Tutup pratinjau foto"
-            >
-              ✕ Tutup
-            </button>
-            <img
-              src={activePhoto.image}
-              alt={activePhoto.title}
-              onError={(event) => {
-                event.currentTarget.onerror = null
-                event.currentTarget.src = destination.heroImage
-              }}
-            />
+            <div className="destination-lightbox-media">
+              <button
+                type="button"
+                className="destination-lightbox-close"
+                onClick={() => setActivePhotoIndex(null)}
+                aria-label="Tutup pratinjau foto"
+              >
+                ✕ Tutup
+              </button>
+              {galleryItems.length > 1 && (
+                <>
+                  <button
+                    type="button"
+                    className="destination-lightbox-nav is-prev"
+                    onClick={handlePrevPhoto}
+                    aria-label="Foto sebelumnya"
+                  >
+                    ‹
+                  </button>
+                  <button
+                    type="button"
+                    className="destination-lightbox-nav is-next"
+                    onClick={handleNextPhoto}
+                    aria-label="Foto berikutnya"
+                  >
+                    ›
+                  </button>
+                </>
+              )}
+              <img
+                src={activePhoto.image}
+                alt={activePhoto.title}
+                onError={(event) => {
+                  event.currentTarget.onerror = null
+                  event.currentTarget.src = destination.heroImage
+                }}
+              />
+            </div>
             <div className="destination-lightbox-caption">
               <span>📍 {activePhoto.location}</span>
               <strong>{activePhoto.title}</strong>
