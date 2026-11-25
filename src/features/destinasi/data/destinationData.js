@@ -123,6 +123,50 @@ export const destinations = {
         description:
           'Pura laut bersejarah di atas bongkahan batu besar yang tampak terapung saat air pasang dengan siluet senja paling populer di Bali.',
       },
+      {
+        id: 'bedugul',
+        name: 'Pura Ulun Danu Beratan',
+        area: 'Bedugul · Tabanan',
+        category: 'Budaya & Alam',
+        rating: '4.9',
+        bestTime: '07.30 - 11.00 WITA',
+        image: '/images/destinasi/baliBedugul.jpg',
+        description:
+          'Ikon pura megah di tepi Danau Beratan dengan udara sejuk pegunungan, kabut tipis pagi hari, dan latar perbukitan hijau yang menenangkan.',
+      },
+      {
+        id: 'seminyak',
+        name: 'Pantai Seminyak & Petitenget',
+        area: 'Badung · Seminyak',
+        category: 'Kuliner & Sunset',
+        rating: '4.8',
+        bestTime: '16.00 - 20.00 WITA',
+        image: '/images/destinasi/baliSeminyak.jpg',
+        description:
+          'Kawasan pantai trendi dengan deretan kafe tepi laut, beanbag warna-warni di atas pasir, butik lokal, dan suasana matahari terbenam yang hangat.',
+      },
+      {
+        id: 'tirta-empul',
+        name: 'Pura Tirta Empul Tampaksiring',
+        area: 'Gianyar · Tampaksiring',
+        category: 'Budaya & Alam',
+        rating: '4.8',
+        bestTime: '08.00 - 12.00 WITA',
+        image: '/images/destinasi/baliTirtaEmpul.jpg',
+        description:
+          'Kompleks pura mata air suci dari abad ke-10 yang terkenal dengan kolam pemandian melukat, arsitektur batu ukir tradisional, dan suasana asri.',
+      },
+      {
+        id: 'lovina',
+        name: 'Pantai Lovina & Wisata Lumba-Lumba',
+        area: 'Buleleng · Bali Utara',
+        category: 'Pantai & Laut',
+        rating: '4.7',
+        bestTime: '05.30 - 09.00 WITA',
+        image: '/images/destinasi/baliLovina.jpg',
+        description:
+          'Pantai berpasir hitam tenang di pesisir utara Bali tempat berlayar dengan perahu jukung saat fajar untuk menyaksikan kawanan lumba-lumba liar.',
+      },
     ],
     tips: [
       {
@@ -257,6 +301,50 @@ export const destinations = {
         image: '/images/destinasi/jogjaKotagede.jpg',
         description:
           'Sentra kerajinan perak tradisional dengan gang-gang arsitektur klasik Mataram Kuno serta pusat kuliner Gudeg autentik khas Yogyakarta.',
+      },
+      {
+        id: 'parangtritis',
+        name: 'Pantai Parangtritis & Gumuk Pasir',
+        area: 'Bantul · Pesisir Selatan',
+        category: 'Alam & Pantai',
+        rating: '4.7',
+        bestTime: '15.30 - 18.30 WIB',
+        image: '/images/destinasi/jogjaParangtritis.jpg',
+        description:
+          'Pantai legendaris dengan ombak besar Samudra Hindia yang berdekatan dengan fenomena alam langka Gumuk Pasir untuk sandboarding dan foto senja.',
+      },
+      {
+        id: 'hutan-pinus',
+        name: 'Hutan Pinus Mangunan & Puncak Becici',
+        area: 'Dlingo · Bantul',
+        category: 'Alam & Pantai',
+        rating: '4.8',
+        bestTime: '06.30 - 10.30 WIB',
+        image: '/images/destinasi/jogjaHutanPinus.jpg',
+        description:
+          'Kawasan hutan pinus sejuk di perbukitan Dlingo dengan gardu pandang kayu, jalur santai di bawah pepohonan tinggi, dan panorama lembah berkabut.',
+      },
+      {
+        id: 'tugu-jogja',
+        name: 'Tugu Pal Putih & Angkringan Kopi Joss',
+        area: 'Jetis · Kota Yogyakarta',
+        category: 'Kuliner & Kota',
+        rating: '4.8',
+        bestTime: '18.30 - 22.30 WIB',
+        image: '/images/destinasi/jogjaTugu.jpg',
+        description:
+          'Monumen ikonik penanda sumbu filosofis Yogyakarta yang semarak di malam hari, berdekatan dengan kawasan angkringan legendaris dan kopi joss.',
+      },
+      {
+        id: 'ullen-sentalu',
+        name: 'Museum Ullen Sentalu',
+        area: 'Kaliurang · Sleman',
+        category: 'Budaya & Sejarah',
+        rating: '4.9',
+        bestTime: '09.00 - 15.00 WIB',
+        image: '/images/destinasi/jogjaKotagede.jpg',
+        description:
+          'Museum seni dan budaya Jawa berarsitektur batu alam di tengah rindangnya lereng Merapi yang menyajikan kisah sejarah Kerajaan Mataram secara eksklusif.',
       },
     ],
     tips: [
@@ -393,6 +481,50 @@ export const destinations = {
         description:
           'Perbukitan hijau di pinggir kota dan kawasan tepi laut modern untuk menikmati siluet kapal phinisi saat matahari terbenam.',
       },
+      {
+        id: 'goa-rangko',
+        name: 'Goa Rangko & Kolam Air Asin Alami',
+        area: 'Desa Rangko · Manggarai Barat',
+        category: 'Pulau & Laut',
+        rating: '4.8',
+        bestTime: '12.00 - 15.00 WITA',
+        image: '/images/destinasi/bajoGoaRangko.jpg',
+        description:
+          'Gua kapur alami dengan kolam air asin sebening kristal yang berkilau biru toska saat sinar matahari siang menembus mulut gua.',
+      },
+      {
+        id: 'wae-rebo',
+        name: 'Desa Adat Wae Rebo',
+        area: 'Manggarai · Flores',
+        category: 'Taman Nasional',
+        rating: '4.9',
+        bestTime: '06.00 - 11.00 WITA',
+        image: '/images/destinasi/bajoWaeRebo.jpg',
+        description:
+          'Desa tradisional di atas awan dengan tujuh rumah adat kerucut Mbaru Niang yang dikelilingi pegunungan hijau dan kabut pagi Flores.',
+      },
+      {
+        id: 'cunca-wulang',
+        name: 'Air Terjun & Ngarai Cunca Wulang',
+        area: 'Mbeliling · Manggarai Barat',
+        category: 'Bukit & Sunset',
+        rating: '4.8',
+        bestTime: '08.30 - 14.00 WITA',
+        image: '/images/destinasi/bajoCuncaWulang.jpg',
+        description:
+          'Air terjun di balik tebing ngarai batu kapur dengan kolam sungai biru jernih di tengah hutan hujan tropis yang sejuk dan alami.',
+      },
+      {
+        id: 'pulau-kalong',
+        name: 'Pulau Kalong Sunset Viewing',
+        area: 'Taman Nasional Komodo',
+        category: 'Bukit & Sunset',
+        rating: '4.8',
+        bestTime: '17.00 - 18.45 WITA',
+        image: '/images/destinasi/bajoPhinisi.jpg',
+        description:
+          'Pulau bakau eksotis tempat menyaksikan ribuan kelelawar buah terbang serentak melintasi langit jingga keunguan saat matahari terbenam dari atas kapal.',
+      },
     ],
     tips: [
       {
@@ -527,6 +659,50 @@ export const destinations = {
         image: '/images/destinasi/lombokSenggigi.jpg',
         description:
           'Garis pantai klasik menghadap Gunung Agung Bali saat senja, dilengkapi wisata kuliner khas Lombok seperti Ayam Taliwang, Plecing Kangkung, dan Sate Rembiga.',
+      },
+      {
+        id: 'pantai-tangsi',
+        name: 'Pantai Tangsi (Pink Beach Lombok)',
+        area: 'Jerowaru · Lombok Timur',
+        category: 'Pantai & Gili',
+        rating: '4.8',
+        bestTime: '09.00 - 15.00 WITA',
+        image: '/images/destinasi/lombokPinkBeach.jpg',
+        description:
+          'Pantai eksotis berpasir merah muda lembut dengan perairan biru jernih, tebing hijau di sekitarnya, dan ombak tenang untuk berenang maupun snorkeling.',
+      },
+      {
+        id: 'kuta-mandalika',
+        name: 'Pantai Kuta Mandalika & Sirkuit',
+        area: 'Pujut · Lombok Tengah',
+        category: 'Pantai & Gili',
+        rating: '4.8',
+        bestTime: '15.00 - 18.30 WITA',
+        image: '/images/destinasi/lombokMandalika.jpg',
+        description:
+          'Kawasan wisata pesisir modern dengan pantai melengkung berpasir putih, jalur pedestrian rapi, deretan kafe santai, dan pemandangan perbukitan selatan.',
+      },
+      {
+        id: 'benang-kelambu',
+        name: 'Air Terjun Benang Stokel & Benang Kelambu',
+        area: 'Batukliang · Lombok Tengah',
+        category: 'Alam & Gunung',
+        rating: '4.8',
+        bestTime: '08.00 - 13.00 WITA',
+        image: '/images/destinasi/lombokBenangKelambu.jpg',
+        description:
+          'Air terjun unik yang mengalir tipis menyerupai tirai benang dari tebing berlumut hijau rimbun dengan udara sejuk khas kaki Gunung Rinjani.',
+      },
+      {
+        id: 'taman-narmada',
+        name: 'Taman Narmada & Pura Lingsar',
+        area: 'Narmada · Lombok Barat',
+        category: 'Budaya & Kuliner',
+        rating: '4.7',
+        bestTime: '08.30 - 16.00 WITA',
+        image: '/images/destinasi/lombokSade.jpg',
+        description:
+          'Taman air peninggalan kerajaan abad ke-18 yang dirancang menyerupai miniatur Gunung Rinjani lengkap dengan kolam teratai, bale peristirahatan, dan mata air awet muda.',
       },
     ],
     tips: [
