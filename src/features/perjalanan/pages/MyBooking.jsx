@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router'
-import { cityName, getJourneyBookings, journeyDate } from '../data/journeyData.js'
+import { cityName, findJourneyBooking, journeyDate } from '../data/journeyData.js'
 import './JourneyPages.css'
 
 function MyBooking() {
@@ -8,20 +8,25 @@ function MyBooking() {
   const [email, setEmail] = useState('')
   const [message, setMessage] = useState('')
   const [result, setResult] = useState(null)
+  const [isSearching, setIsSearching] = useState(false)
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault()
-    const booking = getJourneyBookings().find((item) => item.code?.trim().toLowerCase() === code.trim().toLowerCase())
-    const emailMatches = booking && (booking.passengers || []).some((passenger) => passenger.email?.trim().toLowerCase() === email.trim().toLowerCase())
-    if (!booking) {
-      setResult(null)
-      setMessage('Booking tidak ditemukan. Periksa kembali kode booking.')
-    } else if (!emailMatches && booking.email?.trim().toLowerCase() !== email.trim().toLowerCase()) {
-      setResult(null)
-      setMessage('Email tidak sesuai dengan data pemesanan.')
-    } else {
+    setIsSearching(true)
+    setResult(null)
+    setMessage('')
+    try {
+      const booking = await findJourneyBooking(code, email)
+      if (!booking) {
+        setMessage('Booking tidak ditemukan atau email tidak sesuai. Periksa kembali datanya.')
+        return
+      }
       setResult(booking)
-      setMessage('')
+    } catch (error) {
+      console.error('Gagal mencari booking di Supabase:', error)
+      setMessage('Gagal menghubungi database. Coba lagi beberapa saat.')
+    } finally {
+      setIsSearching(false)
     }
   }
 
@@ -33,7 +38,7 @@ function MyBooking() {
         <form className="journey-form" onSubmit={handleSubmit}>
           <label>Kode Booking<input value={code} onChange={(event) => setCode(event.target.value)} placeholder="Contoh: TRB123" required /></label>
           <label>Email<input type="email" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="Masukkan email" required /></label>
-          <button className="button button-primary" type="submit">Lihat Booking</button>
+          <button className="button button-primary" type="submit" disabled={isSearching}>{isSearching ? 'Mencari…' : 'Lihat Booking'}</button>
         </form>
         {message && <p className="journey-message" role="alert">{message}</p>}
         {result && <article className="journey-booking-card" aria-live="polite">

@@ -93,6 +93,56 @@ export async function saveJourneyBooking(payment, bookingCode, bookingId) {
   saveJourneyBookings([localBooking, ...getJourneyBookings()])
 }
 
+export async function findJourneyBooking(code, email) {
+  if (!supabase) {
+    throw new Error('Supabase belum dikonfigurasi. Periksa VITE_SUPABASE_URL dan VITE_SUPABASE_PUBLISHABLE_KEY.')
+  }
+
+  const { data, error } = await supabase
+    .from('bookings')
+    .select('id, booking_code, contact_name, contact_email, contact_phone, airline, flight_number, from_code, to_code, flight_date, passenger_count, grand_total, checked_in, checked_in_at, created_at, booking_passengers(id, passenger_name, seat), booking_payments(payment_method, payment_status, created_at)')
+    .eq('booking_code', code.trim().toUpperCase())
+    .eq('contact_email', email.trim().toLowerCase())
+    .maybeSingle()
+  if (error) throw error
+  if (!data) return null
+
+  const payment = [...(data.booking_payments || [])]
+    .sort((first, second) => new Date(second.created_at || 0) - new Date(first.created_at || 0))[0]
+  const status = payment?.payment_status === 'simulated_success'
+    ? 'Pembayaran Berhasil'
+    : payment?.payment_status === 'failed'
+      ? 'Pembayaran Gagal'
+      : 'Menunggu Pembayaran'
+
+  return {
+    id: data.id,
+    code: data.booking_code,
+    status,
+    paymentStatus: payment?.payment_status || 'pending',
+    paymentMethod: payment?.payment_method || '',
+    paidAt: payment?.payment_status === 'simulated_success' ? payment.created_at : null,
+    createdAt: data.created_at,
+    date: data.flight_date,
+    from: data.from_code,
+    to: data.to_code,
+    airline: data.airline,
+    flightNumber: data.flight_number,
+    contactName: data.contact_name,
+    email: data.contact_email,
+    phone: data.contact_phone,
+    passengerCount: data.passenger_count,
+    total: Number(data.grand_total) || 0,
+    checkedIn: Boolean(data.checked_in),
+    checkedInAt: data.checked_in_at,
+    passengers: (data.booking_passengers || []).map((passenger) => ({
+      id: passenger.id,
+      name: passenger.passenger_name,
+      seat: passenger.seat,
+    })),
+  }
+}
+
 export function completeJourneyCheckIn(code, seats) {
   const bookings = getJourneyBookings()
   const bookingIndex = bookings.findIndex((booking) => booking.code === code)
