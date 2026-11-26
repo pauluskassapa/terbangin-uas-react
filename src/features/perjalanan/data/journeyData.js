@@ -1,6 +1,5 @@
 import { supabase } from '../../../lib/supabaseClient.js'
 
-const STORAGE_KEY = 'terbanginJourneyBookings'
 const BOOKING_SELECT = 'id, booking_code, contact_name, contact_email, contact_phone, airline, flight_number, from_code, to_code, flight_date, passenger_count, grand_total, checked_in, checked_in_at, created_at, booking_passengers(id, passenger_name, seat), booking_payments(payment_method, payment_status, created_at)'
 
 function normalizeJourneyBooking(data) {
@@ -38,19 +37,6 @@ function normalizeJourneyBooking(data) {
       seat: passenger.seat,
     })),
   }
-}
-
-export function getJourneyBookings() {
-  try {
-    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null')
-    return Array.isArray(saved) ? saved : []
-  } catch {
-    return []
-  }
-}
-
-export function saveJourneyBookings(bookings) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(bookings))
 }
 
 export async function saveJourneyBooking(payment, bookingCode, bookingId) {
@@ -110,25 +96,6 @@ export async function saveJourneyBooking(payment, bookingCode, bookingId) {
     if (paymentError) throw paymentError
   }
 
-  const localBooking = {
-    id: savedBookingId,
-    code: bookingCode,
-    status: 'Pembayaran Berhasil',
-    createdAt: payment.paymentDate,
-    paidAt: payment.paymentDate,
-    date: booking.date,
-    from: booking.from.code,
-    to: booking.to.code,
-    airline: booking.flight.airline,
-    flightNumber: booking.flight.number,
-    contactName: booking.contact.name,
-    email: booking.contact.email,
-    phone: booking.contact.phone,
-    passengers: booking.passengers.map((passenger, index) => ({ id: `${savedBookingId}-${index}`, name: passenger.name, seat: null })),
-    total: payment.grandTotal,
-    checkedIn: false,
-  }
-  saveJourneyBookings([localBooking, ...getJourneyBookings()])
 }
 
 export async function findJourneyBooking(code, email) {
