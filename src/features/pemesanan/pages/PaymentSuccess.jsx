@@ -1,52 +1,28 @@
-import { useEffect, useState } from 'react'
+
 import { Link, useLocation } from 'react-router'
 import { formatRupiah } from '../../../data/penerbangan.js'
-import { getJourneyBookings, saveJourneyBookings } from '../../perjalanan/data/journeyData.js'
 import './PaymentSuccess.css'
 
 function PaymentSuccess() {
     const location = useLocation()
     const payment = location.state?.payment
-    const [bookingCode] = useState(() => `TRB${Date.now().toString().slice(-7)}`)
-
-    useEffect(() => {
-        if (!payment?.booking) return
-        const bookings = getJourneyBookings()
-        if (bookings.some((item) => item.code === bookingCode)) return
-        const { booking } = payment
-        saveJourneyBookings([{
-            code: bookingCode,
-            status: 'Pembayaran Berhasil',
-            createdAt: payment.paymentDate,
-            paidAt: payment.paymentDate,
-            date: booking.date,
-            from: booking.from.code,
-            to: booking.to.code,
-            airline: booking.flight.airline,
-            flightNumber: booking.flight.number,
-            email: booking.contact.email,
-            phone: booking.contact.phone,
-            passengers: booking.passengers,
-            total: payment.grandTotal,
-            checkedIn: false,
-        }, ...bookings])
-    }, [payment, bookingCode])
 
     if (!payment?.booking) {
         return (
-        <main className="page-wrap payment-success-error">
-            <span className="eyebrow">TERBANGIN · PAYMENT</span>
-            <h1>Data pembayaran tidak ditemukan</h1>
-            <p>Silakan lakukan pemesanan dan pembayaran terlebih dahulu.</p>
-            <Link to="/penerbangan" className="button button-primary">
-            Cari Penerbangan
-            </Link>
-        </main>
+            <main className="page-wrap payment-success-error">
+                <span className="eyebrow">TERBANGIN · PAYMENT</span>
+                <h1>Data pembayaran anda tidak ditemukan</h1>
+                <p>Lakukan pemesanan dan pembayaran terlebih dahulu.</p>
+                <Link to="/penerbangan" className="button button-primary">
+                    Cari Penerbangan
+                </Link>
+            </main>
         )
     }
 
     const {
         booking,
+        bookingCode,
         baggageKg,
         baggageTotal,
         paymentMethod,
@@ -54,14 +30,14 @@ function PaymentSuccess() {
         paymentDate,
     } = payment
 
-    const { 
-        flight, 
-        from, 
-        to, 
-        formattedDate, 
-        passengerCount, 
-        contact, 
-        passengers 
+    const {
+        flight,
+        from,
+        to,
+        formattedDate,
+        passengerCount,
+        contact,
+        passengers,
     } = booking
 
     const paymentMethods = {
@@ -85,31 +61,34 @@ function PaymentSuccess() {
                 </div>
 
                 <span className="eyebrow">TERBANGIN · PAYMENT</span>
-                <h1>Pembayaran Berhasil!</h1>
-                <p>Terima kasih telah memilih penerbangan bersama TERBANGIN. Pembayaran Anda berhasil diproses.</p>
+                <h1>Pembayaran Selesai!</h1>
+                <p>Pembayaran tiket dan bagasi kamu telah berhasil diproses. Terima kasih telah memilih penerbangan bersama TERBANGIN.</p>
             </section>
 
-        <section className="success-card">
-            <div className="success-card-header">
-                <div>
-                    <span className="success-label">STATUS PEMBAYARAN</span>
-                    <h2>Pembayaran Berhasil</h2>
+            <section className="success-card">
+                <div className="success-card-header">
+                    <div>
+                        <span className="success-label">STATUS PEMBAYARAN</span>
+                        <h2>Pembayaran Berhasil</h2>
+                    </div>
+
+                    <span className="success-status">
+                        Berhasil
+                    </span>
                 </div>
 
-            <div className="success-detail-item success-booking-code">
-                <span>Kode Booking · simpan untuk check-in</span>
-                <strong>{bookingCode}</strong>
-            </div>
+                <div className="success-detail-item success-booking-code">
+                    <span>Kode Booking · simpan untuk check-in</span>
+                    <strong>{bookingCode}</strong>
+                </div>
 
-                <span className="success-status">Berhasil</span>
-            </div>
+                <div className="success-total">
+                    <span>Total Pembayaran</span>
+                    <strong>{formatRupiah(grandTotal)}</strong>
+                </div>
 
-            <div className="success-total">
-                <span>Total Pembayaran</span>
-                <strong>{formatRupiah(grandTotal)}</strong>
-            </div>
+                <div className="success-divider" />
 
-            <div className="success-divider" />
                 <div className="success-details">
                     <div className="success-detail-item">
                         <span>Maskapai</span>
@@ -158,41 +137,38 @@ function PaymentSuccess() {
                 </div>
 
                 <div className="success-divider" />
-                    <div className="success-passengers">
-                        <h3>Informasi Penumpang</h3>
 
-                        <div className="success-detail-item">
-                            <span>Nama Pemesan</span>
-                            <strong>{contact.name}</strong>
-                        </div>
+                <div className="success-passengers">
+                    <h3>Informasi Penumpang</h3>
 
-                        <div className="success-detail-item">
-                            <span>Email</span>
-                            <strong>{contact.email}</strong>
-                        </div>
-
-                        {passengers.map((passenger, index) => (
-                            <div className="success-passenger-item" key={index}>
-                                <span>Penumpang {index + 1}</span>
-                                <strong>{passenger.name || '-'}</strong>
-                            </div>
-                        ))}
+                    <div className="success-detail-item">
+                        <span>Nama Pemesan</span>
+                        <strong>{contact.name}</strong>
                     </div>
-        </section>
 
-        <section className="success-note">
-            <p> Simpan informasi pembayaran ini sebagai bukti transaksi. Anda dapat melanjutkan ke halaman tiket untuk melihat informasi penerbangan anda.</p>
-        </section>
+                    <div className="success-detail-item">
+                        <span>Email</span>
+                        <strong>{contact.email}</strong>
+                    </div>
 
-        <div className="success-actions">
-            <Link to="/my-booking" className="button button-primary">
-            Buka My Booking
-            </Link>
+                    {passengers.map((passenger, index) => (
+                        <div className="success-passenger-item" key={index}>
+                            <span>Penumpang {index + 1}</span>
+                            <strong>{passenger.name || '-'}</strong>
+                        </div>
+                    ))}
+                </div>
+            </section>
 
-            <Link to="/" className="button success-home-button">
-            Kembali ke Beranda
-            </Link>
-        </div>
+            <div className="success-actions">
+                <Link to="/my-booking" className="button button-primary">
+                    Buka My Booking
+                </Link>
+
+                <Link to="/" className="button success-home-button">
+                    Kembali ke Beranda
+                </Link>
+            </div>
         </main>
     )
 }

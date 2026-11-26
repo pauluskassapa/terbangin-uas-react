@@ -488,7 +488,7 @@ function Payment() {
                         >
                             {isSubmitting
                                 ? 'Menyimpan Pembayaran...'
-                                : 'Konfirmasi Simulasi'}
+                                : 'Konfirmasi Pembayaran'}
 
                             <span aria-hidden="true">→</span>
                         </button>
