@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react'
-import { useNavigate } from 'react-router'
+import { Link, useNavigate } from 'react-router'
 import PassengerPicker from '../components/PassengerPicker.jsx'
 import { airports } from '../../../data/penerbangan.js'
 import './FlightHome.css'
@@ -112,8 +112,13 @@ function FlightHome() {
 
       <section className="home-route-options page-wrap" aria-labelledby="destinations-heading">
         <div className="home-route-heading">
-          <h2 id="destinations-heading">Mau singgah di mana?</h2>
-          <p>Klik kota untuk mengisi tujuan pencarian.</p>
+          <div>
+            <h2 id="destinations-heading">Mau singgah di mana?</h2>
+            <p>Pilih kota untuk menjelajahi rekomendasi spot wisata dan panduan liburan.</p>
+          </div>
+          <Link className="home-dream-place-link" to="/destinasi/tersimpan">
+            <span aria-hidden="true">♥</span> Dream Place <span aria-hidden="true">→</span>
+          </Link>
         </div>
         <div className="home-destination-list">
           {popularDestinations.map((destination) => (

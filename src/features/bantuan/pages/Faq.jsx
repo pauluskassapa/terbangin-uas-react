@@ -7,7 +7,8 @@ const faqCategories = [
   { id: 'Pemesanan', label: 'Pemesanan' },
   { id: 'Pembayaran', label: 'Pembayaran' },
   { id: 'Bagasi', label: 'Bagasi & Check-in' },
-  { id: 'Akun', label: 'Akun & Tiket' },
+  { id: 'Akun', label: 'Akun ' },
+  { id: 'Tiket', label: 'Tiket' }
 ]
 
 const faqItems = [
@@ -67,6 +68,27 @@ const faqItems = [
     answer:
       'Ketentuan perubahan jadwal (reschedule) dan pengembalian dana (refund) mengikuti kebijakan masing-masing maskapai. Pastikan memeriksa kembali rute, tanggal keberangkatan, dan ejaan nama penumpang sebelum mengonfirmasi pembayaran.',
   },
+  {
+    id: 'faq-9',
+    category: 'Pemesanan',
+    question: 'Gimana caranya mengajukan refund?',
+    answer:
+      'Untuk mengajukan refund, kamu dapat menghubungi layanan pelanggan Terbangin melalui nomor layanan pelanggan di aplikasi atau website. Pastikan kamu memiliki bukti pembayaran dan detail penerbangan yang relevan saat mengajukan permintaan refund.',
+  },
+  {
+    id: 'faq-10',
+    category: 'Pembayaran',
+    question: 'Apakah ada biaya tambahan untuk metode pembayaran tertentu?',
+    answer:
+      'Terbangin tidak membebankan biaya tambahan untuk metode pembayaran yang tersedia. Semua harga yang ditampilkan sudah termasuk pajak dan biaya layanan dasar. Namun, pastikan untuk memeriksa syarat dan ketentuan masing-masing metode pembayaran yang digunakan.',
+  },
+  {
+    id: 'faq-11',
+    category: 'Tiket',
+    question: 'Saya telah menyelesaikan pembayaran, tapi belum menerima tiket elektronik. Apa yang harus saya lakukan?',
+    answer:
+      'Jika kamu telah menyelesaikan pembayaran namun belum menerima tiket elektronik, periksa folder spam atau kotak masuk email yang digunakan saat pemesanan. Jika masih belum diterima, hubungi layanan pelanggan Terbangin dengan menyertakan bukti pembayaran dan detail penerbangan untuk bantuan lebih lanjut.',
+  }
 ]
 
 function Faq() {
@@ -108,19 +130,25 @@ function Faq() {
             </p>
           </div>
 
-          <div className="faq-search-box">
-            <label htmlFor="faq-search-input" className="faq-search-label">
-              CARI PERTANYAAN
-            </label>
-            <div className="faq-search-control">
-              <span aria-hidden="true">⌕</span>
-              <input
-                id="faq-search-input"
-                type="search"
-                value={searchQuery}
-                onChange={(event) => setSearchQuery(event.target.value)}
-                placeholder="Ketik kata kunci, misal: bagasi, QRIS, penumpang..."
-              />
+          <div className="faq-search-column">
+            <div className="faq-search-heading">
+              <h2>Pusat Bantuan</h2>
+              <p>Cari jawaban cepat seputar penerbangan &amp; perjalananmu.</p>
+            </div>
+            <div className="faq-search-box">
+              <label htmlFor="faq-search-input" className="faq-search-label">
+                CARI PERTANYAAN
+              </label>
+              <div className="faq-search-control">
+                <span aria-hidden="true">⌕</span>
+                <input
+                  id="faq-search-input"
+                  type="search"
+                  value={searchQuery}
+                  onChange={(event) => setSearchQuery(event.target.value)}
+                  placeholder="Ketik kata kunci, misal: bagasi, QRIS, penumpang..."
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -164,7 +192,7 @@ function Faq() {
                         <strong>{item.question}</strong>
                       </span>
                       <span className="faq-toggle-icon" aria-hidden="true">
-                        {isOpen ? '−' : '+'}
+                        {isOpen ? '⌃' : '⌄ '}
                       </span>
                     </button>
                     {isOpen && (

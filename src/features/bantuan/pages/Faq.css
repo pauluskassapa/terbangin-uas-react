@@ -35,6 +35,26 @@
   line-height: 1.75;
 }
 
+.faq-search-column {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.faq-search-heading h2 {
+  margin: 0 0 4px;
+  color: var(--ink);
+  font: 800 clamp(22px, 2.4vw, 28px) / 1.2 'Manrope', sans-serif;
+  letter-spacing: -0.8px;
+}
+
+.faq-search-heading p {
+  margin: 0;
+  color: #52697a;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
 .faq-search-box {
   padding: 22px 24px;
   background: #ffffff;

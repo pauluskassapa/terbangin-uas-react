@@ -1,0 +1,412 @@
+.saved-spots-hero {
+  background: linear-gradient(125deg, #0b2d48 0%, #0d4b5e 55%, #087f8c 100%);
+  border-bottom: 1px solid var(--line);
+  padding: 52px 0 48px;
+}
+
+.saved-spots-hero-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.saved-spots-hero-copy .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  color: #ffffff;
+}
+
+.saved-spots-hero-copy h1 {
+  margin: 14px 0 10px;
+  color: #ffffff;
+  font: 800 clamp(32px, 4.5vw, 46px) / 1.1 'Manrope', sans-serif;
+  letter-spacing: -1.8px;
+}
+
+.saved-spots-hero-copy h1 span {
+  color: #7ef0ec;
+}
+
+.saved-spots-hero-copy p {
+  max-width: 540px;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.saved-spots-stats {
+  display: flex;
+  gap: 12px;
+}
+
+.saved-spots-stat-card {
+  min-width: 122px;
+  padding: 14px 18px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 12px 28px rgba(8, 25, 45, 0.22);
+}
+
+.saved-spots-stat-card span {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--teal);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.9px;
+}
+
+.saved-spots-stat-card strong {
+  color: var(--ink);
+  font: 800 20px 'Manrope', sans-serif;
+}
+
+.saved-spots-content {
+  padding-top: 32px;
+}
+
+.saved-spots-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.saved-spots-source-badge {
+  padding: 6px 12px;
+  border-radius: 99px;
+  border: 1px solid var(--line);
+  background: #ffffff;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.saved-spots-source-badge.is-cloud {
+  border-color: #a7f3d0;
+  background: #ecfdf5;
+  color: #047857;
+}
+
+.saved-spots-loading {
+  padding: 42px 24px;
+  text-align: center;
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.saved-spots-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.saved-spot-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  box-shadow: 0 10px 28px rgba(24, 50, 75, 0.05);
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.saved-spot-card:hover {
+  border-color: #b7dfe2;
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px rgba(24, 50, 75, 0.08);
+}
+
+.saved-spot-card.is-text-card.is-culinary {
+  border-top: 3px solid #d97706;
+}
+
+.saved-spot-card.is-text-card.is-souvenir {
+  border-top: 3px solid var(--teal);
+}
+
+.saved-spot-text-header {
+  padding: 16px 18px 0;
+}
+
+.saved-spot-text-badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.saved-spot-text-badges .destination-spot-rating {
+  margin-left: auto;
+  padding: 4px 9px;
+  border-radius: 99px;
+  background: var(--page);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.saved-spot-text-submeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.saved-spot-text-submeta small {
+  padding: 3px 8px;
+  border-radius: 99px;
+  background: var(--page);
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.saved-spot-specialty {
+  margin-bottom: 10px;
+  padding: 9px 11px;
+  border-radius: 10px;
+  background: var(--page);
+  border: 1px solid var(--line);
+}
+
+.saved-spot-specialty span {
+  display: block;
+  margin-bottom: 2px;
+  color: var(--teal);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+}
+
+.saved-spot-card.is-culinary .saved-spot-specialty span {
+  color: #b45309;
+}
+
+.saved-spot-specialty strong {
+  color: var(--ink);
+  font: 700 12px / 1.4 'Manrope', sans-serif;
+}
+
+.saved-spot-price {
+  display: block;
+  margin-top: 4px;
+}
+
+.saved-spot-photo {
+  position: relative;
+  width: 100%;
+  height: 168px;
+  overflow: hidden;
+  background: #0d2b45;
+}
+
+.saved-spot-photo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 28, 48, 0.24) 0%,
+    rgba(10, 28, 48, 0) 42%,
+    rgba(10, 28, 48, 0.74) 100%
+  );
+  pointer-events: none;
+}
+
+.saved-spot-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.saved-spot-card:hover .saved-spot-photo img {
+  transform: scale(1.05);
+}
+
+.saved-spot-badges {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.saved-spot-city-pill {
+  padding: 5px 10px;
+  border-radius: 99px;
+  background: rgba(24, 50, 75, 0.86);
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 700;
+  backdrop-filter: blur(6px);
+}
+
+.saved-spot-badges .destination-spot-badge,
+.saved-spot-badges .destination-spot-rating {
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(6px);
+}
+
+.saved-spot-badges .destination-spot-rating {
+  padding: 5px 9px;
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.saved-spot-photo-bottom {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 10px;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.saved-spot-photo-bottom small {
+  padding: 3px 8px;
+  border-radius: 99px;
+  background: rgba(0, 0, 0, 0.38);
+  font-size: 10px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.saved-spot-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 16px 18px 18px;
+}
+
+.saved-spot-body h3 {
+  margin: 0 0 8px;
+  color: var(--ink);
+  font: 750 15.5px / 1.35 'Manrope', sans-serif;
+}
+
+.saved-spot-body p {
+  margin: 0 0 14px;
+  color: #52697a;
+  font-size: 12px;
+  line-height: 1.65;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.saved-spot-meta {
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.saved-spot-meta strong {
+  color: var(--ink);
+}
+
+.saved-spot-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.saved-spot-action-link,
+.saved-spot-ticket-link,
+.saved-spot-remove-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 11px;
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.saved-spot-action-link {
+  border: 1px solid #c3e1e3;
+  background: #eaf7f7;
+  color: var(--teal);
+}
+
+.saved-spot-action-link:hover {
+  background: #d7f1f1;
+}
+
+.saved-spot-ticket-link {
+  border: 1px solid var(--teal);
+  background: var(--teal);
+  color: #ffffff;
+}
+
+.saved-spot-ticket-link:hover {
+  background: var(--teal-dark);
+}
+
+.saved-spot-remove-btn {
+  margin-left: auto;
+  border: 1px solid #fecdd3;
+  background: #fff1f2;
+  color: #e11d48;
+}
+
+.saved-spot-remove-btn:hover:not(:disabled) {
+  background: #ffe4e6;
+}
+
+.saved-spot-remove-btn:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+@media (max-width: 980px) {
+  .saved-spots-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .saved-spots-grid {
+    grid-template-columns: 1fr;
+  }
+}

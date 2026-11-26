@@ -64,6 +64,25 @@
   box-shadow: 0 6px 18px rgba(8, 127, 140, 0.22);
 }
 
+.destination-switcher-item.is-saved-link {
+  padding: 9px 15px;
+  border-color: #fecdd3;
+  background: #fff1f2;
+  color: #e11d48;
+}
+
+.destination-switcher-item.is-saved-link:hover {
+  border-color: #fda4af;
+  background: #ffe4e6;
+}
+
+.destination-switcher-item.is-saved-link.is-active {
+  border-color: #e11d48;
+  background: #e11d48;
+  color: #ffffff;
+  box-shadow: 0 6px 18px rgba(225, 29, 72, 0.22);
+}
+
 .destination-switcher-item img {
   width: 30px;
   height: 30px;
@@ -624,6 +643,67 @@
   gap: 8px;
 }
 
+.destination-spot-save-btn {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 12px;
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  background: #ffffff;
+  color: #52697a;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease, transform 0.15s ease;
+}
+
+.destination-spot-save-btn:hover:not(:disabled) {
+  border-color: #fda4af;
+  background: #fff1f2;
+  color: #e11d48;
+}
+
+.destination-spot-save-btn.is-saved {
+  border-color: #fda4af;
+  background: #fff1f2;
+  color: #e11d48;
+}
+
+.destination-spot-save-btn:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
+.destination-spot-save-btn:focus-visible {
+  outline: 3px solid var(--teal);
+  outline-offset: 2px;
+}
+
+.destination-category-btn.is-saved-tab:hover {
+  border-color: #fda4af;
+  background: #fff1f2;
+  color: #e11d48;
+}
+
+.destination-category-btn.is-saved-tab.active {
+  border-color: #e11d48;
+  background: #e11d48;
+  color: #ffffff;
+}
+
+.destination-save-error {
+  margin: -12px 0 18px;
+  padding: 10px 14px;
+  border: 1px solid #fecdd3;
+  border-radius: 12px;
+  background: #fff1f2;
+  color: #be123c;
+  font-size: 12px;
+  font-weight: 600;
+}
+
 .destination-spot-tap-note {
   color: var(--teal);
   font-size: 10.5px;
@@ -862,6 +942,10 @@
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
 }
 
+.destination-lightbox-media {
+  position: relative;
+}
+
 .destination-lightbox-content img {
   display: block;
   width: 100%;
@@ -873,6 +957,7 @@
   position: absolute;
   top: 14px;
   right: 14px;
+  z-index: 2;
   padding: 8px 14px;
   border: 0;
   border-radius: 99px;
@@ -881,6 +966,44 @@
   font-size: 12px;
   font-weight: 700;
   cursor: pointer;
+}
+
+.destination-lightbox-nav {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 50%;
+  background: rgba(15, 34, 48, 0.72);
+  color: #ffffff;
+  font-size: 26px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.destination-lightbox-nav.is-prev {
+  left: 14px;
+}
+
+.destination-lightbox-nav.is-next {
+  right: 14px;
+}
+
+.destination-lightbox-nav:hover {
+  background: var(--teal);
+  border-color: var(--teal);
+}
+
+.destination-lightbox-nav:focus-visible {
+  outline: 3px solid #7ef0ec;
+  outline-offset: 2px;
 }
 
 .destination-lightbox-caption {
@@ -930,5 +1053,182 @@
     grid-column: auto;
     grid-row: auto;
     aspect-ratio: 16 / 10;
+  }
+}
+
+/* === KULINER KHAS & PUSAT OLEH-OLEH === */
+.destination-local-section {
+  padding-top: 52px;
+}
+
+.destination-local-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 24px;
+}
+
+.destination-local-header h2 {
+  margin: 6px 0 6px;
+  color: var(--ink);
+  font: 800 clamp(22px, 3vw, 28px) / 1.2 'Manrope', sans-serif;
+  letter-spacing: -0.8px;
+}
+
+.destination-local-header p {
+  margin: 0;
+  max-width: 560px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.destination-local-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.destination-local-card {
+  display: flex;
+  flex-direction: column;
+  padding: 22px;
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--teal);
+  border-radius: 16px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.destination-local-card.is-culinary {
+  border-top-color: #d97706;
+}
+
+.destination-local-card.is-souvenir {
+  border-top-color: var(--teal);
+}
+
+.destination-local-card:hover {
+  border-color: #b7dfe2;
+  box-shadow: 0 12px 30px rgba(24, 50, 75, 0.06);
+  transform: translateY(-2px);
+}
+
+.destination-local-card.is-culinary:hover {
+  border-color: #f3cfa0;
+  border-top-color: #d97706;
+}
+
+.destination-local-card.is-souvenir:hover {
+  border-top-color: var(--teal);
+}
+
+.destination-local-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.destination-local-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 11px;
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.destination-local-badge.is-culinary {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.destination-local-badge.is-souvenir {
+  background: #eaf7f7;
+  color: var(--teal);
+}
+
+.destination-local-card h3 {
+  margin: 0 0 4px;
+  color: var(--ink);
+  font: 750 17px / 1.35 'Manrope', sans-serif;
+}
+
+.destination-local-area {
+  display: block;
+  margin-bottom: 12px;
+  color: var(--muted);
+  font-size: 11.5px;
+  font-weight: 600;
+}
+
+.destination-local-specialty {
+  margin-bottom: 12px;
+  padding: 10px 12px;
+  border-radius: 11px;
+  background: var(--page);
+  border: 1px solid var(--line);
+}
+
+.destination-local-specialty span {
+  display: block;
+  margin-bottom: 2px;
+  color: var(--teal);
+  font-size: 9.5px;
+  font-weight: 800;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+}
+
+.destination-local-card.is-culinary .destination-local-specialty span {
+  color: #b45309;
+}
+
+.destination-local-specialty strong {
+  color: var(--ink);
+  font: 700 12.5px / 1.45 'Manrope', sans-serif;
+}
+
+.destination-local-desc {
+  margin: 0 0 14px;
+  color: #52697a;
+  font-size: 12.5px;
+  line-height: 1.7;
+  flex: 1;
+}
+
+.destination-local-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  margin-bottom: 14px;
+  color: #415a6b;
+  font-size: 11.5px;
+  font-weight: 600;
+}
+
+.destination-local-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+
+.destination-local-city-note {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+@media (max-width: 900px) {
+  .destination-local-grid {
+    grid-template-columns: 1fr;
   }
 }
