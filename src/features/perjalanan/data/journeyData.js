@@ -160,25 +160,46 @@ export async function getJourneyBookingsFromDatabase() {
   return (data || []).map(normalizeJourneyBooking)
 }
 
-export function completeJourneyCheckIn(code, seats) {
-  const bookings = getJourneyBookings()
-  const bookingIndex = bookings.findIndex((booking) => booking.code === code)
-  if (bookingIndex < 0) return null
+export async function getJourneyBookingByCode(code) {
+  if (!supabase) {
+    throw new Error('Supabase belum dikonfigurasi. Periksa VITE_SUPABASE_URL dan VITE_SUPABASE_PUBLISHABLE_KEY.')
+  }
 
-  const booking = bookings[bookingIndex]
+  const { data, error } = await supabase
+    .from('bookings')
+    .select(BOOKING_SELECT)
+    .eq('booking_code', code)
+    .maybeSingle()
+  if (error) throw error
+  return data ? normalizeJourneyBooking(data) : null
+}
+
+export async function completeJourneyCheckIn(booking, seats) {
+  if (!supabase) {
+    throw new Error('Supabase belum dikonfigurasi. Periksa VITE_SUPABASE_URL dan VITE_SUPABASE_PUBLISHABLE_KEY.')
+  }
   if (booking.status !== 'Pembayaran Berhasil' || booking.checkedIn) return null
   if (!Array.isArray(seats) || !booking.passengers?.length || seats.length !== booking.passengers.length || seats.some((seat) => !seat)) return null
   if (new Set(seats).size !== seats.length) return null
 
-  const updatedBooking = {
-    ...booking,
-    checkedIn: true,
-    checkedInAt: new Date().toISOString(),
-    passengers: booking.passengers.map((passenger, index) => ({ ...passenger, seat: seats[index] })),
-  }
-  bookings[bookingIndex] = updatedBooking
-  saveJourneyBookings(bookings)
-  return updatedBooking
+  const passengerUpdates = await Promise.all(booking.passengers.map((passenger, index) =>
+    supabase.from('booking_passengers')
+      .update({ seat: seats[index] })
+      .eq('id', passenger.id)
+      .eq('booking_id', booking.id)
+  ))
+  const passengerError = passengerUpdates.find((result) => result.error)?.error
+  if (passengerError) throw passengerError
+
+  const { data, error } = await supabase.from('bookings')
+    .update({ checked_in: true, checked_in_at: new Date().toISOString() })
+    .eq('id', booking.id)
+    .eq('checked_in', false)
+    .select('id')
+    .maybeSingle()
+  if (error) throw error
+  if (!data) return null
+  return getJourneyBookingByCode(booking.code)
 }
 
 export function cityName(code) {

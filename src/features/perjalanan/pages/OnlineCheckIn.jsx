@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useSearchParams } from 'react-router'
-import { cityName, completeJourneyCheckIn, getJourneyBookings, journeyDate } from '../data/journeyData.js'
+import { cityName, completeJourneyCheckIn, getJourneyBookingByCode, journeyDate } from '../data/journeyData.js'
 import '../../penerbangan/pages/FlightSeats.css'
 import './JourneyPages.css'
 
@@ -63,10 +63,36 @@ function CheckInSeatPicker({ passengers, selectedSeats, onSeatClick, onClear, on
 function OnlineCheckIn() {
   const [searchParams] = useSearchParams()
   const code = searchParams.get('code')
-  const [booking, setBooking] = useState(() => getJourneyBookings().find((item) => item.code === code) || null)
+  const [booking, setBooking] = useState(null)
+  const [isLoading, setIsLoading] = useState(true)
+  const [loadError, setLoadError] = useState('')
   const [step, setStep] = useState('review')
-  const [selectedSeats, setSelectedSeats] = useState(() => booking?.passengers?.map((passenger) => passenger.seat || '') || [])
+  const [selectedSeats, setSelectedSeats] = useState([])
   const [message, setMessage] = useState('')
+
+  useEffect(() => {
+    let isActive = true
+    if (!code) {
+      setIsLoading(false)
+      return () => { isActive = false }
+    }
+
+    getJourneyBookingByCode(code)
+      .then((data) => {
+        if (!isActive) return
+        setBooking(data)
+        setSelectedSeats(data?.passengers?.map((passenger) => passenger.seat || '') || [])
+      })
+      .catch((error) => {
+        console.error('Gagal memuat booking untuk check-in:', error)
+        if (isActive) setLoadError('Detail booking gagal dimuat. Coba lagi beberapa saat.')
+      })
+      .finally(() => {
+        if (isActive) setIsLoading(false)
+      })
+
+    return () => { isActive = false }
+  }, [code])
 
   function handleSeatClick(seat) {
     if (occupiedSeats.has(seat)) return
@@ -85,15 +111,20 @@ function OnlineCheckIn() {
     setMessage('')
   }
 
-  function handleCheckIn(event) {
+  async function handleCheckIn(event) {
     event.preventDefault()
-    const updatedBooking = completeJourneyCheckIn(booking.code, selectedSeats)
-    if (!updatedBooking) {
-      setMessage('Check-in belum dapat diselesaikan. Pastikan semua penumpang memilih kursi yang berbeda.')
-      return
+    try {
+      const updatedBooking = await completeJourneyCheckIn(booking, selectedSeats)
+      if (!updatedBooking) {
+        setMessage('Check-in belum dapat diselesaikan. Pastikan semua penumpang memilih kursi yang berbeda.')
+        return
+      }
+      setBooking(updatedBooking)
+      setMessage('Check-in berhasil. Kursi dan status perjalanan sudah disimpan.')
+    } catch (error) {
+      console.error('Gagal menyimpan check-in ke Supabase:', error)
+      setMessage('Check-in gagal disimpan ke database. Coba lagi.')
     }
-    setBooking(updatedBooking)
-    setMessage('Check-in berhasil. Kursi dan status perjalanan sudah disimpan.')
   }
 
   const eligible = booking?.status === 'Pembayaran Berhasil'
@@ -101,7 +132,7 @@ function OnlineCheckIn() {
   return (
     <main className="journey-page page-wrap">
       <section className="journey-hero"><p>Online Check-in</p><h1>Siapkan kursi perjalananmu.</h1><p>Periksa detail booking sebelum memilih kursi untuk setiap penumpang.</p></section>
-      {!booking ? <section className="journey-section"><div className="journey-section-heading"><p>Booking tidak ditemukan</p><h2>Periksa booking dari My Booking</h2><span>Kode booking tidak tersedia. Cari tiketmu terlebih dahulu untuk memulai check-in.</span></div><Link className="button button-primary" to="/my-booking">Kembali ke My Booking</Link></section> : <section className="journey-section">
+      {isLoading ? <section className="journey-section"><p className="journey-empty" role="status">Memuat detail booking…</p></section> : loadError ? <section className="journey-section"><p className="journey-message" role="alert">{loadError}</p><Link className="button button-primary" to="/my-booking">Kembali ke My Booking</Link></section> : !booking ? <section className="journey-section"><div className="journey-section-heading"><p>Booking tidak ditemukan</p><h2>Periksa booking dari My Booking</h2><span>Kode booking tidak tersedia. Cari tiketmu terlebih dahulu untuk memulai check-in.</span></div><Link className="button button-primary" to="/my-booking">Kembali ke My Booking</Link></section> : <section className="journey-section">
         <div className="journey-section-heading"><p>Periksa Booking</p><h2>Detail penerbangan</h2><span>Pastikan rute dan tanggal penerbangan ini sesuai.</span></div>
         <article className="journey-booking-card journey-checkin-summary">
           <div className="journey-booking-top"><div><span>Kode Booking</span><h3>{booking.code}</h3></div><strong className={`journey-status ${eligible ? 'status-selesai' : 'status-menunggu'}`}>{booking.status}</strong></div>
