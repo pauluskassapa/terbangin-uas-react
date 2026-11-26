@@ -200,6 +200,19 @@
   margin-bottom: 24px;
 }
 
+.success-save-message,
+.success-save-error {
+  max-width: 760px;
+  margin: 16px auto;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.success-save-error p {
+  margin: 0 0 12px;
+  color: #a32121;
+}
+
 @media (max-width: 620px) {
   .payment-success-page {
     padding-top: 32px;

@@ -1,36 +1,37 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link, useLocation } from 'react-router'
 import { formatRupiah } from '../../../data/penerbangan.js'
-import { getJourneyBookings, saveJourneyBookings } from '../../perjalanan/data/journeyData.js'
+import { saveJourneyBooking } from '../../perjalanan/data/journeyData.js'
 import './PaymentSuccess.css'
 
 function PaymentSuccess() {
     const location = useLocation()
     const payment = location.state?.payment
-    const [bookingCode] = useState(() => `TRB${Date.now().toString().slice(-7)}`)
+    const [bookingId] = useState(() => crypto.randomUUID())
+    const [bookingCode] = useState(() => `TRB${bookingId.replaceAll('-', '').slice(0, 8).toUpperCase()}`)
+    const [saveState, setSaveState] = useState(payment?.booking ? 'saving' : 'idle')
+    const [saveError, setSaveError] = useState('')
+    const saveStarted = useRef(false)
+
+    async function persistBooking() {
+        if (!payment?.booking) return
+        setSaveState('saving')
+        setSaveError('')
+        try {
+            await saveJourneyBooking(payment, bookingCode, bookingId)
+            setSaveState('saved')
+        } catch (error) {
+            console.error('Gagal menyimpan booking ke Supabase:', error)
+            setSaveError('Booking belum berhasil disimpan ke database. Periksa koneksi Supabase lalu coba lagi.')
+            setSaveState('error')
+        }
+    }
 
     useEffect(() => {
-        if (!payment?.booking) return
-        const bookings = getJourneyBookings()
-        if (bookings.some((item) => item.code === bookingCode)) return
-        const { booking } = payment
-        saveJourneyBookings([{
-            code: bookingCode,
-            status: 'Pembayaran Berhasil',
-            createdAt: payment.paymentDate,
-            paidAt: payment.paymentDate,
-            date: booking.date,
-            from: booking.from.code,
-            to: booking.to.code,
-            airline: booking.flight.airline,
-            flightNumber: booking.flight.number,
-            email: booking.contact.email,
-            phone: booking.contact.phone,
-            passengers: booking.passengers,
-            total: payment.grandTotal,
-            checkedIn: false,
-        }, ...bookings])
-    }, [payment, bookingCode])
+        if (!payment?.booking || saveStarted.current) return
+        saveStarted.current = true
+        persistBooking()
+    }, [payment, bookingCode, bookingId])
 
     if (!payment?.booking) {
         return (
@@ -180,14 +181,15 @@ function PaymentSuccess() {
                     </div>
         </section>
 
+        {saveState === 'saving' && <p className="success-save-message" role="status">Menyimpan booking ke database…</p>}
+        {saveState === 'error' && <div className="success-save-error" role="alert"><p>{saveError}</p><button className="button button-primary" type="button" onClick={persistBooking}>Coba simpan lagi</button></div>}
+
         <section className="success-note">
             <p> Simpan informasi pembayaran ini sebagai bukti transaksi. Anda dapat melanjutkan ke halaman tiket untuk melihat informasi penerbangan anda.</p>
         </section>
 
         <div className="success-actions">
-            <Link to="/my-booking" className="button button-primary">
-            Buka My Booking
-            </Link>
+            {saveState === 'saved' ? <Link to="/my-booking" className="button button-primary">Buka My Booking</Link> : <button className="button button-primary" type="button" disabled>{saveState === 'saving' ? 'Menyimpan booking…' : 'Booking belum tersimpan'}</button>}
 
             <Link to="/" className="button success-home-button">
             Kembali ke Beranda
