@@ -7,6 +7,7 @@ function Register() {
   const [showPassword, setShowPassword] = useState(false)
   const [error, setError] = useState('')
   const [registered, setRegistered] = useState(false)
+  const [confirmationRequired, setConfirmationRequired] = useState(false)
   const { register } = useAuth()
 
   async function handleSubmit(event) {
@@ -22,7 +23,8 @@ function Register() {
 
     setError('')
     try {
-      await register({ name: form.get('name'), email: form.get('email'), phone: form.get('phone'), password })
+      const result = await register({ name: form.get('name'), email: form.get('email'), phone: form.get('phone'), password })
+      setConfirmationRequired(result.requiresEmailConfirmation)
       setRegistered(true)
     } catch (registrationError) {
       setError(registrationError.message || 'Pendaftaran belum berhasil. Coba lagi.')
@@ -44,10 +46,10 @@ function Register() {
           {registered ? (
             <div className="register-success" role="status">
               <span className="register-success-icon" aria-hidden="true">✓</span>
-              <span className="eyebrow">AKUN SIAP DIGUNAKAN</span>
-              <h1 id="register-title">Selamat datang di Terbangin!</h1>
-              <p>Akunmu berhasil dibuat. Kamu sudah masuk dan bisa melihat atau mengubah informasi profil.</p>
-              <Link className="button button-primary" to="/profile">Lihat profil</Link>
+              <span className="eyebrow">{confirmationRequired ? 'PERIKSA EMAIL' : 'AKUN SIAP DIGUNAKAN'}</span>
+              <h1 id="register-title">{confirmationRequired ? 'Konfirmasi emailmu' : 'Selamat datang di Terbangin!'}</h1>
+              <p>{confirmationRequired ? 'Akun sudah dibuat. Buka tautan konfirmasi yang dikirim Supabase ke emailmu, lalu masuk.' : 'Akunmu berhasil dibuat. Kamu sudah masuk dan bisa melihat atau mengubah informasi profil.'}</p>
+              <Link className="button button-primary" to={confirmationRequired ? '/login' : '/profile'}>{confirmationRequired ? 'Ke halaman masuk' : 'Lihat profil'}</Link>
             </div>
           ) : (
             <>
@@ -71,7 +73,7 @@ function Register() {
                 <label className="register-field">
                   <span>Kata sandi</span>
                   <span className="register-password-wrap">
-                    <input name="password" type={showPassword ? 'text' : 'password'} placeholder="Buat kata sandi" autoComplete="new-password" minLength="8" pattern="(?=.*[A-Z])(?=.*[^A-Za-z0-9]).{8,}" title="Minimal 8 karakter, 1 huruf kapital, dan 1 simbol." required />
+                    <input name="password" type={showPassword ? 'text' : 'password'} placeholder="Buat kata sandi" autoComplete="new-password" minLength="8" pattern="(?=.*[A-Z])(?=.*[^A-Za-z0-9\s]).{8,}" title="Minimal 8 karakter, 1 huruf kapital, dan 1 simbol." required />
                     <button type="button" className="password-toggle" onClick={() => setShowPassword((visible) => !visible)} aria-label={showPassword ? 'Sembunyikan kata sandi' : 'Tampilkan kata sandi'}>{showPassword ? 'Sembunyikan' : 'Tampilkan'}</button>
                   </span>
                   <small className="password-requirements">Minimal 8 karakter, 1 huruf kapital, dan 1 simbol.</small>
