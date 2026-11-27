@@ -64,7 +64,7 @@ function OnlineCheckIn() {
   const [searchParams] = useSearchParams()
   const code = searchParams.get('code')
   const [booking, setBooking] = useState(null)
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoadingBooking, setIsLoadingBooking] = useState(true)
   const [loadError, setLoadError] = useState('')
   const [step, setStep] = useState('review')
   const [selectedSeats, setSelectedSeats] = useState([])
@@ -73,7 +73,6 @@ function OnlineCheckIn() {
   useEffect(() => {
     let isActive = true
     if (!code) {
-      setIsLoading(false)
       return () => { isActive = false }
     }
 
@@ -88,7 +87,7 @@ function OnlineCheckIn() {
         if (isActive) setLoadError('Detail booking gagal dimuat. Coba lagi beberapa saat.')
       })
       .finally(() => {
-        if (isActive) setIsLoading(false)
+        if (isActive) setIsLoadingBooking(false)
       })
 
     return () => { isActive = false }
@@ -128,6 +127,7 @@ function OnlineCheckIn() {
   }
 
   const eligible = booking?.status === 'Pembayaran Berhasil'
+  const isLoading = Boolean(code) && isLoadingBooking
 
   return (
     <main className="journey-page page-wrap">

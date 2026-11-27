@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { Link, useLocation } from 'react-router'
 import { formatRupiah } from '../../../data/penerbangan.js'
 import { saveJourneyBooking } from '../../perjalanan/data/journeyData.js'
@@ -13,7 +13,7 @@ function PaymentSuccess() {
     const [saveError, setSaveError] = useState('')
     const saveStarted = useRef(false)
 
-    async function persistBooking() {
+    const persistBooking = useCallback(async function persistBooking() {
         if (!payment?.booking) return
         setSaveState('saving')
         setSaveError('')
@@ -25,13 +25,13 @@ function PaymentSuccess() {
             setSaveError('Booking belum berhasil disimpan ke database. Periksa koneksi Supabase lalu coba lagi.')
             setSaveState('error')
         }
-    }
+    }, [payment, bookingCode, bookingId])
 
     useEffect(() => {
         if (!payment?.booking || saveStarted.current) return
         saveStarted.current = true
         persistBooking()
-    }, [payment, bookingCode, bookingId])
+    }, [persistBooking, payment?.booking])
 
     if (!payment?.booking) {
         return (
