@@ -456,6 +456,104 @@
     color: var(--muted);
 }
 
+.payment-method-detail {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #e1e9ef;
+    border-radius: 14px;
+    background: #f8fafc;
+}
+
+.payment-method-detail h3 {
+    margin: 0 0 8px;
+    color: #18324b;
+    font-size: 18px;
+}
+
+.payment-method-description {
+    margin: 0 0 18px;
+    color: #6b7f8f;
+    font-size: 13px;
+}
+
+.payment-method-detail label {
+    display: block;
+    margin-bottom: 8px;
+    color: #18324b;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.payment-method-detail select {
+    width: 100%;
+    min-height: 44px;
+    padding: 10px 12px;
+    border: 1px solid #e1e9ef;
+    border-radius: 9px;
+    background: #fff;
+    color: #18324b;
+    font: inherit;
+}
+
+.payment-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-top: 15px;
+    padding: 13px;
+    border-radius: 9px;
+    background: #fff;
+}
+
+.payment-info span {
+    color: #6b7f8f;
+    font-size: 13px;
+}
+
+.payment-info strong {
+    color: #18324b;
+    font-size: 14px;
+    text-align: right;
+    overflow-wrap: anywhere;
+}
+
+.payment-simulation-note {
+    margin: 14px 0 0;
+    color: #6b7f8f;
+    font-size: 12px;
+}
+
+.payment-qris-detail {
+    text-align: center;
+}
+
+.payment-qris-container h3 {
+    margin-bottom: 16px;
+}
+
+.payment-qris-image {
+    display: block;
+    width: 200px;
+    height: 200px;
+    max-width: 100%;
+    margin: 0 auto;
+    object-fit: contain;
+    border: 1px solid #e1e9ef;
+    border-radius: 10px;
+    background: #fff;
+}
+
+.payment-qris-container > p {
+    margin: 12px 0 0;
+    color: #6b7f8f;
+    font-size: 13px;
+}
+
+.payment-qris-container .payment-info {
+    text-align: left;
+}
+
 @media (max-width: 850px) {
     .payment-layout {
         grid-template-columns: 1fr;
@@ -464,6 +562,18 @@
     .payment-summary {
         position: static;
         grid-row: 1;
+    }
+}
+
+@media (max-width: 600px) {
+    .payment-info {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .payment-info strong {
+        text-align: left;
     }
 }
 
