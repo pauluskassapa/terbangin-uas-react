@@ -114,7 +114,7 @@ function Booking() {
 
                         <label className="booking-field">
                             <span>Nomor Telepon</span>
-                            <input type="tel"name="phone"value={contact.phone}onChange={handleContactChange}placeholder="Masukkan nomor telepon"required/>
+                            <input type="tel"name="phone"value={contact.phone}onChange={handleContactChange}pattern="^\+?[0-9]{8,15}$"placeholder="Masukkan nomor telepon"required/>
                         </label>
                     </div>
                 </section>
